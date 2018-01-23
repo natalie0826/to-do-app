@@ -1,8 +1,14 @@
 .filter {
+    
+}
+
+.filter-button {
     padding: 5px 10px;
     margin: 5px;
     background-color: rgb(204, 204, 204);
-    border: 1px solid #a7a7a7;
+    font-size: 0.7em;
+    display: block;
+    width: 100%;
 }
 
 .filter-not-active {

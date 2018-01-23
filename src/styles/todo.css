@@ -1,21 +1,58 @@
 * {
     font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+}
+
+.to-do-app {
+    width: 50%;
+    height: 600px;
+    margin: 0 auto;
+    margin-top: 10%;
+    border: 1px solid #cccccc;
+    padding: 0 50px 50px 50px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
 }
 
 h2 {
     padding: 20px 0;
     text-transform: uppercase;
     text-shadow: 0 3px 3px #cccccc;
+    font-size: 1.5em;
+    text-align: center;
 }
 
-.to-do {
-    width: 400px;
-    margin: 0 auto;
+h3 {
+    padding: 0;
+    font-size: 1.2em;
     text-align: center;
-    border: 1px solid #cccccc;
-    padding: 0 50px 50px 50px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
 }
+
+button {
+    padding: 5px 10px;
+    border-radius: 2px;
+    border: 0px;
+    margin-left: 10px;
+    user-select: none;
+    background-color: rgba(256,0,0,0.3);
+}
+
+button:focus{
+    outline: 0;
+}
+
+.add-todos {
+    float: left;
+    height: 100px;
+    width: 70%;
+}
+
+.filter-todos {
+    float: right;
+    width: 30%;
+    height: 100px;
+}
+
+
 
 .delete-todo {
     padding: 3px 7px;

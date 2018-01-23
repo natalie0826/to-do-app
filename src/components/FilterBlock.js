@@ -3,14 +3,14 @@ import FilterLink from '../containers/FilterLink';
 import '../styles/filter.css'
 
 const FilterBlock = () => (
-    <div>
-        <button className="filter">
+    <div className="filter">
+        <button className="filter-button">
             <FilterLink filter="SHOW_ALL">All</FilterLink>
         </button>
-        <button className="filter">
+        <button className="filter-button">
             <FilterLink filter="SHOW_ACTIVE">Not completed</FilterLink>
         </button>
-        <button className="filter">
+        <button className="filter-button">
             <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
         </button>
     </div>
