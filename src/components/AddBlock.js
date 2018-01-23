@@ -2,6 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class AddBlock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {value: ''};
+    
+        this.handleChange = this.handleChange.bind(this);
+      }
+
+    handleChange(event) {
+        this.setState({value: event.target.value})
+    }
 
     render() {
         const {onAddClick} = this.props;
@@ -14,7 +24,8 @@ class AddBlock extends React.Component {
                 }
                 this.el.value = '';
             }}>
-                <input ref={el => this.el = el} />
+                <input onChange={this.handleChange} value={this.state.value}/>
+                <p>{!this.state.value ? 'Please, write a todo' : `You are typing ${this.state.value}`}</p>
                 <button type="submit" onClick={() => onAddClick(this.el.value)}>
                 Add Todo
                 </button>
