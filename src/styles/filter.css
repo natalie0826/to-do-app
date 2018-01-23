@@ -1,0 +1,16 @@
+.filter {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: rgb(204, 204, 204);
+    border: 1px solid #a7a7a7;
+}
+
+.filter-not-active {
+    padding: 5px 10px;
+    margin: 5px;
+    opacity: 0.5;
+}
+
+.filter-not-active:hover {
+    color: rgb(146, 1, 1);
+}
