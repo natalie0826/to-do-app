@@ -10,7 +10,6 @@ const todo = (state, action) => {
         deleted: false
       }
     case 'DELETE_TODO':
-      console.log('in delete');
       if (state.id !== action.id) {
         return state
       }
@@ -20,8 +19,7 @@ const todo = (state, action) => {
         deleted: !state.deleted
       }
     case 'TOGGLE_TODO':
-      console.log('in edit');
-      if (state.id !== action.id) {
+      if (state.id !== action.id && !state.deleted) {
         return state
       }
 
@@ -42,7 +40,6 @@ const todos = (state = [], action) => {
         todo(undefined, action)
       ]
     case 'DELETE_TODO':
-      console.log('in delete todos');
       return state.map(t =>
         todo(t, action)
       )

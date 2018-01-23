@@ -7,5 +7,5 @@ const filter = (state = 'SHOW_ALL', action) => {
     }
   }
   
-  export default filter
+export default filter
   

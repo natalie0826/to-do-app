@@ -4,16 +4,18 @@ import Todo from './Todo';
 import '../styles/todo.css';
 
 const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
-  <ul className="todos">
-    {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onDelete={() => onDeleteClick(todo.id)}
-        onChange={() => onTodoClick(todo.id)}
-      />
-    )}
-  </ul>
+  <table>
+    <tbody>
+      {todos.map(todo =>
+        <Todo
+          key={todo.id}
+          {...todo}
+          onDelete={() => onDeleteClick(todo.id)}
+          onChange={() => onTodoClick(todo.id)}
+        />
+      )}
+    </tbody>
+  </table>
 )
 
 TodoList.propTypes = {

@@ -52,11 +52,13 @@ button:focus{
     height: 100px;
 }
 
-
-
 .delete-todo {
     padding: 3px 7px;
     background-color: #cccccc;
     margin-left: 5px;
     cursor: pointer;
+}
+
+.todo {
+    margin: 10px 0;
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/todo.css'
+import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
 
 class Todo extends React.Component {
   render () {
@@ -14,19 +15,26 @@ class Todo extends React.Component {
     } = this.props;
     
     return (
-      <li
+      <tr
+        className="todo"
         style={{
           display:  deleted ? 'none' : 'block'
         }}
       >
-      <input type="checkbox" checked={completed} onChange={onChange}/>
-      <span
-        onClick={onChange}
-        style={{
-          textDecoration: completed ? 'line-through' : 'none'
-        }}>{text}</span>
-      <span className="delete-todo" onClick={onDelete}>х</span>
-      </li>
+        <td>
+          <input type="checkbox" checked={completed} onChange={onChange}/>
+        </td>
+        <td>
+          <span
+            onClick={onChange}
+            style={{
+              textDecoration: completed ? 'line-through' : 'none'
+            }}>{text}</span>
+        </td>
+        <td>
+          <span className="delete-todo" onClick={onDelete}><i className="fa fa-trash-o" aria-hidden="true"></i></span>
+        </td>
+      </tr>
     )
   }
 }
