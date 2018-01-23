@@ -7,14 +7,9 @@ const getVisibleTodos = (todos, filter) => {
     case 'SHOW_ALL':
       return todos
     case 'SHOW_COMPLETED':
-      console.log('SHOW_COMPLETED', todos.filter(t => t.completed));
       return todos.filter(t => t.completed)
     case 'SHOW_ACTIVE':
-      console.log('SHOW_ACTIVE', todos.filter(t => t.completed));
       return todos.filter(t => !t.completed)
-    case 'SHOW_DELETED':
-      console.log('SHOW_DELETED', todos.filter(t => t.deleted));
-      return todos.filter(t => t.deleted)
     default:
       throw new Error('Unknown filter: ' + filter)
   }

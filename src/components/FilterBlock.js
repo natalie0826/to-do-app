@@ -13,9 +13,6 @@ const FilterBlock = () => (
         <button className="filter-button">
             <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
         </button>
-        <button className="filter-button">
-            <FilterLink filter="SHOW_DELETED">Deleted</FilterLink>
-        </button>
     </div>
 );
 

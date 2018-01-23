@@ -3,29 +3,19 @@ import PropTypes from 'prop-types'
 
 class AddBlock extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            input: ''
-        }
-    }
-
     render() {
         const {onAddClick} = this.props;
 
         return (
             <form onSubmit={e => {
                 e.preventDefault()
-                if (!this.state.input.value.trim()) {
-                return
+                if (!this.el.value.trim()) {
+                    return;
                 }
-                
-                this.state.input.value = ''
+                this.el.value = '';
             }}>
-                <input ref={node => {
-                this.state.input = node
-                }} />
-                <button type="submit" onClick={() => onAddClick(this.state.input.value)}>
+                <input ref={el => this.el = el} />
+                <button type="submit" onClick={() => onAddClick(this.el.value)}>
                 Add Todo
                 </button>
             </form>
