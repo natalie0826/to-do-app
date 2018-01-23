@@ -1,0 +1,6 @@
+.delete-todo {
+    padding: 3px 7px;
+    background-color: #cccccc;
+    margin-left: 5px;
+    cursor: pointer;
+}
