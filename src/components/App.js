@@ -4,7 +4,8 @@ import AddTodo from '../containers/AddTodo';
 import FilterBlock from '../components/FilterBlock';
 
 const App = () => (
-    <div>
+    <div className="to-do">
+        <h2>Welcome to the To-Do!</h2>
         <AddTodo />
         <ShowTodoList />
         <FilterBlock />
