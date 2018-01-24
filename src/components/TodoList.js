@@ -1,13 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Todo from './Todo';
+import EditTodo from '../containers/EditTodo';
 import '../styles/todo.css';
 
 const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
   <table>
     <tbody>
       {todos.map(todo =>
-        <Todo
+        <EditTodo
           key={todo.id}
           {...todo}
           onDelete={() => onDeleteClick(todo.id)}

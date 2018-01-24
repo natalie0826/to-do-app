@@ -9,6 +9,12 @@ export const addTodo = (text) => ({
     text
 })
 
+export const editTodo = (id, text) => ({
+    type: 'EDIT_TODO',
+    id,
+    text
+})
+
 export const deleteTodo = (id) => ({
     type: 'DELETE_TODO',
     id
