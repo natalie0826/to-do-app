@@ -9,8 +9,7 @@ class TodoList extends React.Component {
       todos,
       onTodoClick,
       onDeleteClick,
-      onRestoreClick,
-      onSearchClick
+      onRestoreClick
     } = this.props;
 
     return (
@@ -41,8 +40,7 @@ TodoList.propTypes = {
   }).isRequired).isRequired,
   onTodoClick: PropTypes.func.isRequired,
   onDeleteClick: PropTypes.func.isRequired,
-  onRestoreClick: PropTypes.func.isRequired,
-  onSearchClick: PropTypes.func.isRequired
+  onRestoreClick: PropTypes.func.isRequired
 }
 
 export default TodoList
