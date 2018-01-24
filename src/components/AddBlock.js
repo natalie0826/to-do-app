@@ -13,24 +13,29 @@ class AddBlock extends React.Component {
         this.setState({value: event.target.value})
     }
 
-    render() {
-        const {onAddClick} = this.props;
+    addTodo() {
+        const todo = this.state.value;
+        if (!todo.trim()) {
+            return;
+        }
+        this.setState({value: ''})
+        this.props.onAddClick(todo);
+    }
 
+    render() {
         return (
-            <form onSubmit={e => {
-                e.preventDefault()
-                if (!this.el.value.trim()) {
-                    return;
-                }
-                this.el.value = '';
-            }}>
-                <input onChange={this.handleChange} value={this.state.value}/>
+            <div>
+                <form onSubmit={e => {
+                    e.preventDefault()
+                }}>
+                    <input onChange={this.handleChange} value={this.state.value}/>
+                    <button type="submit" onClick={() => this.addTodo()}>
+                        Add a todo
+                    </button>
+                </form>
                 <p>{!this.state.value ? 'Please, write a todo' : `You are typing ${this.state.value}`}</p>
-                <button type="submit" onClick={() => onAddClick(this.el.value)}>
-                Add Todo
-                </button>
-            </form>
-                )
+            </div>
+        )
     }
 }
 
