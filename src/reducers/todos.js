@@ -5,7 +5,7 @@ const todo = (state, action) => {
     case 'ADD_TODO':
       return {
         id: action.id,
-        text: action.text,
+        text: action.text.toLowerCase(),
         completed: false,
         deleted: false
       }
@@ -17,7 +17,7 @@ const todo = (state, action) => {
       return {
         ...state,
         id: action.id,
-        text: action.text,
+        text: action.text.toLowerCase(),
       }
     case 'DELETE_TODO':
       if (state.id !== action.id) {
@@ -69,6 +69,6 @@ const todos = (state = [], action) => {
   }
 }
 
-const undoableTodos = undoable(todos, { filter: includeAction(['ADD_TODO', 'EDIT_TODO', 'TOGGLE_TODO', 'DELETE_TODO']) })
+const undoableTodos = undoable(todos, { filter: includeAction(['ADD_TODO', 'EDIT_TODO', 'TOGGLE_TODO', 'DELETE_TODO', 'RESTORE_DELETED']) })
 
 export default undoableTodos
