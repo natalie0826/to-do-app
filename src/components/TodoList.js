@@ -4,6 +4,20 @@ import EditTodo from '../containers/EditTodo';
 import '../styles/todo.css';
 
 class TodoList extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      search: ''
+    };
+
+    this.updateSearch = this.updateSearch.bind(this);
+  }
+
+  updateSearch(event) {
+    this.setState({ search: event.target.value });
+  }
+
   render() {
     const {
       todos,
@@ -12,10 +26,19 @@ class TodoList extends React.Component {
       onRestoreClick
     } = this.props;
 
+    let filteredTodos = todos.filter(
+      (todo) => {
+        return todo.text.includes(this.state.search.toLowerCase());
+      }
+    );
+
     return (
       <div>
           <h3>Should do</h3>
-          {todos.map(todo =>
+
+          <input type="text" placeholder="Serach. . ." value={this.state.search} onChange={this.updateSearch} />
+
+          {filteredTodos.map(todo =>
             <EditTodo
               key={todo.id}
               {...todo}
@@ -23,9 +46,11 @@ class TodoList extends React.Component {
               onChange={() => onTodoClick(todo.id)}
             />
           )}
-          {todos.find(todo => todo.deleted) ?
+
+          {filteredTodos.find(todo => todo.deleted) ?
             <button className="restore-deleted" onClick={() => onRestoreClick()}>Restore deleted</button> : ''
           }
+          
       </div>
     )
   }
