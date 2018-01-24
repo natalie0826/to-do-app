@@ -1,4 +1,4 @@
-import undoable, { includeAction } from 'redux-undo'
+import undoable, { includeAction } from 'redux-undo';
 
 const todo = (state, action) => {
   switch (action.type) {
@@ -69,6 +69,6 @@ const todos = (state = [], action) => {
   }
 }
 
-const undoableTodos = undoable(todos, { filter: includeAction(['ADD_TODO', 'EDIT_TODO', 'TOGGLE_TODO', 'DELETE_TODO', 'RESTORE_DELETED']) })
+const undoableTodos = undoable(todos, { filter: includeAction(['ADD_TODO', 'EDIT_TODO', 'TOGGLE_TODO', 'DELETE_TODO', 'RESTORE_DELETED']) });
 
-export default undoableTodos
+export default undoableTodos;
