@@ -36,7 +36,7 @@ class AddBlock extends React.Component {
                         Add a todo
                     </button>
                 </form>
-                <p>{!this.state.value ? 'Please, write a todo' : `You are typing ${this.state.value}`}</p>
+                <p>{!this.state.value ? 'Please, write a todo.' : `You are typing ${this.state.value}.`}</p>
             </div>
         )
     }

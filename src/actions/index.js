@@ -25,7 +25,11 @@ export const toggleTodo = (id) => ({
     id
 })
 
+export const restoreTodos = () => ({
+    type: 'RESTORE_DELETED'
+})
+
 export const setFilter = (filter) => ({
     type: 'SET_FILTER',
     filter
-  })
+})

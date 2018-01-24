@@ -37,6 +37,14 @@ const todo = (state, action) => {
         ...state,
         completed: !state.completed
       }
+    case 'RESTORE_DELETED':
+      if (!state.deleted) {
+        return state
+      }
+      return {
+        ...state,
+        deleted: false,
+      }
     default:
       return state
   }
@@ -50,14 +58,9 @@ const todos = (state = [], action) => {
         todo(undefined, action)
       ]
     case 'EDIT_TODO':
-      return state.map(t =>
-        todo(t, action)
-      )
     case 'DELETE_TODO':
-      return state.map(t =>
-        todo(t, action)
-      )
     case 'TOGGLE_TODO':
+    case 'RESTORE_DELETED':
       return state.map(t =>
         todo(t, action)
       )

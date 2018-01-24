@@ -3,7 +3,6 @@ import { editTodo } from '../actions';
 import Todo from '../components/Todo';
 
 const mapStateToProps = (state) => ({
-
 })
 
 const mapDispatchToProps = ({
