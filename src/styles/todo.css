@@ -33,6 +33,7 @@ button {
     margin-left: 10px;
     user-select: none;
     background-color: rgba(256,0,0,0.3);
+    cursor: pointer;
 }
 
 button:focus{
@@ -56,6 +57,10 @@ button:focus{
     background-color: #cccccc;
     margin-left: 5px;
     cursor: pointer;
+}
+
+.edit-todo {
+    display: inline-block;
 }
 
 .todo {

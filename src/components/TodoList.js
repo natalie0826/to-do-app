@@ -4,8 +4,7 @@ import EditTodo from '../containers/EditTodo';
 import '../styles/todo.css';
 
 const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
-  <table>
-    <tbody>
+  <div>
       {todos.map(todo =>
         <EditTodo
           key={todo.id}
@@ -14,8 +13,7 @@ const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
           onChange={() => onTodoClick(todo.id)}
         />
       )}
-    </tbody>
-  </table>
+  </div>
 )
 
 TodoList.propTypes = {

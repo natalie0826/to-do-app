@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Modal from './Modal';
 import '../styles/todo.css';
-import '../../node_modules/font-awesome/css/font-awesome.min.css'; 
+import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 class Todo extends React.Component {
 
@@ -9,12 +10,14 @@ class Todo extends React.Component {
     super(props);
     this.state = {
       isEditing: false,
-      todoText: props.text
+      todoText: props.text,
+      isOpenModal: false
     }
 
     this.startEdit = this.startEdit.bind(this);
     this.endEdit = this.endEdit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   startEdit() {
@@ -32,6 +35,10 @@ class Todo extends React.Component {
     this.setState({todoText: event.target.value});
   }
 
+  toggleModal() {
+    this.setState({isOpenModal: !this.state.isOpenModal})
+  }
+
   render() {
 
     const {
@@ -44,31 +51,34 @@ class Todo extends React.Component {
     } = this.props;
     
     return (
-      <tr
+      <div
         className="todo"
         style={{
           display:  deleted ? 'none' : 'block'
         }}
       >
-        <td>
-          <input type="checkbox" checked={completed} onChange={onChange}/>
-        </td>
-        <td>
+        <input type="checkbox" checked={completed} onChange={onChange}/>
           <span
             onClick={this.startEdit}
             style={{
               textDecoration: completed ? 'line-through' : 'none'
             }}>{!this.state.isEditing ? this.state.todoText : ''}</span>
-            {this.state.isEditing ? <div>
+            {this.state.isEditing ? <div className="edit-todo">
                                       <input value={this.state.todoText} onChange={this.handleChange}/>
                                       <button onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>
                                     </div> : ''
             }
-        </td>
-        <td>
+            {!this.state.isEditing ?
+              <button onClick={this.toggleModal}>More</button> : '' }
           <span className="delete-todo" onClick={onDelete}><i className="fa fa-trash-o" aria-hidden="true"></i></span>
-        </td>
-      </tr>
+          <Modal
+              show={this.state.isOpenModal}
+              onClose={this.toggleModal}>
+                <h3>Todo info</h3>
+                <p>ID: {id}</p>
+                <p>TEXT: {text}</p>
+          </Modal>
+      </div>
     )
   }
 }
