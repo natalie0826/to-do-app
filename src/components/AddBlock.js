@@ -27,6 +27,7 @@ class AddBlock extends React.Component {
     render() {
         return (
             <div>
+                <h3>Add todos</h3>
                 <form onSubmit={e => {
                     e.preventDefault()
                 }}>

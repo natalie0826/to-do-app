@@ -5,6 +5,7 @@ import '../styles/todo.css';
 
 const TodoList = ({ todos, onTodoClick, onDeleteClick }) => (
   <div>
+      <h3>Should do</h3>
       {todos.map(todo =>
         <EditTodo
           key={todo.id}

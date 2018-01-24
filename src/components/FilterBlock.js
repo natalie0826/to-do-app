@@ -4,6 +4,7 @@ import '../styles/filter.css'
 
 const FilterBlock = () => (
     <div className="filter">
+        <h3>Filter todos</h3>
         <button className="filter-button">
             <FilterLink filter="SHOW_ALL">All</FilterLink>
         </button>
