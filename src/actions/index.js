@@ -2,7 +2,6 @@
 
 let nextId = 0
 
-// calling reducers
 export const addTodo = (text) => ({
     type: 'ADD_TODO',
     id: nextId++,

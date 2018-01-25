@@ -36,7 +36,7 @@ class TodoList extends React.Component {
       <div>
           <h3>Should do</h3>
 
-          <input type="text" placeholder="Serach. . ." value={this.state.search} onChange={this.updateSearch} />
+          <input type="text" placeholder="Search. . ." value={this.state.search} onChange={this.updateSearch} />
 
           {filteredTodos.map(todo =>
             <EditTodo
