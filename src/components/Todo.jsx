@@ -70,7 +70,9 @@ class Todo extends React.Component {
             }
             {!this.state.isEditing ?
               <button onClick={this.toggleModal}>More</button> : '' }
-          <span className="delete-todo" onClick={onDelete}><i className="fa fa-trash-o" aria-hidden="true"></i></span>
+          <span className="delete-todo" onClick={onDelete}>
+            <i className="fa fa-trash-o" aria-hidden="true"></i>
+          </span>
           <Modal
               show={this.state.isOpenModal}
               onClose={this.toggleModal}>
