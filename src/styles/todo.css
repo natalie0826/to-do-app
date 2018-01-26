@@ -40,16 +40,16 @@ button:focus{
     outline: 0;
 }
 
-.add-todos {
+.left {
     float: left;
-    height: 100px;
+    height: 100%;
     width: 70%;
 }
 
-.filter-todos {
-    float: right;
+.right {
+    float: left;
     width: 30%;
-    height: 100px;
+    height: 100%;
 }
 
 .delete-todo {
