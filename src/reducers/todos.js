@@ -6,6 +6,7 @@ const todo = (state, action) => {
       return {
         id: action.id,
         text: action.text.toLowerCase(),
+        date: action.date,
         completed: false,
         deleted: false
       }

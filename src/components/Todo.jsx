@@ -46,6 +46,7 @@ class Todo extends React.Component {
       onDelete,
       id,
       text,
+      date,
       deleted,
       completed
     } = this.props;
@@ -79,6 +80,7 @@ class Todo extends React.Component {
                 <h3>Todo info</h3>
                 <p>ID: {id}</p>
                 <p>TEXT: {text}</p>
+                <p>CREATE: {date.toLocaleString('ru-RU')}</p>
           </Modal>
       </div>
     )

@@ -2,10 +2,11 @@
 
 let nextId = 0
 
-export const addTodo = (text) => ({
+export const addTodo = (text, date) => ({
     type: 'ADD_TODO',
     id: nextId++,
-    text
+    text,
+    date
 })
 
 export const editTodo = (id, text) => ({
