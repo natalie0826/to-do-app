@@ -47,10 +47,9 @@ class TodoList extends React.Component {
             />
           )}
 
-          {filteredTodos.find(todo => todo.deleted) ?
-            <button className="restore-deleted" onClick={() => onRestoreClick()}>Restore deleted</button> : ''
+          {filteredTodos.find(todo => todo.deleted) &&
+            <button className="restore-deleted" onClick={() => onRestoreClick()}>Restore deleted</button>
           }
-          
       </div>
     )
   }

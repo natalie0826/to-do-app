@@ -63,14 +63,13 @@ class Todo extends React.Component {
             onClick={this.startEdit}
             style={{
               textDecoration: completed ? 'line-through' : 'none'
-            }}>{!this.state.isEditing ? this.state.todoText : ''}</span>
-            {this.state.isEditing ? <div className="edit-todo">
+            }}>{!this.state.isEditing && this.state.todoText}</span>
+            {this.state.isEditing && <div className="edit-todo">
                                       <input value={this.state.todoText} onChange={this.handleChange}/>
                                       <button onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>
-                                    </div> : ''
+                                    </div>
             }
-            {!this.state.isEditing ?
-              <button onClick={this.toggleModal}>More</button> : '' }
+            {!this.state.isEditing && <button onClick={this.toggleModal}>More</button> }
           <span className="delete-todo" onClick={onDelete}>
             <i className="fa fa-trash-o" aria-hidden="true"></i>
           </span>
