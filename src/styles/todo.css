@@ -7,8 +7,8 @@
     width: 50%;
     height: 600px;
     margin: 0 auto;
-    border: 1px solid #cccccc;
     padding: 0 50px 50px 50px;
+    border: 1px solid #cccccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
 }
 
@@ -16,23 +16,23 @@ h2 {
     padding: 20px 0;
     text-transform: uppercase;
     text-shadow: 0 3px 3px #cccccc;
-    font-size: 1.5em;
     text-align: center;
+    font-size: 1.5em;
 }
 
 h3 {
     padding: 0;
-    font-size: 1.2em;
     text-align: center;
+    font-size: 1.2em;
 }
 
 button {
     padding: 5px 10px;
+    margin-left: 10px;
     border-radius: 2px;
     border: 0px;
-    margin-left: 10px;
-    user-select: none;
     background-color: rgba(256, 0, 0, 0.3);
+    user-select: none;
     cursor: pointer;
 }
 
@@ -54,8 +54,8 @@ button:focus{
 
 .delete-todo {
     padding: 3px 7px;
-    background-color: #cccccc;
     margin-left: 5px;
+    background-color: #cccccc;
     cursor: pointer;
 }
 
@@ -68,6 +68,6 @@ button:focus{
 }
 
 .restore-deleted {
-    background-color: rgba(56, 180, 0, 0.3);
     margin-top: 20px;
+    background-color: rgba(56, 180, 0, 0.3);
 }
