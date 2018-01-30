@@ -10,7 +10,7 @@ export default class Link extends React.Component {
     }
 
     if (active) {
-        return <span>{children}</span>
+        return <span>{this.props.children}</span>
     }
     
     render() {
