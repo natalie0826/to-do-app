@@ -2,7 +2,7 @@ import React from 'react';
 import FilterLink from '../containers/FilterLink';
 import '../styles/filter.css'
 
-const FilterBlock = () => (
+export const FilterBlock = () => (
     <div className="filter">
         <h3>Filter todos</h3>
         <button className="filter-button">
@@ -16,5 +16,3 @@ const FilterBlock = () => (
         </button>
     </div>
 );
-
-export default FilterBlock;

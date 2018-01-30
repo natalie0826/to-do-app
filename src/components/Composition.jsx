@@ -2,6 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export default class Composition extends React.Component {
+    static propTypes = {
+        header: PropTypes.string.isRequired,
+        left: PropTypes.node.isRequired,
+        right: PropTypes.node.isRequired
+    }
 
     render() {
         return (
@@ -16,10 +21,4 @@ export default class Composition extends React.Component {
             </div>
         )
     }
-}
-
-Composition.propTypes = {
-    header: PropTypes.string.isRequired,
-    left: PropTypes.node.isRequired,
-    right: PropTypes.node.isRequired
 }

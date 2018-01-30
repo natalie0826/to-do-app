@@ -3,7 +3,13 @@ import PropTypes from 'prop-types';
 import '../styles/modal.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
-class Modal extends React.Component {
+export default class Modal extends React.Component {
+    static propTypes = {
+        onClose: PropTypes.func.isRequired,
+        show: PropTypes.bool,
+        children: PropTypes.node
+    }
+
     render() {
         if(!this.props.show) {
             return null;
@@ -23,11 +29,3 @@ class Modal extends React.Component {
         );
     }
 }
-
-Modal.propTypes = {
-    onClose: PropTypes.func.isRequired,
-    show: PropTypes.bool,
-    children: PropTypes.node
-}
-
-export default Modal;

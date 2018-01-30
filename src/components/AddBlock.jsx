@@ -1,7 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class AddBlock extends React.Component {
+export default class AddBlock extends React.Component {
+    static propTypes = {
+        onAddClick: PropTypes.func.isRequired
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -41,9 +45,3 @@ class AddBlock extends React.Component {
         )
     }
 }
-
-AddBlock.propTypes = {
-  onAddClick: PropTypes.func.isRequired
-}
-
-export default AddBlock

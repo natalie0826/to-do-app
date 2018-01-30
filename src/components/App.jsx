@@ -4,7 +4,7 @@ import AddTodo from '../containers/AddTodo';
 import FilterBlock from '../components/FilterBlock';
 import Composition from './Composition';
 
-const App = () => (
+export const App = () => (
     <Composition header="Welcome to the To-Do!"
         left={
             <div>
@@ -17,5 +17,3 @@ const App = () => (
         }
     />
 )
-
-export default App;
