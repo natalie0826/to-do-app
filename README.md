@@ -1,4 +1,8 @@
 # to-do-app
 ToDo application is created using react/redux
 
-To start app run 'npm install', then 'npm start'
+*How to build project?*
+
+1. Run 'npm install'
+2. Then run 'npm start'
+3. Enjoy! :)
