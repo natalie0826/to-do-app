@@ -68,6 +68,7 @@ button:focus{
 }
 
 .restore-deleted {
+    display: block;
     margin-top: 20px;
     background-color: rgba(56, 180, 0, 0.3);
 }

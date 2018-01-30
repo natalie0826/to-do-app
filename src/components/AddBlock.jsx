@@ -5,8 +5,7 @@ class AddBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
-            date: new Date()
+            value: ''
         };
     
         this.handleChange = this.handleChange.bind(this);
@@ -22,7 +21,7 @@ class AddBlock extends React.Component {
             return;
         }
         this.setState({value: ''})
-        this.props.onAddClick(todo, this.state.date);
+        this.props.onAddClick(todo, new Date());
     }
 
     render() {
