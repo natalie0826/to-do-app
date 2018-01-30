@@ -5,38 +5,38 @@ class AddBlock extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: ''
+            value: '',
+            isSmthEntered: true
         };
     
         this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
-        this.setState({value: event.target.value})
+        this.setState({value: event.target.value, isSmthEntered: true})
     }
 
     addTodo() {
         const todo = this.state.value;
         if (!todo.trim()) {
+            this.setState({isSmthEntered: false});
             return;
         }
-        this.setState({value: ''})
+        this.setState({value: ''});
         this.props.onAddClick(todo, new Date());
     }
 
     render() {
+        const message = 'Please, enter something';
+
         return (
             <div>
                 <h3>Add todos</h3>
-                <form onSubmit={e => {
-                    e.preventDefault()
-                }}>
-                    <input onChange={this.handleChange} value={this.state.value}/>
-                    <button type="submit" onClick={() => this.addTodo()}>
-                        Add a todo
-                    </button>
-                </form>
-                <p>{!this.state.value ? 'Please, write a todo.' : `You are typing ${this.state.value}.`}</p>
+                <input onChange={this.handleChange} value={this.state.value}/>
+                <button type="submit" onClick={() => this.addTodo()}>
+                    Add a todo
+                </button>
+                <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>
             </div>
         )
     }

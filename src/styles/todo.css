@@ -67,6 +67,12 @@ button:focus{
     margin: 10px 0;
 }
 
+.todo-hint {
+    font-style: italic;
+    color: #cccccc;
+    font-size: .9em;
+}
+
 .restore-deleted {
     display: block;
     margin-top: 20px;
