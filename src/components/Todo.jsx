@@ -28,7 +28,7 @@ export default class Todo extends React.Component {
 
     startEdit = () => {
         if(!this.props.completed) {
-        this.setState({isEditing: true});
+            this.setState({isEditing: true});
         }
     }
 
@@ -38,7 +38,7 @@ export default class Todo extends React.Component {
     }
 
     toDelete = () => {
-        this.setState((prevState) => ({isStartDeleting: !prevState.isStartDeleting}));
+        this.setState({isStartDeleting: !this.state.isStartDeleting});
     }
 
     handleChange = (event) => {
@@ -95,7 +95,7 @@ export default class Todo extends React.Component {
 
 
             <Modal
-                show={this.state.isOpenModal}
+                show={!this.state.isOpenModal}
                 onClose={this.toggleModal}>
                     <h2>Todo info</h2>
                     <p>ID: {id}</p>
