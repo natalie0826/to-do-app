@@ -23,7 +23,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = ({
   onDeleteClick: deleteTodo,
   onTodoClick: toggleTodo,
-  onRestoreClick: restoreTodos
+  onRestoreClick: restoreTodos,
+  search: ''
 })
 
 const ShowTodoList = connect(

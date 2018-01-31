@@ -29,8 +29,6 @@ export default class AddBlock extends React.Component {
     }
 
     render() {
-        const message = 'Please, enter something';
-
         return (
             <div>
                 <input
