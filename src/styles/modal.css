@@ -17,6 +17,11 @@
     background-color: #ffffff;
 }
 
+h2,
+p {
+    color: #000000;
+}
+
 .close-modal {
     float: right;
 }

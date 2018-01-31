@@ -18,46 +18,42 @@ export default class Todo extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-        isEditing: false,
-        todoText: props.text,
-        isOpenModal: false
+            isEditing: false,
+            isConfirmedDeleting: false,
+            todoText: props.text,
+            isOpenModal: false
         }
-
-        this.startEdit = this.startEdit.bind(this);
-        this.endEdit = this.endEdit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.toggleModal = this.toggleModal.bind(this);
     }
 
-    startEdit() {
+    startEdit = () => {
         if(!this.props.completed) {
         this.setState({isEditing: true});
         }
     }
 
-    endEdit(id, text) {
+    endEdit = (id, text) => {
         this.setState({isEditing: false});
         this.props.onEditClick(id, text);
     }
 
-    handleChange(event) {
+    handleChange = (event) => {
         this.setState({todoText: event.target.value});
     }
 
-    toggleModal() {
+    toggleModal = () => {
         this.setState({isOpenModal: !this.state.isOpenModal})
     }
 
     render() {
 
         const {
-        onChange,
-        onDelete,
-        id,
-        text,
-        date,
-        deleted,
-        completed
+            onChange,
+            onDelete,
+            id,
+            text,
+            date,
+            deleted,
+            completed
         } = this.props;
         
         return (
@@ -67,27 +63,30 @@ export default class Todo extends React.Component {
             display:  deleted ? 'none' : 'block'
             }}
         >
-            <input type="checkbox" checked={completed} onChange={onChange}/>
-            <span
-                onClick={this.startEdit}
-                style={{
-                textDecoration: completed ? 'line-through' : 'none'
-                }}>
-                {!this.state.isEditing && this.state.todoText}
-            </span>
-                {this.state.isEditing && <div className="edit-todo">
-                                        <input value={this.state.todoText} onChange={this.handleChange}/>
-                                        <button onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>
-                                        </div>
-                }
-                {!this.state.isEditing && <button onClick={this.toggleModal}>More</button> }
-            <span className="delete-todo" onClick={onDelete}>
-                <i className="fa fa-trash-o" aria-hidden="true"></i>
-            </span>
+            <li class="todo">
+                <input type="checkbox" checked={completed} onChange={onChange}/>
+                <span class="todo-text"
+                    onClick={this.toggleModal}
+                    style={{
+                        textDecoration: completed ? 'line-through' : 'none',
+                        color: id%2 ? '#DB4E3D' : '#1BBC9B'
+                    }}>
+                    {!this.state.isEditing && this.state.todoText}
+                </span>
+                {this.state.isEditing && <input class="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>}
+                <div class="buttons-wrapper">
+                    {!this.state.isEditing
+                        ? <button class="btn btn-edit" onClick={this.startEdit}> Edit </button>
+                        : <button class="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
+                    <button class="btn btn-delete" onClick={onDelete}> Delete </button>
+                </div>
+            </li>
+
+
             <Modal
                 show={this.state.isOpenModal}
                 onClose={this.toggleModal}>
-                    <h3>Todo info</h3>
+                    <h2>Todo info</h2>
                     <p>ID: {id}</p>
                     <p>TEXT: {text}</p>
                     <p>CREATE: {date.toLocaleString('ru-RU')}</p>

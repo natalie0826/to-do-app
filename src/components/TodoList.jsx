@@ -21,11 +21,9 @@ export default class TodoList extends React.Component {
         this.state = {
         search: ''
         };
-
-        this.updateSearch = this.updateSearch.bind(this);
     }
 
-    updateSearch(event) {
+    updateSearch = (event) => {
         this.setState({ search: event.target.value });
     }
 
@@ -39,29 +37,33 @@ export default class TodoList extends React.Component {
 
         // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
         let filteredTodos = todos.filter(
-        (todo) => {
-            return todo.text.includes(this.state.search.toLowerCase());
-        }
+            (todo) => {
+                return todo.text.includes(this.state.search.toLowerCase());
+            }
         );
 
         return (
         <div>
-            <h3>Should do {filteredTodos.length} todos</h3>
+            <input
+                class="search-todo"
+                type="text"
+                placeholder="Search. . ."
+                value={this.state.search}
+                onChange={this.updateSearch} />
+            <ul class="todos">
+                {filteredTodos.map(todo =>
+                    <EditTodo
+                        key={todo.id}
+                        {...todo}
+                        onDelete={() => onDeleteClick(todo.id)}
+                        onChange={() => onTodoClick(todo.id)}
+                    />
+                )}
 
-            <input type="text" placeholder="Search. . ." value={this.state.search} onChange={this.updateSearch} />
-
-            {filteredTodos.map(todo =>
-                <EditTodo
-                key={todo.id}
-                {...todo}
-                onDelete={() => onDeleteClick(todo.id)}
-                onChange={() => onTodoClick(todo.id)}
-                />
-            )}
-
-            {filteredTodos.find(todo => todo.deleted) &&
-                <button className="restore-deleted" onClick={() => onRestoreClick()}>Restore deleted</button>
-            }
+                {filteredTodos.find(todo => todo.deleted) &&
+                    <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+                }
+            </ul>
         </div>
         )
     }

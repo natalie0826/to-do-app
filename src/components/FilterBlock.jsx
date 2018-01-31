@@ -1,21 +1,21 @@
 import React from 'react';
 import FilterLink from '../containers/FilterLink';
-import '../styles/filter.css'
+import '../styles/todo.css'
 
 export default class FilterBlock extends React.Component {
     render() {
         return (
-            <div className="filter">
-                <h3>Filter todos</h3>
-                <button className="filter-button">
+            <div class="filter">
+                <button class="btn btn-filter">
                     <FilterLink filter="SHOW_ALL">All</FilterLink>
                 </button>
-                <button className="filter-button">
-                    <FilterLink filter="SHOW_ACTIVE">Not completed</FilterLink>
-                </button>
-                <button className="filter-button">
+                <button class="btn btn-filter">
                     <FilterLink filter="SHOW_COMPLETED">Completed</FilterLink>
                 </button>
+                <button class="btn btn-filter">
+                    <FilterLink filter="SHOW_ACTIVE">Not completed</FilterLink>
+                </button>
+                <hr />
             </div>
         )
     }

@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import '../styles/filter.css';
+import '../styles/todo.css';
 
 export default class Link extends React.Component {
     static propTypes = {
@@ -21,7 +21,7 @@ export default class Link extends React.Component {
         } = this.props;
 
         return (
-            <a className="filter-not-active" onClick={e => {
+            <a onClick={e => {
                 e.preventDefault()
                 onClick()
             }}>

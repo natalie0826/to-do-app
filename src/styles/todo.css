@@ -1,80 +1,137 @@
-* {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 14px;
+@import url("https://fonts.googleapis.com/css?family=Sacramento");
+
+body {
+  font-size: 14px;
+  background-color: #1BBC9B;
+  padding: 10px;
+  font-family: "Arial";
+  color:  #000000;
 }
 
-.to-do-app {
-    width: 50%;
-    height: 600px;
-    margin: 0 auto;
-    padding: 0 50px 50px 50px;
-    border: 1px solid #cccccc;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);;
-}
-
-h2 {
-    padding: 20px 0;
-    text-transform: uppercase;
-    text-shadow: 0 3px 3px #cccccc;
-    text-align: center;
-    font-size: 1.5em;
+.container {
+  width: 70%;
+  min-height: 400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #ffffff;
 }
 
 h3 {
-    padding: 0;
-    text-align: center;
-    font-size: 1.2em;
+  color: #1BBC9B;
+  font-size: 4em;
+  padding: 20px 0 0 0;
+  margin: 0;
+  font-family: "Sacramento", cursive;
 }
 
-button {
-    padding: 5px 10px;
-    margin-left: 10px;
-    border-radius: 2px;
-    border: 0px;
-    background-color: rgba(256, 0, 0, 0.3);
-    user-select: none;
-    cursor: pointer;
+.add-todo {
+  width: 89%;
+  margin: 0 0 0 10px;
 }
 
-button:focus{
-    outline: 0;
-}
-
-.left {
-    float: left;
-    height: 100%;
-    width: 70%;
-}
-
-.right {
-    float: left;
-    width: 30%;
-    height: 100%;
-}
-
-.delete-todo {
-    padding: 3px 7px;
-    margin-left: 5px;
-    background-color: #cccccc;
-    cursor: pointer;
+.search-todo {
+  width: 50%;
+  margin-left: 25%;
 }
 
 .edit-todo {
-    display: inline-block;
+    width: 78%;
+}
+
+.add-todo,
+.search-todo,
+.edit-todo {
+  height: 20px;
+  padding: 2px 5px;
+  border: 2px solid #1BBC9B;
+}
+
+.add-todo:focus,
+.search-todo:focus {
+    outline: 0;
+}
+
+.edit {
+    display: inline;
+    clear: both;
+}
+
+.buttons-wrapper {
+  float: right;
+}
+
+.btn {
+  padding: 7px 5px;
+  margin: 0 5px;
+  border: none;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn-add {
+  float: right;
+}
+
+.btn-add,
+.btn-edit,
+.btn-filter {
+  background-color: #1BBC9B;
+  transition: .3s ease-in;
+}
+
+.btn-add:hover,
+.btn-edit:hover,
+.btn-filter:hover {
+    background-color: rgb(22, 156, 129);
+    transition: .3s ease-in;
+}
+
+.btn-delete {
+    clear : both;
+  background-color: #DB4E3D;
+  transition: .3s ease-in;
+}
+
+.btn-delete:hover{
+    background-color: rgb(185, 56, 42);
+    transition: .3s ease-in;
+}
+
+.filter {
+  text-align: center;
+}
+
+.btn-filter {
+  width: 20%;
+  margin-right: 20px;
+}
+
+hr {
+  margin: 20px 0;
+  border: .5px solid #cccccc;
+}
+
+.todos {
+  list-style-type: none;
+  padding: 0;
 }
 
 .todo {
-    margin: 10px 0;
+  clear: both;
+  margin: 20px 0;
+}
+
+.todo-text {
+  font-family: "Arial";
+  font-weight: bold;
+  font-size: 1.1em;
+  cursor: pointer;
 }
 
 .todo-hint {
     font-style: italic;
     color: #cccccc;
     font-size: .9em;
-}
-
-.restore-deleted {
-    display: block;
-    margin-top: 20px;
-    background-color: rgba(56, 180, 0, 0.3);
 }

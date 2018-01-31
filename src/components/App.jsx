@@ -1,23 +1,18 @@
 import React from 'react';
 import ShowTodoList from '../containers/ShowTodoList';
 import AddTodo from '../containers/AddTodo';
-import FilterBlock from '../components/FilterBlock';
-import Composition from './Composition';
+import FilterBlock from './FilterBlock';
+import '../styles/todo.css';
 
 export default class App extends React.Component {
     render() {
         return (
-            <Composition header="Welcome to the To-Do!"
-                left={
-                    <div>
-                        <AddTodo />
-                        <ShowTodoList />
-                    </div>
-                }
-                right={
-                    <FilterBlock />
-                }
-            />
+            <div class="container">
+                <h3>Todos</h3>
+                <AddTodo />
+                <FilterBlock />
+                <ShowTodoList />
+            </div>
         )
     }
 }
