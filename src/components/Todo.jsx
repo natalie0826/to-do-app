@@ -19,7 +19,8 @@ export default class Todo extends React.Component {
         super(props);
         this.state = {
             isEditing: false,
-            isConfirmedDeleting: false,
+            isStartDeleting: false,
+            hasConfirmedDelete: false,
             todoText: props.text,
             isOpenModal: false
         }
@@ -34,6 +35,10 @@ export default class Todo extends React.Component {
     endEdit = (id, text) => {
         this.setState({isEditing: false});
         this.props.onEditClick(id, text);
+    }
+
+    toDelete = () => {
+        this.setState((prevState) => ({isStartDeleting: !prevState.isStartDeleting}));
     }
 
     handleChange = (event) => {
@@ -78,7 +83,13 @@ export default class Todo extends React.Component {
                     {!this.state.isEditing
                         ? <button class="btn btn-edit" onClick={this.startEdit}> Edit </button>
                         : <button class="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
-                    <button class="btn btn-delete" onClick={onDelete}> Delete </button>
+                    {this.state.isStartDeleting
+                        ?   <div class="delete">
+                                <span>Are you sure to delete?</span>
+                                <button class="btn btn-edit" onClick={() => {onDelete(); this.toDelete()}}>Yes</button>
+                                <button class="btn btn-delete" onClick={this.toDelete}>No</button>
+                            </div>
+                        : <button class="btn btn-delete" onClick={this.toDelete}> Delete </button>}
                 </div>
             </li>
 
