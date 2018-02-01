@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Modal from './Modal';
+import { Modal } from './Modal';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -67,9 +67,9 @@ export default class Todo extends React.Component {
             display:  deleted ? 'none' : 'block'
             }}
         >
-            <li class="todo">
+            <li className="todo">
                 <input type="checkbox" checked={completed} onChange={onChange}/>
-                <span class="todo-text"
+                <span className="todo-text"
                     onClick={this.toggleModal}
                     style={{
                         textDecoration: completed ? 'line-through' : 'none',
@@ -77,18 +77,18 @@ export default class Todo extends React.Component {
                     }}>
                     {!this.state.isEditing && this.state.todoText}
                 </span>
-                {this.state.isEditing && <input class="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>}
-                <div class="buttons-wrapper">
+                {this.state.isEditing && <input className="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>}
+                <div className="buttons-wrapper">
                     {!this.state.isEditing
-                        ? <button class="btn btn-edit" onClick={this.startEdit}> Edit </button>
-                        : <button class="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
+                        ? <button className="btn btn-edit" onClick={this.startEdit}> Edit </button>
+                        : <button className="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
                     {this.state.showDeleteConfirmation
-                        ?   <div class="delete">
+                        ?   <div className="delete">
                                 <span>Are you sure to delete?</span>
-                                <button class="btn btn-edit" onClick={() => {onDelete(); this.toDelete()}}>Yes</button>
-                                <button class="btn btn-delete" onClick={this.toDelete}>No</button>
+                                <button className="btn btn-edit" onClick={() => {onDelete(); this.toDelete()}}>Yes</button>
+                                <button className="btn btn-delete" onClick={this.toDelete}>No</button>
                             </div>
-                        : <button class="btn btn-delete" onClick={this.toDelete}> Delete </button>}
+                        : <button className="btn btn-delete" onClick={this.toDelete}> Delete </button>}
                 </div>
             </li>
 

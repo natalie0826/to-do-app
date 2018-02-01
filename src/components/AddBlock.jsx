@@ -32,13 +32,13 @@ export default class AddBlock extends React.Component {
         return (
             <div>
                 <input
-                    class="add-todo"
+                    className="add-todo"
                     type="text"
                     placeholder="Task"
                     onChange={this.handleChange}
                     value={this.state.value}
                 />
-                <button class="btn btn-add" onClick={() => this.addTodo()}>
+                <button className="btn btn-add" onClick={() => this.addTodo()}>
                     Add
                 </button>
                 <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>

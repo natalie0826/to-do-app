@@ -2,8 +2,6 @@
 
 let nextId = 0
 
-
-
 export const addTodo = (text, date) => ({
     type: 'ADD_TODO',
     id: nextId++,

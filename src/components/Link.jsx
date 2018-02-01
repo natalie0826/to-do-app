@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import '../styles/todo.css';
 
-const Link = (props) => {
+export const Link = (props) => {
     Link.propTypes = {
         active: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
@@ -22,5 +22,3 @@ const Link = (props) => {
         </a>
     )
 }
-
-export default Link;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import '../styles/modal.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
-const Modal = (props) => {
+export const Modal = (props) => {
     Modal.propTypes = {
         onClose: PropTypes.func.isRequired,
         show: PropTypes.bool,
@@ -27,5 +27,3 @@ const Modal = (props) => {
         </div>
     );
 }
-
-export default Modal;

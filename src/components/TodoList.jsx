@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import EditTodo from '../containers/EditTodo';
+import { EditTodo } from '../containers/EditTodo';
 import '../styles/todo.css';
 
 export default class TodoList extends React.Component {
@@ -45,12 +45,12 @@ export default class TodoList extends React.Component {
         return (
         <div>
             <input
-                class="search-todo"
+                className="search-todo"
                 type="text"
                 placeholder="Search. . ."
                 value={this.state.search}
                 onChange={this.updateSearch} />
-            <ul class="todos">
+            <ul className="todos">
                 {filteredTodos.map(todo =>
                     <EditTodo
                         key={todo.id}
@@ -61,7 +61,7 @@ export default class TodoList extends React.Component {
                 )}
 
                 {filteredTodos.find(todo => todo.deleted) &&
-                    <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+                    <button classNameName="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
                 }
             </ul>
         </div>
