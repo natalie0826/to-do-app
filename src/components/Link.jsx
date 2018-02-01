@@ -1,5 +1,5 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React from 'react';
+import PropTypes from 'prop-types';
 import '../styles/todo.css';
 
 export const Link = (props) => {
@@ -7,18 +7,18 @@ export const Link = (props) => {
         active: PropTypes.bool.isRequired,
         children: PropTypes.node.isRequired,
         onClick: PropTypes.func.isRequired
-    }
+    };
 
     if (props.active) {
-        return <span>{props.children}</span>
+        return <span>{props.children}</span>;
     }
     
     return (
         <a onClick={e => {
-            e.preventDefault()
-            props.onClick()
+            e.preventDefault();
+            props.onClick();
         }}>
             {props.children}
         </a>
-    )
-}
+    );
+};

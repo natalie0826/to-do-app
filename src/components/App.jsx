@@ -4,7 +4,7 @@ import { AddTodo } from '../containers/AddTodo';
 import { FilterBlock } from './FilterBlock';
 import '../styles/todo.css';
 
-const App = () => {
+export const App = () => {
     return (
         <div className="container">
             <h3>Todos</h3>
@@ -12,7 +12,5 @@ const App = () => {
             <FilterBlock />
             <ShowTodoList />
         </div>
-    )
-}
-
-export default App;
+    );
+};

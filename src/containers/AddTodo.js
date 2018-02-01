@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 import { addTodo } from '../actions';
 import AddBlock from '../components/AddBlock';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = () => ({
 });
 
 const mapDispatchToProps = ({
-  onAddClick: addTodo
+    addTodo: addTodo
 });
 
 export const AddTodo = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(AddBlock);

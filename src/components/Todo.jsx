@@ -45,7 +45,7 @@ export default class Todo extends React.Component {
     }
 
     toggleModal = () => {
-        this.setState({isOpenModal: !this.state.isOpenModal})
+        this.setState({isOpenModal: !this.state.isOpenModal});
     }
 
     render() {
@@ -55,7 +55,6 @@ export default class Todo extends React.Component {
             onDelete,
             id,
             text,
-            date,
             deleted,
             completed
         } = this.props;
@@ -99,7 +98,6 @@ export default class Todo extends React.Component {
                     <h2>Todo info</h2>
                     <p>ID: {id}</p>
                     <p>TEXT: {text}</p>
-                    <p>CREATE: {date.toLocaleString('ru-RU')}</p>
             </Modal>
         </div>
         )

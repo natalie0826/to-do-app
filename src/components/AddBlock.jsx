@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default class AddBlock extends React.Component {
     static propTypes = {
-        onAddClick: PropTypes.func.isRequired
+        addTodo: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -15,17 +15,19 @@ export default class AddBlock extends React.Component {
     }
 
     handleChange = (event) => {
-        this.setState({value: event.target.value, isSmthEntered: true})
+        this.setState({value: event.target.value, isSmthEntered: true});
     }
 
-    addTodo() {
-        const todo = this.state.value;
-        if (!todo.trim()) {
+    addTodo(todo) {
+        console.log('TODOOOOO', todo);
+        if (todo === undefined || todo.length === 0) {
+            console.log('if');
             this.setState({isSmthEntered: false});
-            return;
+        } else {
+            console.log('else ---');
+            this.setState({value: ''});
+            this.props.addTodo(todo);
         }
-        this.setState({value: ''});
-        this.props.onAddClick(todo, new Date());
     }
 
     render() {
@@ -38,12 +40,12 @@ export default class AddBlock extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.value}
                 />
-                <button className="btn btn-add" onClick={() => this.addTodo()}>
+                <button className="btn btn-add" onClick={this.addTodo}>
                     Add
                 </button>
                 <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>
                 <hr />    
             </div>
-        )
+        );
     }
 }

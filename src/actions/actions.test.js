@@ -1,6 +1,3 @@
-import React from 'react';
-import { shallow } from 'enzyme';
-
 // actions
 import * as actions from './index';
 
@@ -9,14 +6,12 @@ describe('Actions', () => {
     const text = 'test';
 
     it('should create an action to ADD a todo', () => {
-        const date = new Date();
         const expectedAction = {
             type: 'ADD_TODO',
             text,
-            date,
             id
         };
-        expect(actions.addTodo(text, date)).toEqual(expectedAction);
+        expect(actions.addTodo(text)).toEqual(expectedAction);
     });
 
     it('should create an action to DELETE the todo', () => {
