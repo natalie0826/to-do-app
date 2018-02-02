@@ -1,0 +1,38 @@
+{
+    "extends": "react-app",
+    "env": {
+      "browser": true,
+      "commonjs": true,
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "ecmaVersion": 6
+    },
+    "rules": {
+      "no-console": "off",
+      "strict": ["error", "global"],
+      "semi": [2, "always"],
+      "curly": "warn",
+      "no-debugger": 0,
+      "new-cap": 0,
+      "no-underscore-dangle": 0,
+      "no-use-before-define": 1,
+      "eol-last": 0,
+      "jsx-quotes": [1, "prefer-double"],
+      "react/jsx-no-undef": 1,
+      "react/jsx-uses-react": 1,
+      "react/jsx-uses-vars": 1,
+      "no-undef": 1,
+      "quotes": [2, "single", {"allowTemplateLiterals": true}],
+      "no-unused-vars": 1,
+      "comma-dangle": 0,
+      "no-class-assign": 0,
+      "arrow-spacing": 2,
+      "no-mixed-spaces-and-tabs": 1
+    },
+    "parser": "babel-eslint",
+    "plugins": [
+      "react"
+    ]
+  }

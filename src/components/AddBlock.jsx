@@ -18,16 +18,14 @@ export default class AddBlock extends React.Component {
         this.setState({value: event.target.value, isSmthEntered: true});
     }
 
-    addTodo(todo) {
-        console.log('TODOOOOO', todo);
-        if (todo === undefined || todo.length === 0) {
-            console.log('if');
+    addTodo() {
+        const todo = this.state.value;
+        if (!todo.trim()) {
             this.setState({isSmthEntered: false});
-        } else {
-            console.log('else ---');
-            this.setState({value: ''});
-            this.props.addTodo(todo);
+            return;
         }
+        this.setState({value: ''});
+        this.props.addTodo(todo, new Date());
     }
 
     render() {
@@ -40,7 +38,7 @@ export default class AddBlock extends React.Component {
                     onChange={this.handleChange}
                     value={this.state.value}
                 />
-                <button className="btn btn-add" onClick={this.addTodo}>
+                <button className="btn btn-add" onClick={() => this.addTodo()}>
                     Add
                 </button>
                 <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>

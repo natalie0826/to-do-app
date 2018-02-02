@@ -18,7 +18,7 @@ h3 {
 
 hr {
     margin: 20px 0;
-    border: .5px solid #cccccc;
+    border: 1px solid #cccccc;
 }
 
 .container {
@@ -125,18 +125,79 @@ hr {
 
 .todo {
     clear: both;
-    margin: 20px 0;
+    margin: 20px 0 20px 5px;
+}
+
+.todo-display {
+    display: none;
 }
 
 .todo-text {
-    font-family: "Arial";
     font-weight: bold;
     font-size: 1.1em;
     cursor: pointer;
+    color: #DB4E3D;
+}
+
+.todo-completed {
+    text-decoration: line-through;
+}
+
+.todo-odd {
+    color: rgb(22, 156, 129);
 }
 
 .todo-hint {
     font-style: italic;
-    color: #cccccc;
+    color: #92000F;
     font-size: .9em;
+    margin-left: 10px;
+}
+
+/* CHECKBOX STYLES */
+.label-checkbox {
+    position: relative;
+    margin: 1px;
+    line-height: 135%;
+    cursor: pointer;
+}
+
+.checkbox {
+    position: relative;
+    top: -1px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+.checkbox:before {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #1BBC9B;
+}
+.checkbox:checked:before {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 7px;
+    border-color: #009688;
+    border-top-style: none;
+    border-right-style: none;
+}
+.checkbox:after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    cursor: pointer;
 }

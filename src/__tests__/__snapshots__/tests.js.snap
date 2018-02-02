@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Application render todo should render correctly 1`] = `
+<Connect(Todo)
+  completed={false}
+  deleted={false}
+  id={2}
+  key="1"
+  text="aaaa"
+/>
+`;
