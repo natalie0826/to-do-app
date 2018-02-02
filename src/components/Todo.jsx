@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import{ DeleteBlock } from './DeleteBlock';
-import Notification from './Notification';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
