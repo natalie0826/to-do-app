@@ -29,10 +29,10 @@ export default class TodoList extends React.Component {
 
     render() {
         const {
-        todos,
-        onTodoClick,
-        onDeleteClick,
-        onRestoreClick
+            todos,
+            onTodoClick,
+            onDeleteClick,
+            onRestoreClick
         } = this.props;
 
         // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
@@ -61,7 +61,7 @@ export default class TodoList extends React.Component {
                 )}
 
                 {filteredTodos.find(todo => todo.deleted) &&
-                    <button classNameName="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+                    <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
                 }
             </ul>
         </div>

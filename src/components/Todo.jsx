@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import{ DeleteBlock } from './DeleteBlock';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -21,7 +22,7 @@ export default class Todo extends React.Component {
             showDeleteConfirmation: false,
             todoText: props.text,
             isOpenModal: false
-        }
+        };
     }
 
     startEdit = () => {
@@ -35,8 +36,11 @@ export default class Todo extends React.Component {
         this.props.onEditClick(id, text);
     }
 
-    toDelete = () => {
-        this.setState({showDeleteConfirmation: !this.state.showDeleteConfirmation});
+    confirmDeleting = (id, sureToDelete) => {
+        this.setState((prevState) => ({showDeleteConfirmation: !prevState.showDeleteConfirmation}));
+        if (sureToDelete) {
+            this.props.onDelete(id);
+        }
     }
 
     handleChange = (event) => {
@@ -51,9 +55,7 @@ export default class Todo extends React.Component {
 
         const {
             onChange,
-            onDelete,
             id,
-            text,
             deleted,
             completed
         } = this.props;
@@ -68,29 +70,32 @@ export default class Todo extends React.Component {
         const todoClass = classNames({
             'todo': true,
             'todo-display': deleted
-        })
+        });
         
         return (
             <div className={todoClass}>
-                <li className="todo">
-                    <label className={todoTextClass} onClick={this.toggleModal}>
-                        <input type="checkbox" checked={completed} onChange={onChange} class="checkbox"/>
-                        {!this.state.isEditing && this.state.todoText}
-                    </label>
-                    {this.state.isEditing && <input className="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>}
-                    <div className="buttons-wrapper">
-                        {!this.state.isEditing
-                            ? <button className="btn btn-edit" onClick={this.startEdit}> Edit </button>
-                            : <button className="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
-                        {this.state.showDeleteConfirmation
-                            ?   <div className="delete">
-                                    <span>Are you sure to delete?</span>
-                                    <button className="btn btn-edit" onClick={() => {onDelete(); this.toDelete()}}>Yes</button>
-                                    <button className="btn btn-delete" onClick={this.toDelete}>No</button>
-                                </div>
-                            : <button className="btn btn-delete" onClick={this.toDelete}> Delete </button>}
-                    </div>
-                </li>
+                {!this.state.showDeleteConfirmation
+                    ?   <li className="todo">
+                            <label className={todoTextClass} onClick={this.toggleModal}>
+                                {!this.state.isEditing
+                                    ?   <label>
+                                            <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
+                                            {this.state.todoText}
+                                        </label>
+                                    :   <input className="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>
+                                }
+                            </label>
+                            <div className="buttons-wrapper">
+                                {!this.state.isEditing
+                                    ? <button className="btn btn-edit" onClick={this.startEdit}> Edit </button>
+                                    : <button className="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
+                                <button className="btn btn-delete" onClick={this.confirmDeleting}> Delete </button>
+                            </div>
+                        </li>
+                    :   <DeleteBlock
+                            confirm={(flag) => this.confirmDeleting(id, flag)}
+                        />
+                }
             </div>
         );
     }
