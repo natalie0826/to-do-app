@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import { EditTodo } from '../containers/EditTodo';
+import NotificationSystem from 'react-notification-system';
 import '../styles/todo.css';
 
 export default class TodoList extends React.Component {
@@ -19,7 +21,8 @@ export default class TodoList extends React.Component {
     constructor() {
         super();
         this.state = {
-            search: ''
+            search: '',
+            showNotification: false
         };
     }
 
@@ -27,11 +30,33 @@ export default class TodoList extends React.Component {
         this.setState({ search: event.target.value });
     }
 
+    notificationSystem = null;
+
+    addNotification(id) {
+        const that = this;
+        that.notificationSystem.addNotification({
+            title: `Your item №${id+1} has been successfully deleted!`,
+            message: 'To cancel this action, press button',
+            level: 'info',
+            autoDismiss: 10,
+            dismissible: false,
+            action: {
+                label: 'Cancel',
+                callback: function() {
+                    that.props.onDeleteClick(id);
+                }
+            }
+        });
+    }
+
+    componentDidMount() {
+        this.notificationSystem = this.refs.notificationSystem;
+    }
+
     render() {
         const {
             todos,
             onTodoClick,
-            onDeleteClick,
             onRestoreClick
         } = this.props;
 
@@ -42,29 +67,49 @@ export default class TodoList extends React.Component {
             }
         );
 
-        return (
-        <div>
-            <input
-                className="search-todo"
-                type="text"
-                placeholder="Search. . ."
-                value={this.state.search}
-                onChange={this.updateSearch} />
-            <ul className="todos">
-                {filteredTodos.map(todo =>
-                    <EditTodo
-                        key={todo.id}
-                        {...todo}
-                        onDelete={() => onDeleteClick(todo.id)}
-                        onChange={() => onTodoClick(todo.id)}
-                    />
-                )}
-
-                {filteredTodos.find(todo => todo.deleted) &&
-                    <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+        let showSearch = (function(){
+            if (!todos.length) {
+                return false;
+            } else {
+                let existDeletedTodos = todos.find((todo) => {
+                    return !todo.deleted;
+                });
+                console.log(existDeletedTodos);
+                if (existDeletedTodos === undefined) {
+                    return false;
+                } else {
+                    return true;
                 }
-            </ul>
-        </div>
-        )
+            }
+        })();
+
+        return (
+            <div>
+                {showSearch
+                    ? <input
+                        className="search-todo"
+                        type="text"
+                        placeholder="Search. . ."
+                        value={this.state.search}
+                        onChange={this.updateSearch} />
+                    : ''
+                }
+                <ul className="todos">
+                    {filteredTodos.map(todo =>
+                        <EditTodo
+                            key={todo.id}
+                            {...todo}
+                            onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
+                            onChange={() => onTodoClick(todo.id)}
+                        />
+                    )}
+
+                    {filteredTodos.find(todo => todo.deleted) &&
+                        <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+                    }
+                </ul>
+                <NotificationSystem ref="notificationSystem" />
+            </div>
+        );
     }
 }

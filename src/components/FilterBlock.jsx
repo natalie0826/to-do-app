@@ -1,6 +1,6 @@
 import React from 'react';
 import { FilterLink } from '../containers/FilterLink';
-import '../styles/todo.css'
+import '../styles/todo.css';
 
 export const FilterBlock = () => {
     return (
@@ -16,5 +16,5 @@ export const FilterBlock = () => {
             </button>
             <hr />
         </div>
-    )
-}
+    );
+};

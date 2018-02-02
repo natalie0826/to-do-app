@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
 import{ DeleteBlock } from './DeleteBlock';
+import Notification from './Notification';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -20,10 +22,11 @@ export default class Todo extends React.Component {
         this.state = {
             isEditing: false,
             showDeleteConfirmation: false,
-            todoText: props.text,
-            isOpenModal: false
+            todoText: props.text
         };
     }
+
+    notificationSystem = null;
 
     startEdit = () => {
         if(!this.props.completed) {
@@ -45,10 +48,6 @@ export default class Todo extends React.Component {
 
     handleChange = (event) => {
         this.setState({todoText: event.target.value});
-    }
-
-    toggleModal = () => {
-        this.setState({isOpenModal: !this.state.isOpenModal});
     }
 
     render() {
@@ -76,7 +75,7 @@ export default class Todo extends React.Component {
             <div className={todoClass}>
                 {!this.state.showDeleteConfirmation
                     ?   <li className="todo">
-                            <label className={todoTextClass} onClick={this.toggleModal}>
+                            <label className={todoTextClass}>
                                 {!this.state.isEditing
                                     ?   <label>
                                             <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>

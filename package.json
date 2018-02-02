@@ -9,6 +9,7 @@
     "prop-types": "^15.5.10",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-notification-system": "^0.2.16",
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
     "react-test-renderer": "^16.2.0",
