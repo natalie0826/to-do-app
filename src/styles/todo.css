@@ -30,8 +30,10 @@ hr {
     background-color: #ffffff;
 }
 
+/* todo inputs */
+
 .add-todo {
-    width: 300px;
+    width: 150px;
     margin: 0 0 0 10px;
 }
 
@@ -47,7 +49,7 @@ hr {
 .add-todo,
 .search-todo,
 .edit-todo {
-    height: 20px;
+    height: 24px;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
 }
@@ -67,6 +69,8 @@ hr {
     margin-left: 10px;
     text-align: center;
 }
+
+/* buttons */
 
 .buttons-wrapper {
     float: right;
@@ -116,6 +120,8 @@ hr {
     margin-right: 20px;
 }
 
+/* todos */
+
 .filter {
     text-align: center;
 }
@@ -130,15 +136,16 @@ hr {
     margin: 20px 0 20px 5px;
 }
 
-.todo-display {
-    display: none;
-}
-
-.todo-text {
+.todo-info {
+    display: inline;
     font-weight: bold;
     font-size: 1.1em;
     cursor: pointer;
     color: #DB4E3D;
+}
+
+.todo-display {
+    display: none;
 }
 
 .todo-completed {
@@ -156,7 +163,12 @@ hr {
     margin-left: 10px;
 }
 
-/* CHECKBOX STYLES */
+.todo-info-card {
+    display: inline-block;
+}
+
+/* checkbox styles */
+
 .label-checkbox {
     position: relative;
     margin: 1px;
@@ -202,4 +214,42 @@ hr {
     height: 18px;
     background: #fff;
     cursor: pointer;
+}
+
+/* categories and description */
+
+.select-category {
+    width: 160px;
+    height: 31px;
+    margin-left: 30px;
+    padding: 2px 5px;
+    border: 2px solid #1BBC9B;
+}
+.select-category:focus {
+    outline: 0;
+}
+
+.description-todo {
+    width: 470px;
+    margin: 20px 0 0 10px;
+    padding: 2px 5px;
+    border: 2px solid #1BBC9B;
+    clear: both;
+}
+
+.description {
+    font-size: 0.9em;
+    color: rgb(139, 139, 139);
+    font-style: italic;
+    margin: 2px 0 0 22px;
+}
+
+.category-todo {
+    padding: 5px 10px;
+    background-color: rgba(26, 157, 190, 0.2);
+    font-size: .9em;
+    border-radius: 2px;
+    color: #000000;
+    margin-left: 30px;
+    font-weight: normal;
 }

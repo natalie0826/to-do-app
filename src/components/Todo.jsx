@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import{ DeleteBlock } from './DeleteBlock';
+import { DeleteBlock } from './DeleteBlock';
+import { EditTodo } from '../containers/EditTodo';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
@@ -54,6 +55,8 @@ export default class Todo extends React.Component {
         const {
             onChange,
             id,
+            description,
+            category,
             deleted,
             completed
         } = this.props;
@@ -61,28 +64,34 @@ export default class Todo extends React.Component {
         const classNames = require('classnames');
         const todoTextClass = classNames({
             'label-checkbox': true,
-            'todo-text': true,
-            'todo-completed': completed,
+            'todo-info': true,
             'todo-odd': id % 2
         });
         const todoClass = classNames({
             'todo': true,
             'todo-display': deleted
         });
+        const todoCompleted = classNames({
+            'todo-completed': completed
+        })
         
         return (
             <div className={todoClass}>
                 {!this.state.showDeleteConfirmation
                     ?   <li className="todo">
-                            <label className={todoTextClass}>
+                            <div className={todoTextClass}>
                                 {!this.state.isEditing
-                                    ?   <label>
-                                            <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
-                                            {this.state.todoText}
-                                        </label>
-                                    :   <input className="edit-todo" value={this.state.todoText} onChange={this.handleChange}/>
+                                    ?   <div className="todo-info-card">
+                                            <label className="todoCompleted">
+                                                <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
+                                                {this.state.todoText}
+                                            </label>
+                                            <span className="category-todo">{category}</span>
+                                            <p className="description">{description}</p>
+                                        </div>
+                                    :   <EditTodo isAddBlock={false} />
                                 }
-                            </label>
+                            </div>
                             <div className="buttons-wrapper">
                                 {!this.state.isEditing
                                     ? <button className="btn btn-edit" onClick={this.startEdit}> Edit </button>

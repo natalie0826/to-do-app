@@ -8,7 +8,7 @@ export const App = () => {
     return (
         <div className="container">
             <h3>Todos</h3>
-            <AddTodo />
+            <AddTodo isAddBlock={true} />
             <FilterBlock />
             <ShowTodoList />
         </div>

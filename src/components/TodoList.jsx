@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { EditTodo } from '../containers/EditTodo';
+import Todo from '../components/Todo';
 import NotificationSystem from 'react-notification-system';
 import '../styles/todo.css';
 
@@ -95,8 +95,8 @@ export default class TodoList extends React.Component {
                     : ''
                 }
                 <ul className="todos">
-                    {filteredTodos.map(todo =>
-                        <EditTodo
+                    {filteredTodos.map((todo) =>
+                        <Todo
                             key={todo.id}
                             {...todo}
                             onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}

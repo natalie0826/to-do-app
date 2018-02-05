@@ -6,6 +6,8 @@ const todo = (state, action) => {
         return {
             id: action.id,
             text: action.text.toLowerCase(),
+            category: action.category,
+            description: action.description,
             completed: false,
             deleted: false
         };
@@ -18,6 +20,8 @@ const todo = (state, action) => {
             ...state,
             id: action.id,
             text: action.text.toLowerCase(),
+            category: action.category,
+            description: action.description
         };
     case 'DELETE_TODO':
         if (state.id !== action.id) {
@@ -53,7 +57,6 @@ const todo = (state, action) => {
 const todos = (state = [], action) => {
   switch (action.type) {
     case 'ADD_TODO':
-    console.log('addtodo reducer');
         return [
             ...state,
             todo(undefined, action)
