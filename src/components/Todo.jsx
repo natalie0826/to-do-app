@@ -14,7 +14,7 @@ export default class Todo extends React.Component {
         text: PropTypes.string.isRequired,
         onChange: PropTypes.func.isRequired,
         onDelete: PropTypes.func.isRequired,
-        onEditClick: PropTypes.func.isRequired
+        onEditClick: PropTypes.func
     }
 
     constructor(props) {
@@ -73,7 +73,7 @@ export default class Todo extends React.Component {
         });
         const todoCompleted = classNames({
             'todo-completed': completed
-        })
+        });
         
         return (
             <div className={todoClass}>
@@ -82,7 +82,7 @@ export default class Todo extends React.Component {
                             <div className={todoTextClass}>
                                 {!this.state.isEditing
                                     ?   <div className="todo-info-card">
-                                            <label className="todoCompleted">
+                                            <label className={todoCompleted}>
                                                 <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
                                                 {this.state.todoText}
                                             </label>

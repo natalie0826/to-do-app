@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ModalManager } from 'react-dynamic-modal';
+
+import { CategoryModal } from './CategoryModal';
+import '../styles/modal.css';
 
 export default class AddBlock extends React.Component {
     static propTypes = {
-        addTodo: PropTypes.func.isRequired,
-        isAddBlock: PropTypes.bool.isRequired
+        onAddClick: PropTypes.func,
+        onEditClick: PropTypes.func,
+        isAddBlock: PropTypes.bool.isRequired,
+        store: PropTypes.object,
+        categories: PropTypes.array
     }
 
     constructor(props) {
@@ -28,20 +35,26 @@ export default class AddBlock extends React.Component {
             return;
         }
         this.setState({value: '', description: ''});
-        this.props.addTodo(todo, this.state.category, this.state.description);
+        this.props.onAddClick(todo, this.state.category, this.state.description);
     }
 
     handleCategoryChange = (event) => {
-        this.setState({category: event.target.value});
+        if (event.target.value !== 'Add category') {
+            this.setState({category: event.target.value});
+        } else {
+           this.handleCategoryModal();
+        }
     }
 
     handleDescriptionChange = (event) => {
         this.setState({description: event.target.value});
     }
 
-    render() {
-        const categories = ["work", "home", "reading", "cleaning"];
+    handleCategoryModal = () => {
+        ModalManager.open(<CategoryModal onRequestClose={() => true} store={this.props.store} categories={this.props.categories}/>);
+    }
 
+    render() {
         return (
             <div>
                 <input
@@ -52,13 +65,15 @@ export default class AddBlock extends React.Component {
                     value={this.state.value}
                 />
                 <select className="select-category" value={this.state.category} onChange={this.handleCategoryChange}>
-                    {categories.map((category) => {
-                        return <option key={category.toString()} value={category}>{category}</option>
+                    {this.props.categories.map((category) => {
+                        return <option key={category.category.toString()} value={category.category}>{category.category}</option>;
                     })}
+                    <option key="add" value="Add category">Add category</option>
                 </select>
-                <button className="btn btn-add" onClick={() => this.addTodo()}>
-                    {this.props.isAddBlock ? 'Add' : 'Save'}
-                </button>
+                {this.props.isAddBlock
+                    ? <button className="btn btn-add" onClick={() => this.addTodo()}>Add</button>
+                    : <button className="btn btn-add" onClick={() => this.editTodo()}>Edit</button>
+                }
                 <textarea
                     className="description-todo"
                     value={this.state.description}
@@ -66,8 +81,8 @@ export default class AddBlock extends React.Component {
                     placeholder="Description"
                     rows="5" cols="20"
                 />
-                <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>
-                <hr />    
+                <p className="todo-hint">{!this.state.isSmthEntered && 'Please, write smth you want to do :)'}</p>   
+            
             </div>
         );
     }

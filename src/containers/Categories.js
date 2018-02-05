@@ -1,16 +1,16 @@
 import { connect } from 'react-redux';
-import { addTodo } from '../actions';
-import AddBlock from '../components/AddBlock';
+import { addCategory } from '../actions';
+import CategoriesBlock from '../components/CategoriesBlock';
 
 const mapStateToProps = (store) => ({
     categories: store.categories
 });
 
 const mapDispatchToProps = ({
-    onAddClick: addTodo
+    onCategoryAdd: addCategory
 });
 
-export const AddTodo = connect(
+export const Categories = connect(
     mapStateToProps,
     mapDispatchToProps
-)(AddBlock);
+)(CategoriesBlock);

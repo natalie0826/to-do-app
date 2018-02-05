@@ -35,6 +35,7 @@ hr {
 .add-todo {
     width: 150px;
     margin: 0 0 0 10px;
+    border-radius: 3px;
 }
 
 .search-todo {
@@ -77,9 +78,10 @@ hr {
 }
 
 .btn {
-    padding: 7px 5px;
+    padding: 8px 5px;
     margin: 0 5px;
     border: none;
+    border-radius: 3px;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
     color: #ffffff;
     cursor: pointer;
@@ -224,6 +226,7 @@ hr {
     margin-left: 30px;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
+    border-radius: 3px;
 }
 .select-category:focus {
     outline: 0;
@@ -234,22 +237,25 @@ hr {
     margin: 20px 0 0 10px;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
+    border-radius: 3px;
     clear: both;
 }
 
 .description {
-    font-size: 0.9em;
-    color: rgb(139, 139, 139);
-    font-style: italic;
     margin: 2px 0 0 22px;
+    font-size: 0.9em;
+    font-weight: normal;
+    font-style: italic;
+    color: rgb(139, 139, 139);
+    
 }
 
 .category-todo {
     padding: 5px 10px;
-    background-color: rgba(26, 157, 190, 0.2);
-    font-size: .9em;
-    border-radius: 2px;
-    color: #000000;
     margin-left: 30px;
+    background-color: rgba(6, 41, 49, 0.2);
+    border-radius: 10px;
+    font-size: .9em;
     font-weight: normal;
+    color: #000000;
 }

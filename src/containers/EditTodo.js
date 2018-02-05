@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 import { editTodo } from '../actions';
 import AddBlock from '../components/AddBlock';
 
-const mapStateToProps = (state) => {
-};
+const mapStateToProps = () => ({
+});
 
 const mapDispatchToProps = ({
     onEditClick: editTodo

@@ -36,3 +36,9 @@ export const setFilter = (filter) => ({
     type: 'SET_FILTER',
     filter
 });
+
+export const addCategory = (category, color) => ({
+    type: 'ADD_CATEGORY',
+    category,
+    color
+});
