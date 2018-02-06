@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalManager } from 'react-dynamic-modal';
 
-import { CategoryModal } from './CategoryModal';
-import '../styles/modal.css';
+import { CategoryModal } from '../categories/CategoryModal';
+import '../../styles/modal.css';
 
 export default class AddBlock extends React.Component {
     static propTypes = {
@@ -11,31 +11,51 @@ export default class AddBlock extends React.Component {
         onEditClick: PropTypes.func,
         isAddBlock: PropTypes.bool.isRequired,
         store: PropTypes.object,
-        categories: PropTypes.array
+        categories: PropTypes.array.isRequired,
+        text: PropTypes.string,
+        category: PropTypes.string,
+        description: PropTypes.string,
+        finishEditing: PropTypes.func,
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            value: '',
+            text: this.props.text || '',
             isSmthEntered: true,
-            category: 'work',
-            description: ''
+            category: this.props.category || this.props.categories[0].category,
+            description: this.props.description || ''
         };
     }
 
     handleChange = (event) => {
-        this.setState({value: event.target.value, isSmthEntered: true});
+        this.setState({text: event.target.value, isSmthEntered: true});
     }
 
     addTodo() {
-        const todo = this.state.value;
-        if (!todo.trim() || !this.state.description.trim()) {
-            this.setState({isSmthEntered: false});
+        if(this.validData()) {
+            this.props.onAddClick(this.state.text, this.state.category, this.state.description);
+        } else {
             return;
         }
-        this.setState({value: '', description: ''});
-        this.props.onAddClick(todo, this.state.category, this.state.description);
+    }
+
+    editTodo() {
+        if(this.validData()) {
+            this.props.onEditClick(this.props.id, this.state.text, this.state.category, this.state.description);
+            this.props.finishEditing();
+        } else {
+            return;
+        }
+    }
+
+    validData() {
+        if (!this.state.text.trim() || !this.state.description.trim()) {
+            this.setState({isSmthEntered: false});
+            return false;
+        }
+        this.setState({text: '', description: ''});
+        return true;
     }
 
     handleCategoryChange = (event) => {
@@ -55,6 +75,7 @@ export default class AddBlock extends React.Component {
     }
 
     render() {
+
         return (
             <div>
                 <input
@@ -62,7 +83,7 @@ export default class AddBlock extends React.Component {
                     type="text"
                     placeholder="Task"
                     onChange={this.handleChange}
-                    value={this.state.value}
+                    value={this.state.text}
                 />
                 <select className="select-category" value={this.state.category} onChange={this.handleCategoryChange}>
                     {this.props.categories.map((category) => {
@@ -72,7 +93,7 @@ export default class AddBlock extends React.Component {
                 </select>
                 {this.props.isAddBlock
                     ? <button className="btn btn-add" onClick={() => this.addTodo()}>Add</button>
-                    : <button className="btn btn-add" onClick={() => this.editTodo()}>Edit</button>
+                    : <button className="btn btn-add" onClick={() => this.editTodo()}>Save</button>
                 }
                 <textarea
                     className="description-todo"

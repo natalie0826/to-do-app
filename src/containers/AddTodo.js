@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { addTodo } from '../actions';
-import AddBlock from '../components/AddBlock';
+import AddBlock from '../components/layout blocks/AddBlock';
 
 const mapStateToProps = (store) => ({
     categories: store.categories

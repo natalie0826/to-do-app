@@ -1,10 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import { Modal, Effect} from 'react-dynamic-modal';
 
-import { Categories } from '../containers/Categories';
-import '../styles/modal.css';
+import { Categories } from '../../containers/Categories';
+import '../../styles/modal.css';
 
 export const CategoryModal = (props) => {
     CategoryModal.propTypes = {

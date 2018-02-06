@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import '../styles/todo.css';
+import '../../styles/todo.css';
 
 export const Link = (props) => {
     Link.propTypes = {

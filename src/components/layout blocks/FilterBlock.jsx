@@ -1,6 +1,6 @@
 import React from 'react';
-import { FilterLink } from '../containers/FilterLink';
-import '../styles/todo.css';
+import { FilterLink } from '../../containers/FilterLink';
+import '../../styles/todo.css';
 
 export const FilterBlock = () => {
     return (

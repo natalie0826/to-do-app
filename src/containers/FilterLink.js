@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setFilter } from '../actions';
-import { Link } from '../components/Link';
+import { Link } from '../components/layout blocks/Link';
 
 const mapStateToProps = (state, ownProps) => ({
   active: ownProps.filter === state.filter

@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
 import { editTodo } from '../actions';
-import AddBlock from '../components/AddBlock';
+import AddBlock from '../components/layout blocks/AddBlock';
 
-const mapStateToProps = () => ({
+const mapStateToProps = (store) => ({
+    categories: store.categories
 });
 
 const mapDispatchToProps = ({

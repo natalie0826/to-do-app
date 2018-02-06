@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ModalManager } from 'react-dynamic-modal';
 
 import { CirclePicker } from 'react-color';
-import '../styles/modal.css';
+import '../../styles/modal.css';
 
 export default class CategoriesBlock extends React.Component {
     static propTypes = {

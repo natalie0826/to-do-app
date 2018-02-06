@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DeleteBlock } from './DeleteBlock';
+import { DeleteBlock } from './layout blocks/DeleteBlock';
 import { EditTodo } from '../containers/EditTodo';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
@@ -21,22 +21,14 @@ export default class Todo extends React.Component {
         super(props);
         this.state = {
             isEditing: false,
-            showDeleteConfirmation: false,
-            todoText: props.text
+            showDeleteConfirmation: false
         };
     }
 
-    notificationSystem = null;
-
-    startEdit = () => {
+    setEditStatus = () => {
         if(!this.props.completed) {
-            this.setState({isEditing: true});
+            this.setState({isEditing: !this.state.isEditing});
         }
-    }
-
-    endEdit = (id, text) => {
-        this.setState({isEditing: false});
-        this.props.onEditClick(id, text);
     }
 
     confirmDeleting = (id, sureToDelete) => {
@@ -46,15 +38,12 @@ export default class Todo extends React.Component {
         }
     }
 
-    handleChange = (event) => {
-        this.setState({todoText: event.target.value});
-    }
-
     render() {
 
         const {
             onChange,
             id,
+            text,
             description,
             category,
             deleted,
@@ -84,19 +73,22 @@ export default class Todo extends React.Component {
                                     ?   <div className="todo-info-card">
                                             <label className={todoCompleted}>
                                                 <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
-                                                {this.state.todoText}
+                                                {text}
                                             </label>
                                             <span className="category-todo">{category}</span>
                                             <p className="description">{description}</p>
                                         </div>
-                                    :   <EditTodo isAddBlock={false} />
+                                    :   <EditTodo isAddBlock={false} id={id} text={text} category={category} description={description} finishEditing={this.setEditStatus}/>
                                 }
                             </div>
                             <div className="buttons-wrapper">
                                 {!this.state.isEditing
-                                    ? <button className="btn btn-edit" onClick={this.startEdit}> Edit </button>
-                                    : <button className="btn btn-edit" onClick={() => this.endEdit(id, this.state.todoText)}>Save</button>}
-                                <button className="btn btn-delete" onClick={this.confirmDeleting}> Delete </button>
+                                    ?   <div>
+                                            <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>
+                                            <button className="btn btn-delete" onClick={this.confirmDeleting}>Delete</button>
+                                        </div>
+                                    : <button className="btn btn-delete" onClick={this.setEditStatus}>Cancel</button>
+                                }
                             </div>
                         </li>
                     :   <DeleteBlock

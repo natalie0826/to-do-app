@@ -74,7 +74,6 @@ export default class TodoList extends React.Component {
                 let existDeletedTodos = todos.find((todo) => {
                     return !todo.deleted;
                 });
-                console.log(existDeletedTodos);
                 if (existDeletedTodos === undefined) {
                     return false;
                 } else {
