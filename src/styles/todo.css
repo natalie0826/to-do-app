@@ -183,7 +183,6 @@ hr {
 
 .checkbox {
     position: relative;
-    display: inline;
     top: -1px;
     margin: 0 10px 0 0;
     cursor: pointer;

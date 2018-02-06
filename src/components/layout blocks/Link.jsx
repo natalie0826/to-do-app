@@ -2,23 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/todo.css';
 
-export const Link = (props) => {
-    Link.propTypes = {
+export default class Link extends React.Component {
+    static propTypes = {
         active: PropTypes.bool.isRequired,
-        children: PropTypes.node.isRequired,
+        children: PropTypes.node,
         onClick: PropTypes.func.isRequired
     };
 
-    if (props.active) {
-        return <span>{props.children}</span>;
+    componentWillMount() {
+        this.props.onClick();
     }
     
-    return (
-        <a onClick={e => {
-            e.preventDefault();
-            props.onClick();
-        }}>
-            {props.children}
-        </a>
-    );
+    render() {
+        return (
+            <div>
+                {this.props.active && <span>{this.props.children}</span>}
+            </div>
+        );
+    }
 };

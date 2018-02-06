@@ -15,10 +15,14 @@ const getVisibleTodos = (todos, filter) => {
     }
 };
 
-const mapStateToProps = (state) => ({
-    todos: getVisibleTodos(state.todos.present, state.filter),
-    categories: state.categories
-});
+const mapStateToProps = (state) => {
+    console.log('эпаиавимвампавэб', getVisibleTodos(state.todos.present, state.filter));
+    return {
+        todos: getVisibleTodos(state.todos.present, state.filter),
+        categories: state.categories
+    };
+   
+};
 
 const mapDispatchToProps = ({
     onDeleteClick: deleteTodo,

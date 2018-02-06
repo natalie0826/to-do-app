@@ -62,7 +62,8 @@ export default class TodoList extends React.Component {
         const {
             todos,
             onTodoClick,
-            onRestoreClick
+            onRestoreClick,
+            categories
         } = this.props;
 
         // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
@@ -89,7 +90,31 @@ export default class TodoList extends React.Component {
 
         return (
             <div className="accordeon">
-                {/* {showSearch
+                {this.props.flag === 'categories' ?
+                    categories.map((category) => {
+                        return (
+                            <Section key={category.category} title={category.category} color={category.color}>
+                                {todos.map((todo) => {
+                                        if (todo.category === category.category) {
+                                           return (
+                                                <Todo
+                                                    key={todo.text}
+                                                    {...todo}
+                                                    onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
+                                                    onChange={() => onTodoClick(todo.id)}
+                                                />
+                                            );
+                                        } else {
+                                            return null;
+                                        }
+                                })}
+                            </Section>
+                        );
+                    })
+                    :
+
+            <div>
+                {showSearch
                     ? <input
                         className="search-todo"
                         type="text"
@@ -97,40 +122,26 @@ export default class TodoList extends React.Component {
                         value={this.state.search}
                         onChange={this.updateSearch} />
                     : ''
-                } */}
-                {this.props.categories.map((category) => {
-                    return (
-                        <Section key={category.category} title={category.category} color={category.color}>
-                            {this.props.todos.map((todo) => {
-                                if (todo.category === category.category) {
-                                    return (
-                                        <Todo
-                                            key={todo.id}
-                                            {...todo}
-                                            onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
-                                            onChange={() => onTodoClick(todo.id)}
-                                        />
-                                    );
-                                }
-                            })}
-                        </Section>
-                    );
-                })}
+                }
                 <div className="todos">
-                    {/* {filteredTodos.map((todo) =>
+                    {filteredTodos.map((todo) =>
                         <Todo
                             key={todo.id}
                             {...todo}
                             onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
                             onChange={() => onTodoClick(todo.id)}
                         />
-                    )} */}
+                    )}
 
                     {filteredTodos.find(todo => todo.deleted) &&
                         <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
                     }
                 </div>
                 <NotificationSystem ref="notificationSystem" />
+            </div>
+            
+            }
+                
             </div>
         );
     }
