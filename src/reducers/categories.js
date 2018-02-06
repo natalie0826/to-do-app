@@ -1,7 +1,7 @@
 const categoriesState = [
-    { category: 'hello', color: '#eeeeee' },
-    { category: 'fine', color: '#AABBCC' },
-    { category: 'good', color: '#DDEEFF' }
+    { category: 'hello', color: '#FBD6AA' },
+    { category: 'fine', color: '#FB77FF' },
+    { category: 'good', color: '#F33AAA' }
 ];
 
 export const categories = (state = categoriesState, action) => {

@@ -15,7 +15,7 @@ export default class AddBlock extends React.Component {
         text: PropTypes.string,
         category: PropTypes.string,
         description: PropTypes.string,
-        finishEditing: PropTypes.func,
+        setEditStatus: PropTypes.func,
     }
 
     constructor(props) {
@@ -43,7 +43,7 @@ export default class AddBlock extends React.Component {
     editTodo() {
         if(this.validData()) {
             this.props.onEditClick(this.props.id, this.state.text, this.state.category, this.state.description);
-            this.props.finishEditing();
+            this.props.setEditStatus();
         } else {
             return;
         }

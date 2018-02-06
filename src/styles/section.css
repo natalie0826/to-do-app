@@ -1,0 +1,90 @@
+.section {
+    position: relative;
+}
+
+.section .toggle-button {
+    position: absolute;
+    right: 0;
+    top: -5px;
+    margin: 0;
+    padding: 0;
+    height: 50px;
+    width: 50px;
+    outline: 0;
+    border: 0;
+    background: none;
+    text-indent: -9999%;
+    pointer-events: none;
+}
+
+.section .toggle-button:before {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 12px;
+    width: 4px;
+    border-radius: .3em;
+    background: #1BBC9B;
+    transform-origin: 50%;
+    top: 50%;
+    left: 50%;
+    transition: all .25s ease-in-out;
+    transform: translate(75%, -50%) rotate(45deg);
+}
+
+.section .toggle-button:after {
+    content: '';
+    display: block;
+    position: absolute;
+    height: 12px;
+    width: 4px;
+    border-radius: .3em;
+    background: #1BBC9B;
+    transform-origin: 50%;
+    top: 50%;
+    left: 50%;
+    transition: all .25s ease-in-out;
+    transform: translate(-75%, -50%) rotate(-45deg);
+}
+
+.section.open .toggle-button:before,
+.section.open .toggle-button:after {
+    height: 14px;
+}
+
+.section.open .toggle-button:before {
+    transform: translate(0%, -50%) rotate(-45deg);
+}
+
+.section.open .toggle-button:after {
+    transform: translate(0%, -50%) rotate(45deg);
+}
+
+.section.open .articlewrap {
+    height: auto;
+}
+
+.article-wrap {
+    height: 0;
+    overflow: hidden;
+    transition: all .2s ease-in;
+}
+
+.section-head {
+    overflow: hidden;
+    width: 470px;
+    padding: 10px 0 10px 20px;
+    margin: 5px 10px 0 5px;
+    border: 2px solid #1BBC9B;
+    color: #313131;
+    cursor: pointer;
+    font-weight: 700;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.article {
+    padding-left: 10px;
+    color: #333;
+    line-height: 1.3;
+}

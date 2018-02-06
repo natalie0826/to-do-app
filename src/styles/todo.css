@@ -135,7 +135,10 @@ hr {
 
 .todo {
     clear: both;
-    margin: 20px 0 20px 5px;
+    width: 460px;
+    margin: 5px 0 5px 0;
+    padding: 10px;
+    background-color: #eeeeee;
 }
 
 .todo-info {
@@ -180,6 +183,7 @@ hr {
 
 .checkbox {
     position: relative;
+    display: inline;
     top: -1px;
     margin: 0 10px 0 0;
     cursor: pointer;
@@ -214,7 +218,7 @@ hr {
     left: 0;
     width: 18px;
     height: 18px;
-    background: #fff;
+    background: #ffffff;
     cursor: pointer;
 }
 
@@ -223,7 +227,7 @@ hr {
 .select-category {
     width: 160px;
     height: 31px;
-    margin-left: 30px;
+    margin-left: 2%;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
     border-radius: 3px;
@@ -233,7 +237,7 @@ hr {
 }
 
 .description-todo {
-    width: 470px;
+    width: 95%;
     margin: 20px 0 0 10px;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
@@ -258,4 +262,12 @@ hr {
     font-size: .9em;
     font-weight: normal;
     color: #000000;
+}
+
+/* accordeon */
+.accordeon {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    width: 500px;
+    overflow: hidden;
 }

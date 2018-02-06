@@ -57,7 +57,6 @@ export default class Todo extends React.Component {
             'todo-odd': id % 2
         });
         const todoClass = classNames({
-            'todo': true,
             'todo-display': deleted
         });
         const todoCompleted = classNames({
@@ -67,7 +66,7 @@ export default class Todo extends React.Component {
         return (
             <div className={todoClass}>
                 {!this.state.showDeleteConfirmation
-                    ?   <li className="todo">
+                    ?   <div className="todo">
                             <div className={todoTextClass}>
                                 {!this.state.isEditing
                                     ?   <div className="todo-info-card">
@@ -76,9 +75,9 @@ export default class Todo extends React.Component {
                                                 {text}
                                             </label>
                                             <span className="category-todo">{category}</span>
-                                            <p className="description">{description}</p>
+                                            <div className="description">{description}</div>
                                         </div>
-                                    :   <EditTodo isAddBlock={false} id={id} text={text} category={category} description={description} finishEditing={this.setEditStatus}/>
+                                    :   <EditTodo isAddBlock={false} id={id} text={text} category={category} description={description} setEditStatus={this.setEditStatus}/>
                                 }
                             </div>
                             <div className="buttons-wrapper">
@@ -90,7 +89,7 @@ export default class Todo extends React.Component {
                                     : <button className="btn btn-delete" onClick={this.setEditStatus}>Cancel</button>
                                 }
                             </div>
-                        </li>
+                        </div>
                     :   <DeleteBlock
                             confirm={(flag) => this.confirmDeleting(id, flag)}
                         />

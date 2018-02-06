@@ -16,6 +16,7 @@
     "react-notification-system": "^0.2.16",
     "react-redux": "^5.0.6",
     "react-scripts": "1.1.0",
+    "react-tabs": "^2.2.1",
     "react-test-renderer": "^16.2.0",
     "redux": "^3.7.2",
     "redux-undo": "^0.6.1"

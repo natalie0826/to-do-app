@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Todo from '../components/Todo';
+import Section from './Section';
 import NotificationSystem from 'react-notification-system';
 import '../styles/todo.css';
 
@@ -12,6 +13,10 @@ export default class TodoList extends React.Component {
           deleted: PropTypes.bool.isRequired,
           completed: PropTypes.bool.isRequired,
           text: PropTypes.string.isRequired
+        }).isRequired).isRequired,
+        categories: PropTypes.arrayOf(PropTypes.shape({
+            category: PropTypes.string.isRequired,
+            color: PropTypes.string.isRequired
         }).isRequired).isRequired,
         onTodoClick: PropTypes.func.isRequired,
         onDeleteClick: PropTypes.func.isRequired,
@@ -83,8 +88,8 @@ export default class TodoList extends React.Component {
         })();
 
         return (
-            <div>
-                {showSearch
+            <div className="accordeon">
+                {/* {showSearch
                     ? <input
                         className="search-todo"
                         type="text"
@@ -92,21 +97,39 @@ export default class TodoList extends React.Component {
                         value={this.state.search}
                         onChange={this.updateSearch} />
                     : ''
-                }
-                <ul className="todos">
-                    {filteredTodos.map((todo) =>
+                } */}
+                {this.props.categories.map((category) => {
+                    return (
+                        <Section key={category.category} title={category.category} color={category.color}>
+                            {this.props.todos.map((todo) => {
+                                if (todo.category === category.category) {
+                                    return (
+                                        <Todo
+                                            key={todo.id}
+                                            {...todo}
+                                            onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
+                                            onChange={() => onTodoClick(todo.id)}
+                                        />
+                                    );
+                                }
+                            })}
+                        </Section>
+                    );
+                })}
+                <div className="todos">
+                    {/* {filteredTodos.map((todo) =>
                         <Todo
                             key={todo.id}
                             {...todo}
                             onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
                             onChange={() => onTodoClick(todo.id)}
                         />
-                    )}
+                    )} */}
 
                     {filteredTodos.find(todo => todo.deleted) &&
                         <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
                     }
-                </ul>
+                </div>
                 <NotificationSystem ref="notificationSystem" />
             </div>
         );
