@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import Todo from '../components/Todo';
 import Section from './Section';
 import NotificationSystem from 'react-notification-system';
+import { FilterLink } from '../containers/FilterLink';
 import '../styles/todo.css';
 
 export default class TodoList extends React.Component {
@@ -115,15 +116,20 @@ export default class TodoList extends React.Component {
 
             <div>
                 {showSearch
-                    ? <input
-                        className="search-todo"
-                        type="text"
-                        placeholder="Search. . ."
-                        value={this.state.search}
-                        onChange={this.updateSearch} />
+                    ? <div>
+                        <hr />
+                        <input
+                            className="search-todo"
+                            type="text"
+                            placeholder="Search. . ."
+                            value={this.state.search}
+                            onChange={this.updateSearch} />
+                        <hr />
+                      </div>
                     : ''
                 }
                 <div className="todos">
+                    <FilterLink />
                     {filteredTodos.map((todo) =>
                         <Todo
                             key={todo.id}
@@ -139,9 +145,7 @@ export default class TodoList extends React.Component {
                 </div>
                 <NotificationSystem ref="notificationSystem" />
             </div>
-            
             }
-                
             </div>
         );
     }

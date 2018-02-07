@@ -1,5 +1,5 @@
 .modal {
-    width: 200px;
+    width: 200px !important;
 }
 
 .category-modal {
@@ -40,7 +40,7 @@
 
 .categories {
     float: right;
-    width: 430px;
+    width: 250px;
 }
 
 .categories p {
@@ -50,6 +50,5 @@
 .category-badge {
     display: inline-block;
     position: relative;
-    margin-left: 0;
-    margin-right: 10px;
+    margin: 3px 5px 3px 0;
 }

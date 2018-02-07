@@ -61,7 +61,8 @@ describe('Application', () => {
 
     function setup() {
         const props = {
-            addTodo: jest.fn()
+            addTodo: jest.fn('text', 'description', 'category'),
+            isAddBlock: true
         };
         const store = createStore(
             todoApp
@@ -96,7 +97,7 @@ describe('Application', () => {
                 // console.log('AAA', props.onAddClick.mock);
                 // expect(props.onAddClick.mock.calls.length).toBe(0);
 
-                todoButton.props().onClick('1');
+                todoButton.props().onClick('1', 'dfvgd', 'dvgdf');
                 expect(props.addTodo.mock.calls.length).toBe(1);
             });
         });

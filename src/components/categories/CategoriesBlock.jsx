@@ -31,6 +31,13 @@ export default class CategoriesBlock extends React.Component {
         this.setState({ color: color.hex });
     };
 
+    addCategory = () => {
+        if(this.state.category.trim()) {
+            this.props.onCategoryAdd(this.state.category, this.state.color);
+        }
+        this.setState({category: ''});
+    }
+
 
     render(){
         return (
@@ -65,7 +72,7 @@ export default class CategoriesBlock extends React.Component {
                 />
                 
                 <div className="buttons-wrapper modal-footer">
-                    <button className="btn btn-add" onClick={() => this.props.onCategoryAdd(this.state.category, this.state.color)}>Add category</button>
+                    <button className="btn btn-add" onClick={this.addCategory}>Add category</button>
                     <button className="btn btn-delete" onClick={ModalManager.close}>Close Modal</button>
                 </div>
             </div>

@@ -1,21 +1,19 @@
 import { connect } from 'react-redux';
 import { setFilter } from '../actions';
-import Link from '../components/layout blocks/Link';
+import FilterBlock from '../components/layout blocks/FilterBlock';
 
-const mapStateToProps = (state, ownProps) =>  {
-console.log('state', state, 'props', ownProps);
-    return {
-        active: ownProps.filter === state.filter
-    };
-};
+const mapStateToProps = () =>  ({
+
+});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onClick: () => {
-        dispatch(setFilter(ownProps.filter));
+    onClick: (filter) => {
+        console.log('onclick', filter);
+        dispatch(setFilter(filter));
     }
 });
 
 export const FilterLink = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Link);
+)(FilterBlock);

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/todo.css';
 
+import ToggleButton from 'react-toggle-button';
+
 export default class Link extends React.Component {
     static propTypes = {
         active: PropTypes.bool.isRequired,
@@ -9,15 +11,11 @@ export default class Link extends React.Component {
         onClick: PropTypes.func.isRequired
     };
 
-    componentWillMount() {
-        this.props.onClick();
-    }
-    
     render() {
         return (
-            <div>
-                {this.props.active && <span>{this.props.children}</span>}
-            </div>
+            <a className="filter-not-active" onClick={e => { e.preventDefault(); this.props.onClick();}}>
+                {this.props.children}
+            </a>
         );
     }
 };

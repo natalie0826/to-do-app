@@ -12,10 +12,16 @@ export const CategoryModal = (props) => {
         onRequestClose: PropTypes.func.isRequired
     };
 
+    const style = {
+        content: {
+            width: '600px',
+            margin: '15px auto'
+        }
+    };
+
     return (
-        
         <Modal
-            className="modal"
+            style={style}
             onRequestClose={props.onRequestClose}
             effect={Effect.Fall}
         >

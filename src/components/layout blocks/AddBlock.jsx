@@ -33,6 +33,7 @@ export default class AddBlock extends React.Component {
     }
 
     addTodo() {
+        console.log('sgvfsdrfgvdsfbvgdft');
         if(this.validData()) {
             this.props.onAddClick(this.state.text, this.state.category, this.state.description);
         } else {

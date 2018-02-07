@@ -124,13 +124,9 @@ hr {
 
 /* todos */
 
-.filter {
-    text-align: center;
-}
-
 .todos {
-    list-style-type: none;
     padding: 0;
+    list-style-type: none;
 }
 
 .todo {
@@ -269,4 +265,17 @@ hr {
     margin-bottom: 30px;
     width: 500px;
     overflow: hidden;
+}
+
+/* filter */
+
+.filter {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.filter-hint {
+    display: flex;
+    margin-right: 20px;
+    padding-top: 2px;
 }

@@ -83,7 +83,7 @@ export default class Todo extends React.Component {
                             <div className="buttons-wrapper">
                                 {!this.state.isEditing
                                     ?   <div>
-                                            <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>
+                                            {!completed && <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>}
                                             <button className="btn btn-delete" onClick={this.confirmDeleting}>Delete</button>
                                         </div>
                                     : <button className="btn btn-delete" onClick={this.setEditStatus}>Cancel</button>
