@@ -1,8 +1,12 @@
 import undoable, { includeAction } from 'redux-undo';
+import {
+    ADD_TODO, EDIT_TODO, DELETE_TODO, TOGGLE_TODO, 
+    RESTORE_DELETED
+} from '../actions/index';
 
 const todo = (state, action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case ADD_TODO:
         return {
             id: action.id,
             text: action.text.toLowerCase(),
@@ -11,7 +15,7 @@ const todo = (state, action) => {
             completed: false,
             deleted: false
         };
-    case 'EDIT_TODO':
+    case EDIT_TODO:
         if (state.id !== action.id) {
             return state;
         }
@@ -23,7 +27,7 @@ const todo = (state, action) => {
             category: action.category,
             description: action.description
         };
-    case 'DELETE_TODO':
+    case DELETE_TODO:
         if (state.id !== action.id) {
             return state;
         }
@@ -32,7 +36,7 @@ const todo = (state, action) => {
             ...state,
             deleted: !state.deleted
         };
-    case 'TOGGLE_TODO':
+    case TOGGLE_TODO:
         if (state.id !== action.id && !state.deleted) {
             return state;
         }
@@ -41,7 +45,7 @@ const todo = (state, action) => {
             ...state,
             completed: !state.completed
         };
-    case 'RESTORE_DELETED':
+    case RESTORE_DELETED:
         if (!state.deleted) {
             return state;
         }
@@ -54,17 +58,20 @@ const todo = (state, action) => {
   }
 };
 
+let i = 0;
+
 const todos = (state = [], action) => {
   switch (action.type) {
-    case 'ADD_TODO':
+    case ADD_TODO:
+        console.log('STATE', i, state);
         return [
             ...state,
             todo(undefined, action)
         ];
-    case 'EDIT_TODO':
-    case 'DELETE_TODO':
-    case 'TOGGLE_TODO':
-    case 'RESTORE_DELETED':
+    case EDIT_TODO:
+    case DELETE_TODO:
+    case TOGGLE_TODO:
+    case RESTORE_DELETED:
         return state.map(t =>
             todo(t, action)
         );

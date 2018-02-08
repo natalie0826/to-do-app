@@ -46,12 +46,24 @@ export const restoreTodos = () => ({
     type: RESTORE_DELETED
 });
 
-export const requestTodos = (filter) => ({
-    type: REQUEST_TODOS,
-    filter
+export const requestTodos = () => ({
+    type: REQUEST_TODOS
 });
 
-export const 
+export const recieveTodos = (json) => ({
+    type: RECEIVE_TODOS,
+    todos: json,
+    receivedAt: Date.now()
+});
+
+export function fetchTodos() {
+    return (dispatch) => {
+        dispatch(requestTodos());
+        return fetch('https://api.myjson.com/bins/aufxd')
+            .then(response => response.json())
+            .then(json => dispatch(recieveTodos(json)));
+    };
+}
 
 export const setFilter = (filter) => ({
     type: SET_FILTER,

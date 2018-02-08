@@ -21,7 +21,8 @@ export default class TodoList extends React.Component {
         }).isRequired).isRequired,
         onTodoClick: PropTypes.func.isRequired,
         onDeleteClick: PropTypes.func.isRequired,
-        onRestoreClick: PropTypes.func.isRequired
+        onRestoreClick: PropTypes.func.isRequired,
+        // onFetchClick: PropTypes.func.isRequired
     }
 
     constructor() {
@@ -57,6 +58,7 @@ export default class TodoList extends React.Component {
 
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
+        // console.log(this.onFetchClick());
     }
 
     render() {

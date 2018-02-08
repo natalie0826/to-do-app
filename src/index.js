@@ -2,10 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { App } from './components/App';
-import { store } from './store';
+import { configureStore } from './configureStore';
 
 render(
-    <Provider store={store}>
+    <Provider store={configureStore}>
         <App />
     </Provider>,
     document.getElementById('root')
