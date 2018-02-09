@@ -58,7 +58,7 @@ export default class TodoList extends React.Component {
 
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
-        this.props.fetch();
+        if (this.props.flag === 'list'){ this.props.fetch(); }
     }
 
     render() {
@@ -104,8 +104,8 @@ export default class TodoList extends React.Component {
                                                 <Todo
                                                     key={todo.text}
                                                     {...todo}
-                                                    onDelete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
-                                                    onChange={() => toggleTodo(todo.id)}
+                                                    delete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
+                                                    edit={() => toggleTodo(todo.id)}
                                                 />
                                             );
                                         } else {
@@ -137,7 +137,7 @@ export default class TodoList extends React.Component {
                         <Todo
                             key={todo.id}
                             {...todo}
-                            delete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
+                            delete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
                             edit={() => toggleTodo(todo.id)}
                         />
                     )}
