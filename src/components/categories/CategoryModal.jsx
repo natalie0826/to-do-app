@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Effect} from 'react-dynamic-modal';
 
-import { Categories } from '../../containers/Categories';
+import { AddCategory } from '../../containers/AddCategory';
 import '../../styles/modal.css';
 
 export const CategoryModal = (props) => {
@@ -25,7 +25,7 @@ export const CategoryModal = (props) => {
             onRequestClose={props.onRequestClose}
             effect={Effect.Fall}
         >
-            <Categories store={props.store}/>
+            <AddCategory store={props.store}/>
         </Modal>
     );
 };

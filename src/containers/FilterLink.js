@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setFilter } from '../actions';
-import FilterBlock from '../components/layout blocks/FilterBlock';
+import Filter from '../components/common/Filter';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
     onClick: (filter) => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 export const FilterLink = connect(
     null,
     mapDispatchToProps
-)(FilterBlock);
+)(Filter);

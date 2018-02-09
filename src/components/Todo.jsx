@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DeleteBlock } from './layout blocks/DeleteBlock';
+import { DeletingTodo } from './common/DeletingTodo';
 import { EditTodo } from '../containers/EditTodo';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
@@ -12,9 +12,8 @@ export default class Todo extends React.Component {
         completed: PropTypes.bool.isRequired,
         deleted: PropTypes.bool.isRequired,
         text: PropTypes.string.isRequired,
-        onChange: PropTypes.func.isRequired,
-        onDelete: PropTypes.func.isRequired,
-        onEditClick: PropTypes.func
+        edit: PropTypes.func.isRequired,
+        delete: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -90,7 +89,7 @@ export default class Todo extends React.Component {
                                 }
                             </div>
                         </div>
-                    :   <DeleteBlock
+                    :   <DeletingTodo
                             confirm={(flag) => this.confirmDeleting(id, flag)}
                         />
                 }

@@ -4,7 +4,7 @@ import ToggleButton from 'react-toggle-button';
 
 import '../../styles/todo.css';
 
-export default class FilterBlock extends React.Component {
+export default class Filter extends React.Component {
     static propTypes = {
         onClick: PropTypes.func.isRequired
     };

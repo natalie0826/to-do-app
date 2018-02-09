@@ -5,7 +5,7 @@ import { ModalManager } from 'react-dynamic-modal';
 import { CategoryModal } from '../categories/CategoryModal';
 import '../../styles/modal.css';
 
-export default class AddBlock extends React.Component {
+export default class Edittor extends React.Component {
     static propTypes = {
         addTodo: PropTypes.func,
         editTodo: PropTypes.func,

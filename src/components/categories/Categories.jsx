@@ -11,7 +11,7 @@ export default class CategoriesBlock extends React.Component {
             category: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        onCategoryAdd: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired
     };
 
     constructor(props) {
@@ -31,9 +31,9 @@ export default class CategoriesBlock extends React.Component {
         this.setState({ color: color.hex });
     };
 
-    addCategory = () => {
+    handleAddCategory = () => {
         if(this.state.category.trim()) {
-            this.props.onCategoryAdd(this.state.category, this.state.color);
+            this.props.addCategory(this.state.category, this.state.color);
         }
         this.setState({category: ''});
     }
@@ -72,7 +72,7 @@ export default class CategoriesBlock extends React.Component {
                 />
                 
                 <div className="buttons-wrapper modal-footer">
-                    <button className="btn btn-add" onClick={this.addCategory}>Add category</button>
+                    <button className="btn btn-add" onClick={this.handleAddCategory}>Add category</button>
                     <button className="btn btn-delete" onClick={ModalManager.close}>Close Modal</button>
                 </div>
             </div>

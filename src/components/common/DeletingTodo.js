@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import '../../styles/todo.css';
 
-export const DeleteBlock = (props) => {
-    DeleteBlock.propTypes = {
+export const DeletingTodo = (props) => {
+    DeletingTodo.propTypes = {
         confirm: PropTypes.func.isRequired
     };
 

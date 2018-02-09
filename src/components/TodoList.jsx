@@ -137,8 +137,8 @@ export default class TodoList extends React.Component {
                         <Todo
                             key={todo.id}
                             {...todo}
-                            onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
-                            onChange={() => toggleTodo(todo.id)}
+                            delete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
+                            edit={() => toggleTodo(todo.id)}
                         />
                     )}
 
