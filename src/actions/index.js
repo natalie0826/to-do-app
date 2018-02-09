@@ -50,20 +50,13 @@ export const requestTodos = () => ({
     type: REQUEST_TODOS
 });
 
-export const recieveTodos = (json) => ({
-    type: RECEIVE_TODOS,
-    todos: json,
-    receivedAt: Date.now()
-});
-
-export function fetchTodos() {
+export const fetchTodos = () => {
     return (dispatch) => {
-        dispatch(requestTodos());
         return fetch('https://api.myjson.com/bins/aufxd')
             .then(response => response.json())
-            .then(json => dispatch(recieveTodos(json)));
+            .then(todos => todos.map(todo => dispatch(addTodo(todo.text, todo.category, todo.text)))); // addTodo = initializeStore
     };
-}
+};
 
 export const setFilter = (filter) => ({
     type: SET_FILTER,

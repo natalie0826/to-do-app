@@ -23,11 +23,11 @@ const mapStateToProps = (state) => {
     
 };
 
-const mapDispatchToProps = ({
-    // onFetchClick: fetchTodos,
-    onDeleteClick: deleteTodo,
-    onTodoClick: toggleTodo,
-    onRestoreClick: restoreTodos,
+const mapDispatchToProps = (dispatch, ownProps) => ({
+    fetch: () => dispatch(fetchTodos()),
+    deleteTodo: deleteTodo,
+    toggleTodo: toggleTodo,
+    restoreTodos: restoreTodos,
     search: ''
 });
 

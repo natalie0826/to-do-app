@@ -19,10 +19,10 @@ export default class TodoList extends React.Component {
             category: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        onTodoClick: PropTypes.func.isRequired,
-        onDeleteClick: PropTypes.func.isRequired,
-        onRestoreClick: PropTypes.func.isRequired,
-        // onFetchClick: PropTypes.func.isRequired
+        toggleTodo: PropTypes.func.isRequired,
+        deleteTodo: PropTypes.func.isRequired,
+        restoreTodos: PropTypes.func.isRequired,
+        fetch: PropTypes.func.isRequired
     }
 
     constructor() {
@@ -58,14 +58,15 @@ export default class TodoList extends React.Component {
 
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
-        // console.log(this.onFetchClick());
+        this.props.fetch();
     }
 
     render() {
         const {
             todos,
-            onTodoClick,
-            onRestoreClick,
+            toggleTodo,
+            deleteTodo,
+            restoreTodos,
             categories
         } = this.props;
 
@@ -103,8 +104,8 @@ export default class TodoList extends React.Component {
                                                 <Todo
                                                     key={todo.text}
                                                     {...todo}
-                                                    onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
-                                                    onChange={() => onTodoClick(todo.id)}
+                                                    onDelete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
+                                                    onChange={() => toggleTodo(todo.id)}
                                                 />
                                             );
                                         } else {
@@ -137,12 +138,12 @@ export default class TodoList extends React.Component {
                             key={todo.id}
                             {...todo}
                             onDelete={() => {this.props.onDeleteClick(todo.id); this.addNotification(todo.id); }}
-                            onChange={() => onTodoClick(todo.id)}
+                            onChange={() => toggleTodo(todo.id)}
                         />
                     )}
 
                     {filteredTodos.find(todo => todo.deleted) &&
-                        <button className="btn btn-delete" onClick={() => onRestoreClick()}>Restore deleted</button>
+                        <button className="btn btn-delete" onClick={() => restoreTodos()}>Restore deleted</button>
                     }
                 </div>
                 <NotificationSystem ref="notificationSystem" />

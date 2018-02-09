@@ -7,8 +7,8 @@ import '../../styles/modal.css';
 
 export default class AddBlock extends React.Component {
     static propTypes = {
-        onAddClick: PropTypes.func,
-        onEditClick: PropTypes.func,
+        addTodo: PropTypes.func,
+        editTodo: PropTypes.func,
         isAddBlock: PropTypes.bool.isRequired,
         store: PropTypes.object,
         categories: PropTypes.array.isRequired,
@@ -32,18 +32,17 @@ export default class AddBlock extends React.Component {
         this.setState({text: event.target.value, isSmthEntered: true});
     }
 
-    addTodo() {
-        console.log('sgvfsdrfgvdsfbvgdft');
+    handleAddTodo() {
         if(this.validData()) {
-            this.props.onAddClick(this.state.text, this.state.category, this.state.description);
+            this.props.addTodo(this.state.text, this.state.category, this.state.description);
         } else {
             return;
         }
     }
 
-    editTodo() {
+    handleEditTodo() {
         if(this.validData()) {
-            this.props.onEditClick(this.props.id, this.state.text, this.state.category, this.state.description);
+            this.props.ediTodo(this.props.id, this.state.text, this.state.category, this.state.description);
             this.props.setEditStatus();
         } else {
             return;
@@ -93,8 +92,8 @@ export default class AddBlock extends React.Component {
                     <option key="add" value="Add category">Add category</option>
                 </select>
                 {this.props.isAddBlock
-                    ? <button className="btn btn-add" onClick={() => this.addTodo()}>Add</button>
-                    : <button className="btn btn-add" onClick={() => this.editTodo()}>Save</button>
+                    ? <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>
+                    : <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>
                 }
                 <textarea
                     className="description-todo"
