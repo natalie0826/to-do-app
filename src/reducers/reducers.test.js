@@ -20,12 +20,12 @@ describe('Reducers', () => {
             todosReducer([], {
                 id,
                 type: 'ADD_TODO',
-                text: text.toLowerCase(),
+                text: text,
             })).toEqual({
                 'past': [],
                 'present': [
                     {
-                        text: text.toLowerCase(),
+                        text: text,
                         completed: false,
                         deleted: false,
                         id
@@ -36,7 +36,7 @@ describe('Reducers', () => {
                     'past': [],
                     'present': [
                         {
-                            text: text.toLowerCase(),
+                            text: text,
                             completed: false,
                             deleted: false,
                             id
