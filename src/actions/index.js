@@ -1,5 +1,4 @@
 // actions call reducers
-
 import fetch from 'isomorphic-fetch';
 
 let nextId = 0;
