@@ -72,11 +72,7 @@ export default class TodoList extends React.Component {
         } = this.props;
 
         // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
-        let filteredTodos = todos.filter(
-            (todo) => {
-                return todo.text.includes(this.state.search.toLowerCase());
-            }
-        );
+        let filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
 
         let showSearch = () => {
             if (!todos.length) {

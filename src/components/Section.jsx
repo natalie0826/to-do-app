@@ -18,7 +18,6 @@ export default class Section extends React.Component {
 
     handleClick = () => {
         if (this.props.children.length) {
-            console.log(this.props.children);;
             if (this.state.open) {
                 this.setState({
                     open: false,
