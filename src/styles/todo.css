@@ -77,6 +77,11 @@ hr {
     float: right;
 }
 
+.buttons-wrapper-category {
+    float: right;
+    margin-top: 30px;
+}
+
 .btn {
     padding: 8px 5px;
     margin: 0 5px;

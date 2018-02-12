@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import NotificationSystem from 'react-notification-system';
 
 import Todo from '../components/Todo';
 import Section from './Section';
-import NotificationSystem from 'react-notification-system';
 import { FilterLink } from '../containers/FilterLink';
+import { Search } from './common/Search';
 import '../styles/todo.css';
 
 export default class TodoList extends React.Component {
@@ -118,19 +119,7 @@ export default class TodoList extends React.Component {
                     :
 
             <div>
-                {showSearch
-                    ? <div>
-                        <hr />
-                        <input
-                            className="search-todo"
-                            type="text"
-                            placeholder="Search. . ."
-                            value={this.state.search}
-                            onChange={this.updateSearch} />
-                        <hr />
-                      </div>
-                    : ''
-                }
+                <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={showSearch} />
                 <div className="todos">
                     <FilterLink />
                     {filteredTodos.map((todo) =>
