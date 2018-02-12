@@ -9,7 +9,7 @@ export default class Edittor extends React.Component {
     static propTypes = {
         addTodo: PropTypes.func,
         editTodo: PropTypes.func,
-        isAddBlock: PropTypes.bool.isRequired,
+        isAddTodo: PropTypes.bool.isRequired,
         store: PropTypes.object,
         categories: PropTypes.array.isRequired,
         text: PropTypes.string,
@@ -35,6 +35,7 @@ export default class Edittor extends React.Component {
     handleAddTodo() {
         if(this.validData()) {
             this.props.addTodo(this.state.text, this.state.category, this.state.description);
+            this.setState({text: '', description: ''});
         } else {
             return;
         }
@@ -42,8 +43,9 @@ export default class Edittor extends React.Component {
 
     handleEditTodo() {
         if(this.validData()) {
-            this.props.ediTodo(this.props.id, this.state.text, this.state.category, this.state.description);
+            this.props.editTodo(this.props.id, this.state.text, this.state.category, this.state.description);
             this.props.setEditStatus();
+            this.setState({text: '', description: ''});
         } else {
             return;
         }
@@ -54,7 +56,6 @@ export default class Edittor extends React.Component {
             this.setState({isSmthEntered: false});
             return false;
         }
-        this.setState({text: '', description: ''});
         return true;
     }
 
@@ -91,7 +92,7 @@ export default class Edittor extends React.Component {
                     })}
                     <option key="add" value="Add category">Add category</option>
                 </select>
-                {this.props.isAddBlock
+                {this.props.isAddTodo
                     ? <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>
                     : <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>
                 }

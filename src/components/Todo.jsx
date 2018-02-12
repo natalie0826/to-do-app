@@ -33,7 +33,7 @@ export default class Todo extends React.Component {
     confirmDeleting = (id, sureToDelete) => {
         this.setState((prevState) => ({showDeleteConfirmation: !prevState.showDeleteConfirmation}));
         if (sureToDelete) {
-            this.props.onDelete(id);
+            this.props.delete(id);
         }
     }
 
@@ -76,7 +76,7 @@ export default class Todo extends React.Component {
                                             <span className="category-todo">{category}</span>
                                             <div className="description">{description}</div>
                                         </div>
-                                    :   <EditTodo isAddBlock={false} id={id} text={text} category={category} description={description} setEditStatus={this.setEditStatus}/>
+                                    :   <EditTodo isAddTodo={false} id={id} text={text} category={category} description={description} setEditStatus={this.setEditStatus}/>
                                 }
                             </div>
                             <div className="buttons-wrapper">

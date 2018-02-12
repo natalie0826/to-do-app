@@ -7,7 +7,7 @@ const mapStateToProps = (store) => ({
 });
 
 const mapDispatchToProps = ({
-    onEditClick: editTodo
+    editTodo: editTodo
 });
 
 export const EditTodo = connect(

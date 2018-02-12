@@ -16,6 +16,7 @@ const todo = (state, action) => {
                 deleted: false
             };
         case EDIT_TODO:
+        console.log('state', state, 'action', action);
             if (state.id !== action.id) {
                 return state;
             }

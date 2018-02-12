@@ -27,8 +27,9 @@ export default class Filter extends React.Component {
 
     render() {
         return (
+           
             <div className="filter">
-                <span className="filter-hint">{this.state.value ? 'Show all the tasks' : 'Show only uncompleted tasks'}</span>
+                <span className="filter-hint">Show only all the tasks</span>
                 <ToggleButton
                     value={ this.state.value }
                     onToggle={(value) => this.handleChange(value)}

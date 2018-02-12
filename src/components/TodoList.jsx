@@ -50,7 +50,7 @@ export default class TodoList extends React.Component {
             action: {
                 label: 'Cancel',
                 callback: function() {
-                    that.props.onDeleteClick(id);
+                    that.props.deleteTodo(id);
                 }
             }
         });
@@ -77,7 +77,7 @@ export default class TodoList extends React.Component {
             }
         );
 
-        let showSearch = (function(){
+        let showSearch = () => {
             if (!todos.length) {
                 return false;
             } else {
@@ -90,7 +90,7 @@ export default class TodoList extends React.Component {
                     return true;
                 }
             }
-        })();
+        };
 
         return (
             <div className="accordeon">

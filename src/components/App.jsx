@@ -11,7 +11,7 @@ export const App = () => {
     return (
         <div className="container">
             <h3>Todos</h3>
-            <AddTodo isAddBlock={true} store={configureStore} categories={configureStore.categories}/>
+            <AddTodo isAddTodo={true} store={configureStore} categories={configureStore.categories}/>
             <Tabs>
                 <TabList>
                     <Tab>All tasks</Tab>
