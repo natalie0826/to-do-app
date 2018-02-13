@@ -8,19 +8,20 @@ import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class Todo extends React.Component {
     static propTypes = {
-        id: PropTypes.number.isRequired,
+        id: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         deleted: PropTypes.bool.isRequired,
         text: PropTypes.string.isRequired,
-        edit: PropTypes.func.isRequired,
-        delete: PropTypes.func.isRequired
+        delete: PropTypes.func.isRequired,
+        toggle: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props);
         this.state = {
             isEditing: false,
-            showDeleteConfirmation: false
+            showDeleteConfirmation: false,
+            compl: this.props.completed
         };
     }
 
@@ -37,10 +38,13 @@ export default class Todo extends React.Component {
         }
     }
 
-    render() {
+    handleChange = () => {
+        this.setState({compl: !this.state.compl});
+        this.props.toggle(this.props.id);
+    }
 
+    render() {
         const {
-            onChange,
             id,
             text,
             description,
@@ -70,7 +74,7 @@ export default class Todo extends React.Component {
                                 {!this.state.isEditing
                                     ?   <div className="todo-info-card">
                                             <label className={todoCompleted}>
-                                                <input type="checkbox" checked={completed} onChange={onChange} className="checkbox"/>
+                                                <input type="checkbox" checked={this.state.compl} onChange={this.handleChange}/>
                                                 {text}
                                             </label>
                                             <span className="category-todo">{category}</span>

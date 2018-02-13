@@ -11,7 +11,7 @@ import '../styles/todo.css';
 export default class TodoList extends React.Component {
     static propTypes = {
         todos: PropTypes.arrayOf(PropTypes.shape({
-          id: PropTypes.number.isRequired,
+          id: PropTypes.string.isRequired,
           deleted: PropTypes.bool.isRequired,
           completed: PropTypes.bool.isRequired,
           text: PropTypes.string.isRequired
@@ -22,7 +22,6 @@ export default class TodoList extends React.Component {
         }).isRequired).isRequired,
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
-        restoreTodos: PropTypes.func.isRequired,
         fetch: PropTypes.func.isRequired
     }
 
@@ -41,17 +40,15 @@ export default class TodoList extends React.Component {
     notificationSystem = null;
 
     addNotification(id) {
-        const that = this;
-        that.notificationSystem.addNotification({
-            title: `Your item №${id+1} has been successfully deleted!`,
-            message: 'To cancel this action, press button',
+        this.notificationSystem.addNotification({
+            title: `Your item has been successfully deleted!`,
             level: 'info',
             autoDismiss: 10,
             dismissible: false,
             action: {
-                label: 'Cancel',
-                callback: function() {
-                    that.props.deleteTodo(id);
+                label: 'Undo',
+                callback: () => {
+                    //this.props.deleteTodo(id);
                 }
             }
         });
@@ -65,29 +62,14 @@ export default class TodoList extends React.Component {
     render() {
         const {
             todos,
+            editTodo,
             toggleTodo,
             deleteTodo,
-            restoreTodos,
             categories
         } = this.props;
 
         // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
         let filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
-
-        let showSearch = () => {
-            if (!todos.length) {
-                return false;
-            } else {
-                let existDeletedTodos = todos.find((todo) => {
-                    return !todo.deleted;
-                });
-                if (existDeletedTodos === undefined) {
-                    return false;
-                } else {
-                    return true;
-                }
-            }
-        };
 
         return (
             <div className="accordeon">
@@ -101,8 +83,8 @@ export default class TodoList extends React.Component {
                                                 <Todo
                                                     key={todo.text}
                                                     {...todo}
-                                                    delete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
-                                                    edit={() => toggleTodo(todo.id)}
+                                                    toggle={() => toggleTodo(todo.id, !todo.completed)}
+                                                    delete={() => this.addNotification(todo.id)}
                                                 />
                                             );
                                         } else {
@@ -115,21 +97,17 @@ export default class TodoList extends React.Component {
                     :
 
             <div>
-                <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={showSearch} />
+                <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={todos.length} />
                 <div className="todos">
                     <FilterLink />
                     {filteredTodos.map((todo) =>
                         <Todo
                             key={todo.id}
                             {...todo}
-                            delete={() => {deleteTodo(todo.id); this.addNotification(todo.id); }}
-                            edit={() => toggleTodo(todo.id)}
+                            toggle={() => toggleTodo(todo.id, !todo.completed)}
+                            delete={() => this.addNotification(todo.id)}
                         />
                     )}
-
-                    {filteredTodos.find(todo => todo.deleted) &&
-                        <button className="btn btn-delete" onClick={() => restoreTodos()}>Restore deleted</button>
-                    }
                 </div>
                 <NotificationSystem ref="notificationSystem" />
             </div>
