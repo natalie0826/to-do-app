@@ -1,5 +1,6 @@
 import React from 'react';
 import { ShowTodoList } from '../containers/ShowTodoList';
+import { FetchAndDisplayData } from '../containers/DataHoc';
 import { AddTodo } from '../containers/AddTodo';
 import { configureStore } from '../configureStore';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -14,7 +15,10 @@ export const App = () => {
             <AddCategory store={configureStore} categories={configureStore.categories} />
             <h3>Todos</h3>
             <AddTodo isAddTodo={true} categories={configureStore.categories}/>
-            <Tabs>
+
+            <FetchAndDisplayData />
+            
+            {/* <Tabs>
                 <TabList>
                     <Tab>All tasks</Tab>
                     <Tab>Categories</Tab>
@@ -26,7 +30,7 @@ export const App = () => {
                 <TabPanel>
                     <ShowTodoList flag="categories"/>
                 </TabPanel>
-            </Tabs>
+            </Tabs> */}
         </div>
     );
 };
