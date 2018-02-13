@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { addTodo } from '../actions';
-import Edittor from '../components/common/Edittor';
+import { addTodo } from '../actions/actions';
+import Editor from '../components/common/Editor';
 
 const mapStateToProps = (store) => ({
     categories: store.categories
@@ -13,4 +13,4 @@ const mapDispatchToProps = ({
 export const AddTodo = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Edittor);
+)(Editor);

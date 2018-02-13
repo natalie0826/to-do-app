@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { addCategory } from '../actions';
+import { addCategory } from '../actions/actions';
 import Categories from '../components/categories/Categories';
 
 const mapStateToProps = (store) => ({
