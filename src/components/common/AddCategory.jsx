@@ -17,8 +17,6 @@ export const AddCategory = (props) => {
         ModalManager.open(<CategoryModal onRequestClose={() => true} store={props.store} categories={props.categories}/>);
     };
 
-    console.log(props);
-
     return (
         <div className="buttons-wrapper-category">
             <button className="btn btn-add" onClick={handleCategoryModal}>Add new category</button>

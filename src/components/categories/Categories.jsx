@@ -27,7 +27,6 @@ export default class CategoriesBlock extends React.Component {
     }
 
     handleChangeComplete = (color) => {
-        console.log('color', color.hex);
         this.setState({ color: color.hex });
     };
 
