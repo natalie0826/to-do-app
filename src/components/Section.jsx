@@ -17,24 +17,18 @@ export default class Section extends React.Component {
     }
 
     handleClick = () => {
-        if (this.props.children.length) {
-            if (this.state.open) {
-                this.setState({
-                    open: false,
-                    class: 'section'
-                });
-            } else {
-                this.setState({
-                    open: true,
-                    class: 'section open'
-                });
-            }
-        }
+        this.setState({open: !this.state.open});
     }
 
     render() {
+        const classNames = require('classnames');
+        const sectionClass = classNames({
+            'section': !this.state.open,
+            'section open': this.state.open,
+        });
+
         return (
-            <div className={this.state.class}>
+            <div className={sectionClass}>
                 <button className="toggle-button">toggle</button>
                 <div
                     className="section-head"
