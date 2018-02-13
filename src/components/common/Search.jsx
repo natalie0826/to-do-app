@@ -5,7 +5,7 @@ export const Search = (props) => {
     Search.propTypes = {
         updateSearch: PropTypes.func.isRequired,
         value: PropTypes.string.isRequired,
-        isVisible: PropTypes.bool
+        isVisible: PropTypes.number
     };
 
     Search.defaultProps = {
