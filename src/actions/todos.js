@@ -49,9 +49,3 @@ export const setFilter = (filter) => ({
     type: constants.SET_FILTER,
     filter
 });
-
-export const addCategory = (category, color) => ({
-    type: constants.ADD_CATEGORY,
-    category,
-    color
-});

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import { fetchTodos } from '../actions/actions';
 import { ShowTodoList } from './ShowTodoList';
+import TodoList from '../components/TodoList';
 
 const DataHoc = endpoint => ComposedComponent =>
     class DataHoc extends React.Component {
@@ -28,35 +29,28 @@ const DataHoc = endpoint => ComposedComponent =>
         render() {
             return (
                 <div className="data-component">
-                    {this.state.loading ? <div>Loading...</div> : <Presentational data={this.state.data} />}
+                    {this.state.loading ? <div>Loading...</div> : <TodoList todos={this.state.data} />}
                 </div>
             );
         }
     }
 
-    const mapStateToProps = (state) => {
-        return {
-            todos: state.todos.present
-        };
+const mapStateToProps = (state) => {
+    return {
+        todos: state.todos.present,
+        categories: state.categories
     };
+};
 
-    const mapDispatchToProps = (dispatch) => ({
-        fetch: () => dispatch(fetchTodos())
-    });
+const mapDispatchToProps = (dispatch) => ({
+    fetch: () => dispatch(fetchTodos())
+});
 
-    const HigherOrderComponent = compose(
-        DataHoc()
-    )
+const HigherOrderComponent = compose(
+    DataHoc()
+)
 
-    export const FetchAndDisplayData = connect(
-        mapStateToProps,
-        mapDispatchToProps
-    )(HigherOrderComponent(Presentational));
-
-    const Presentational = ({ data }) => 
-        <ul>{data.map((v, k) => 
-            <li key={k}>
-            {v.text}
-            </li>
-        )}
-        </ul>
+export const FetchAndDisplayData = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(HigherOrderComponent(TodoList));
