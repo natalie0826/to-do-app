@@ -16,13 +16,13 @@ export default class TodoList extends React.Component {
           completed: PropTypes.bool.isRequired,
           text: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        categories: PropTypes.arrayOf(PropTypes.shape({
-            category: PropTypes.string.isRequired,
-            color: PropTypes.string.isRequired
-        }).isRequired).isRequired,
-        toggleTodo: PropTypes.func.isRequired,
-        deleteTodo: PropTypes.func.isRequired,
-        fetch: PropTypes.func.isRequired
+        // categories: PropTypes.arrayOf(PropTypes.shape({
+        //     category: PropTypes.string.isRequired,
+        //     color: PropTypes.string.isRequired
+        // }).isRequired).isRequired,
+        // toggleTodo: PropTypes.func.isRequired,
+        // deleteTodo: PropTypes.func.isRequired,
+        // fetch: PropTypes.func.isRequired
     }
 
     constructor() {
