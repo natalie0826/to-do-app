@@ -20,7 +20,7 @@ export default class Editor extends React.Component {
         super(props);
         this.state = {
             text: this.props.text || '',
-            category: this.props.category || this.props.categories[0].category,
+            category: this.props.category || '',
             description: this.props.description || ''
         };
     }
