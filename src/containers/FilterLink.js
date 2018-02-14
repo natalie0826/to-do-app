@@ -1,6 +1,6 @@
 
 import { connect } from 'react-redux';
-import { setFilter } from '../actions/actions';
+import { setFilter } from '../actions/todos';
 import Filter from '../components/common/Filter';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
