@@ -1,13 +1,15 @@
+import { constants } from './constants';
+
 export const addCategory = (category, color) => ({
     type: constants.ADD_CATEGORY,
     category,
     color
 });
 
-export const fetchTodos = () => {
+export const fetchCategories = (url) => {
     return (dispatch) => {
-        return fetch('https://api.myjson.com/bins/wqrmt')
+        return fetch(url)
             .then(response => response.json())
-            .then(todos => todos.map(todo => dispatch(addTodo(todo.text, todo.category, todo.text, todo.completed, todo.deleted)))); // addTodo = initializeStore
+            .then(categories => categories.map(category => dispatch(addCategory(category.category, category.color))));
     };
 };
