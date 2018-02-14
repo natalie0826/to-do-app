@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo'
-import { toggleTodo, deleteTodo, fetchTodos } from '../actions/actions';
-import TodoList from '../components/TodoList';
+import { addTodo, editTodo, toggleTodo, deleteTodo } from '../actions/todos';
+import TodoApp from '../components/TodoApp';
 
 const getVisibleTodos = (todos, filter) => {
     switch (filter) {
@@ -23,15 +23,15 @@ const mapStateToProps = (state) => {
     };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-    fetch: () => dispatch(fetchTodos()),
+const mapDispatchToProps = ({
+    editTodo: editTodo,
+    addTodo: addTodo,
     deleteTodo: deleteTodo,
     toggleTodo: toggleTodo,
-    search: '',
     undo: UndoActionCreators.undo,
 });
 
 export const ShowTodoList = connect(
     mapStateToProps,
     mapDispatchToProps
-)(TodoList);
+)(TodoApp);
