@@ -1,5 +1,5 @@
 import undoable from 'redux-undo';
-import { includeAction } from 'redux-undo';
+// import { includeAction } from 'redux-undo';
 import { constants } from '../actions/constants';
 
 const todo = (state, action) => {
@@ -33,7 +33,7 @@ const todo = (state, action) => {
 
             return {
                 ...state,
-                completed: !action.completed
+                completed: !state.completed
             };
         default:
             return state;
