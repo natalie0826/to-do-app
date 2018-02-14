@@ -2,18 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { DeletingTodo } from './common/DeletingTodo';
-import { EditTodo } from '../containers/EditTodo';
+import Editor from '../components/common/Editor';
 import '../styles/todo.css';
 import '../../node_modules/font-awesome/css/font-awesome.min.css';
 
 export default class Todo extends React.Component {
     static propTypes = {
         id: PropTypes.string.isRequired,
+        text: PropTypes.string.isRequired,
+        category: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         completed: PropTypes.bool.isRequired,
         deleted: PropTypes.bool.isRequired,
-        text: PropTypes.string.isRequired,
-        delete: PropTypes.func.isRequired,
-        toggle: PropTypes.func.isRequired
+        deleteTodo: PropTypes.func.isRequired,
+        toggleTodo: PropTypes.func.isRequired,
+        editTodo: PropTypes.func.isRequired,
+        categories: PropTypes.array.isRequired
     }
 
     constructor(props) {
@@ -34,23 +38,27 @@ export default class Todo extends React.Component {
     confirmDeleting = (id, sureToDelete) => {
         this.setState((prevState) => ({showDeleteConfirmation: !prevState.showDeleteConfirmation}));
         if (sureToDelete) {
-            this.props.delete(id);
+            this.props.deleteTodo(id);
         }
     }
 
     handleChange = () => {
         this.setState({compl: !this.state.compl});
-        this.props.toggle(this.props.id);
+        this.props.toggleTodo(this.props.id);
     }
 
     render() {
         const {
             id,
             text,
-            description,
             category,
+            description,
+            completed,
             deleted,
-            completed
+            deleteTodo,
+            toggleTodo,
+            editTodo,
+            categories
         } = this.props;
 
         const classNames = require('classnames');
@@ -80,7 +88,14 @@ export default class Todo extends React.Component {
                                             <span className="category-todo">{category}</span>
                                             <div className="description">{description}</div>
                                         </div>
-                                    :   <EditTodo isAddTodo={false} id={id} text={text} category={category} description={description} setEditStatus={this.setEditStatus}/>
+                                     :  <Editor isAddTodo={false}
+                                                id={id}
+                                                text={text}
+                                                category={category}
+                                                description={description}
+                                                categories={categories}
+                                                setEditStatus={this.setEditStatus}
+                                                editTodo={editTodo} />
                                 }
                             </div>
                             <div className="buttons-wrapper">
