@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NotificationSystem from 'react-notification-system';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import Todo from '../components/Todo';
-import { FilterLink } from '../containers/FilterLink';
+import Editor from './common/Editor';
 import { Search } from './common/Search';
+import TodoList from './TodoList';
+import TodoListByCategories from './TodoListByCategories';
 import '../styles/todo.css';
 
-export default class TodoList extends React.Component {
+export default class TodoApp extends React.Component {
     static propTypes = {
         todos: PropTypes.arrayOf(PropTypes.shape({
           id: PropTypes.string.isRequired,
@@ -21,11 +23,12 @@ export default class TodoList extends React.Component {
         }).isRequired).isRequired,
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
+        addTodo: PropTypes.func.isRequired,
         editTodo: PropTypes.func.isRequired
     }
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             search: '',
             showNotification: false
@@ -39,7 +42,6 @@ export default class TodoList extends React.Component {
     notificationSystem = null;
 
     addNotification(id) {
-        this.props.deleteTodo(id);
         this.notificationSystem.addNotification({
             title: `Your item has been successfully deleted!`,
             level: 'info',
@@ -48,7 +50,7 @@ export default class TodoList extends React.Component {
             action: {
                 label: 'Undo',
                 callback: () => {
-                    this.props.deleteTodo(id);
+                    //this.props.deleteTodo(id);
                 }
             }
         });
@@ -56,37 +58,43 @@ export default class TodoList extends React.Component {
 
     componentDidMount() {
         this.notificationSystem = this.refs.notificationSystem;
-        if (this.props.flag === 'list'){ this.props.fetch(); }
     }
 
     render() {
         const {
             todos,
-            editTodo,
+            categories,
             toggleTodo,
             deleteTodo,
-            categories
+            addTodo,
+            editTodo
         } = this.props;
-
-        // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
-        let filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
 
         return (
             <div>
-                <div className="todos">
-                    <FilterLink />
-                    {filteredTodos.map((todo) =>
-                        <Todo
-                            key={todo.id}
-                            {...todo}
-                            toggleTodo={() => toggleTodo(todo.id)}
-                            deleteTodo={() => this.addNotification(todo.id)}
-                            editTodo={editTodo}
-                            categories={categories}
-                        />
-                    )}
-                </div>
-                <NotificationSystem ref="notificationSystem" />
+                <Editor isAddTodo={true} categories={categories} addTodo={addTodo} />
+                <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={todos.length} />
+                <Tabs>
+                    <TabList>
+                        <Tab>All tasks</Tab>
+                        <Tab>Categories</Tab>
+                    </TabList>
+                
+                    <TabPanel>
+                        <TodoList   todos={todos}
+                                    categories={categories}
+                                    editTodo={editTodo}
+                                    deleteTodo={deleteTodo}
+                                    toggleTodo={toggleTodo} />
+                    </TabPanel>
+                    <TabPanel>
+                        <TodoListByCategories   todos={todos}
+                                                categories={categories}
+                                                editTodo={editTodo}
+                                                deleteTodo={deleteTodo}
+                                                toggleTodo={toggleTodo} />
+                    </TabPanel>
+                </Tabs> 
             </div>
         );
     }

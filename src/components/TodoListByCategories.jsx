@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import NotificationSystem from 'react-notification-system';
 
 import Todo from '../components/Todo';
+import Section from './Section';
 import { FilterLink } from '../containers/FilterLink';
 import { Search } from './common/Search';
 import '../styles/todo.css';
 
-export default class TodoList extends React.Component {
+export default class TodoListByCategories extends React.Component {
     static propTypes = {
         todos: PropTypes.arrayOf(PropTypes.shape({
           id: PropTypes.string.isRequired,
@@ -39,7 +40,6 @@ export default class TodoList extends React.Component {
     notificationSystem = null;
 
     addNotification(id) {
-        this.props.deleteTodo(id);
         this.notificationSystem.addNotification({
             title: `Your item has been successfully deleted!`,
             level: 'info',
@@ -48,7 +48,7 @@ export default class TodoList extends React.Component {
             action: {
                 label: 'Undo',
                 callback: () => {
-                    this.props.deleteTodo(id);
+                    //this.props.deleteTodo(id);
                 }
             }
         });
@@ -72,21 +72,29 @@ export default class TodoList extends React.Component {
         let filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
 
         return (
-            <div>
-                <div className="todos">
-                    <FilterLink />
-                    {filteredTodos.map((todo) =>
-                        <Todo
-                            key={todo.id}
-                            {...todo}
-                            toggleTodo={() => toggleTodo(todo.id)}
-                            deleteTodo={() => this.addNotification(todo.id)}
-                            editTodo={editTodo}
-                            categories={categories}
-                        />
-                    )}
-                </div>
-                <NotificationSystem ref="notificationSystem" />
+            <div className="accordeon">
+                {categories.map((category) => {
+                    return (
+                        <Section key={category.category} title={category.category} color={category.color}>
+                            {todos.map((todo) => {
+                                    if (todo.category === category.category) {
+                                        return (
+                                            <Todo
+                                                key={todo.id}
+                                                {...todo}
+                                                toggleTodo={() => toggleTodo(todo.id, !todo.completed)}
+                                                deleteTodo={() => this.addNotification(todo.id)}
+                                                editTodo={editTodo}
+                                                categories={categories}
+                                            />
+                                        );
+                                    } else {
+                                        return null;
+                                    }
+                            })}
+                        </Section>
+                    );
+                })}
             </div>
         );
     }
