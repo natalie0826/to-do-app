@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import { DeletingTodo } from './common/DeletingTodo';
 import Editor from '../components/common/Editor';
@@ -55,13 +56,10 @@ export default class Todo extends React.Component {
             description,
             completed,
             deleted,
-            deleteTodo,
-            toggleTodo,
             editTodo,
             categories
         } = this.props;
 
-        const classNames = require('classnames');
         const todoTextClass = classNames({
             'label-checkbox': true,
             'todo-info': true,
@@ -76,13 +74,14 @@ export default class Todo extends React.Component {
         
         return (
             <div className={todoClass}>
-                {!this.state.showDeleteConfirmation
-                    ?   <div className="todo">
+                <div className="todo">
+                    {!this.state.showDeleteConfirmation ?
+                    <div>
                             <div className={todoTextClass}>
                                 {!this.state.isEditing
                                     ?   <div className="todo-info-card">
                                             <label className={todoCompleted}>
-                                                <input type="checkbox" checked={this.state.compl} onChange={this.handleChange}/>
+                                                <input type="checkbox" className="checkbox" checked={this.state.compl} onChange={this.handleChange}/>
                                                 {text}
                                             </label>
                                             <span className="category-todo">{category}</span>
@@ -100,18 +99,20 @@ export default class Todo extends React.Component {
                             </div>
                             <div className="buttons-wrapper">
                                 {!this.state.isEditing
-                                    ?   <div>
+                                    ?   <div >
                                             {!completed && <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>}
                                             <button className="btn btn-delete" onClick={this.confirmDeleting}>Delete</button>
                                         </div>
                                     : <button className="btn btn-delete" onClick={this.setEditStatus}>Cancel</button>
                                 }
                             </div>
-                        </div>
-                    :   <DeletingTodo
+                            </div>
+                            :   <DeletingTodo
                             confirm={(flag) => this.confirmDeleting(id, flag)}
-                        />
-                }
+                        />}
+                        </div>
+                    
+                
             </div>
         );
     }
