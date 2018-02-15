@@ -11,7 +11,6 @@ body {
 h3 {
     color: #1BBC9B;
     font-size: 4em;
-    padding: 20px 0 0 0;
     margin: 0;
     font-family: "Sacramento", cursive;
 }
@@ -26,7 +25,7 @@ hr {
     min-height: 400px;
     height: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 20px;
     background-color: #ffffff;
 }
 
@@ -65,10 +64,8 @@ hr {
     clear: both;
 }
 
-.delete {
-    width: 100%;
-    margin-left: 10px;
-    text-align: center;
+.todo-edit {
+    height: 170px;
 }
 
 /* buttons */
@@ -79,12 +76,11 @@ hr {
 
 .buttons-wrapper-category {
     float: right;
-    margin-top: 30px;
 }
 
 .btn {
     padding: 8px 5px;
-    margin: 0 5px;
+    margin: 5px;
     border: none;
     border-radius: 3px;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
@@ -93,28 +89,37 @@ hr {
 }
 
 .btn-add {
+    margin: 0 5px;
     float: right;
     width: 100px;
 }
 
+.btn-edit {
+    width: 50px;
+}
+
 .btn-add,
-.btn-edit,
-.btn-filter {
+.btn-edit {
     background-color: #1BBC9B;
     transition: .3s ease-in;
 }
 
 .btn-add:hover,
-.btn-edit:hover,
-.btn-filter:hover {
+.btn-edit:hover {
     background-color: rgb(22, 156, 129);
     transition: .3s ease-in;
 }
 
-.btn-delete {
+.btn-delete,
+.btn-del {
+    width: 50px;
     clear: both;
     background-color: #DB4E3D;
     transition: .3s ease-in;
+}
+
+.btn-del {
+    width: 100px;
 }
 
 .btn-delete:hover {
@@ -122,15 +127,11 @@ hr {
     transition: .3s ease-in;
 }
 
-.btn-filter {
-    width: 20%;
-    margin-right: 20px;
-}
-
 /* todos */
 
 .todos {
     padding: 0;
+    margin-left: 15px;
     list-style-type: none;
 }
 
@@ -142,12 +143,18 @@ hr {
     background-color: #eeeeee;
 }
 
-.todo-info {
+.todo-info,
+.delete-info {
     display: inline;
     font-weight: bold;
     font-size: 1.1em;
     cursor: pointer;
     color: #DB4E3D;
+}
+
+.delete-info {
+    display: inline-block;
+    margin: 10px 0 0 20px;
 }
 
 .todo-display {
@@ -171,6 +178,11 @@ hr {
 
 .todo-info-card {
     display: inline-block;
+    height: 40px;
+}
+
+.delete {
+    height: 40px;
 }
 
 /* checkbox styles */
@@ -218,7 +230,7 @@ hr {
     left: 0;
     width: 18px;
     height: 18px;
-    background: #ffffff;
+    background: #eeeeee;
     cursor: pointer;
 }
 
