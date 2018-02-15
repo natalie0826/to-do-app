@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NotificationSystem from 'react-notification-system';
 
 import Todo from '../components/Todo';
 import Section from './Section';

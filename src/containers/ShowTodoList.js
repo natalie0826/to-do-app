@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { ActionCreators as UndoActionCreators } from 'redux-undo'
+import { ActionCreators as UndoActionCreators } from 'redux-undo';
+
+import { WithFetching } from './WithFetching';
 import { addTodo, editTodo, toggleTodo, deleteTodo } from '../actions/todos';
 import TodoApp from '../components/TodoApp';
 
