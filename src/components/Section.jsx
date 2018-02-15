@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import '../styles/section.css';
 
@@ -21,11 +22,7 @@ export default class Section extends React.Component {
     }
 
     render() {
-        const classNames = require('classnames');
-        const sectionClass = classNames({
-            'section': !this.state.open,
-            'section open': this.state.open,
-        });
+        const sectionClass = classNames("section", {open: this.state.open});
 
         return (
             <div className={sectionClass}>
