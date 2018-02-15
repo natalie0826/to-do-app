@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ModalManager } from 'react-dynamic-modal';
+import {ModalManager} from 'react-dynamic-modal';
 
-import { CirclePicker } from 'react-color';
+import {CirclePicker} from 'react-color';
 import '../../styles/modal.css';
 
 export default class CategoriesBlock extends React.Component {
@@ -27,54 +27,53 @@ export default class CategoriesBlock extends React.Component {
     }
 
     handleChangeComplete = (color) => {
-        this.setState({ color: color.hex });
+        this.setState({color: color.hex});
     };
 
     handleAddCategory = () => {
-        if(this.state.category.trim()) {
+        if (this.state.category.trim()) {
             this.props.addCategory(this.state.category, this.state.color);
         }
         this.setState({category: ''});
     }
 
+    render() {
+        const categories = this.props.categories
+            .map((category) => {
+                return <span
+                    key={category.category}
+                    className="category-badge"
+                    style={{
+                    'backgroundColor': category.color
+                }}>
+                    {category.category}
+                </span>;
+            });
 
-    render(){
         return (
             <div className="category-modal">
                 <h1>Please, enter a category and select a color for it.</h1>
-                <h3>Remember, category should be unique.</h3>
-                <hr />
+                <h3>Category should be unique.</h3>
+                <hr/>
                 <input
                     className="add-category"
                     type="text"
                     placeholder="Category"
                     onChange={this.handleChange}
-                    value={this.state.category}
-                />
+                    value={this.state.category}/>
                 <div className="categories">
                     <p>All the categories</p>
-                    {this.props.categories.map((category) => {
-                        return  <span
-                                    key={category.category}
-                                    className="category-todo category-badge"
-                                    style={{'backgroundColor': category.color}}>
-                                    {category.category}
-                                </span>;
-                    })}
+                    {categories}
                 </div>
                 {!this.state.color
-                    ? <p><i>Select color for a category: </i></p>
-                    : <p style={{'color': this.state.color}}><i>You selected {this.state.color} color</i></p>
-                }
-                <CirclePicker
-                    onSwatchHover={this.handleChangeComplete}
-                />
-                
+                    ? <p><i>Color for a category:</i></p>
+                    : <p style={{'color': this.state.color}}><i>{this.state.color}</i></p>}
+                <CirclePicker onChange={this.handleChangeComplete}/>
                 <div className="buttons-wrapper modal-footer">
                     <button className="btn btn-add" onClick={this.handleAddCategory}>Add category</button>
-                    <button className="btn btn-delete" onClick={ModalManager.close}>Close Modal</button>
+                    <button className="btn btn-del" onClick={ModalManager.close}>Close Modal</button>
                 </div>
             </div>
         );
-     }
+    }
 }

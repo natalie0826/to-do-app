@@ -14,20 +14,18 @@ export const Search = (props) => {
 
     return (
         <div>
-            {props.isVisible
-                ?
-                <div>
-                    <hr />
-                    <input
-                        className="search-todo"
-                        type="text"
-                        placeholder="Search. . ."
-                        value={props.value}
-                        onChange={props.updateSearch} />
-                    <hr />
-                </div>
-                :
-                null
+            {props.isVisible && (
+                    <div>
+                        <hr />
+                        <input
+                            className="search-todo"
+                            type="text"
+                            placeholder="Search. . ."
+                            value={props.value}
+                            onChange={props.updateSearch} />
+                        <hr />
+                    </div>
+                )
             }
         </div>
     );
