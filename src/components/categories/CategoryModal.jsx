@@ -23,8 +23,7 @@ export const CategoryModal = (props) => {
         <Modal
             style={style}
             onRequestClose={props.onRequestClose}
-            effect={Effect.Fall}
-        >
+            effect={Effect.Fall}>
             <AddCategory store={props.store}/>
         </Modal>
     );

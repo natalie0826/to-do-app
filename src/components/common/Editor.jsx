@@ -61,7 +61,7 @@ export default class Editor extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="todo-edit">
                 <input  className="add-todo"
                         type="text"
                         placeholder="Task"

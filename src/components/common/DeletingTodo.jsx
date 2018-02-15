@@ -9,9 +9,11 @@ export const DeletingTodo = (props) => {
 
     return (
         <div className="delete">
-            <span>Are you sure to delete?</span>
-            <button className="btn btn-edit" onClick={() => props.confirm(true)}>Yes</button>
-            <button className="btn btn-delete" onClick={() => props.confirm(false)}>No</button>
+            <span className="delete-info">Are you sure to delete?</span>
+            <div className="buttons-wrapper">
+                <button className="btn btn-edit btn-fixed-size" onClick={() => props.confirm(true)}>Yes</button>
+                <button className="btn btn-delete btn-fixed-size" onClick={() => props.confirm(false)}>No</button>
+            </div>
         </div>
     );
 };

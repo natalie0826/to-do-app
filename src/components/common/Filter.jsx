@@ -27,7 +27,6 @@ export default class Filter extends React.Component {
 
     render() {
         return (
-           
             <div className="filter">
                 <span className="filter-hint">Show only all the tasks</span>
                 <ToggleButton
