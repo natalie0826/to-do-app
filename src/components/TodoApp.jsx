@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NotificationSystem from 'react-notification-system';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import NotificationSystem from 'react-notification-system';
 
 import Editor from './common/Editor';
 import { Search } from './common/Search';
@@ -39,10 +39,8 @@ export default class TodoApp extends React.Component {
         this.setState({ search: event.target.value });
     }
 
-    notificationSystem = null;
-
-    addNotification(id) {
-        this.notificationSystem.addNotification({
+    addNotification(id/*, callback*/) {
+        this.$notificationSystem.addNotification({
             title: `Your item has been successfully deleted!`,
             level: 'info',
             autoDismiss: 10,
@@ -50,14 +48,15 @@ export default class TodoApp extends React.Component {
             action: {
                 label: 'Undo',
                 callback: () => {
-                    //this.props.deleteTodo(id);
+                    /*callback()*/
                 }
             }
         });
     }
 
-    componentDidMount() {
-        this.notificationSystem = this.refs.notificationSystem;
+    deleteTodo = (id) => {
+        this.props.deleteTodo(id);
+        this.addNotification();
     }
 
     render() {
@@ -65,7 +64,6 @@ export default class TodoApp extends React.Component {
             todos,
             categories,
             toggleTodo,
-            deleteTodo,
             addTodo,
             editTodo
         } = this.props;
@@ -81,20 +79,22 @@ export default class TodoApp extends React.Component {
                     </TabList>
                 
                     <TabPanel>
-                        <TodoList   todos={todos}
-                                    categories={categories}
-                                    editTodo={editTodo}
-                                    deleteTodo={deleteTodo}
-                                    toggleTodo={toggleTodo} />
+                        <TodoList   
+                            todos={todos}
+                            categories={categories}
+                            editTodo={editTodo}
+                            deleteTodo={this.deleteTodo}
+                            toggleTodo={toggleTodo} />
                     </TabPanel>
                     <TabPanel>
                         <TodoListByCategories   todos={todos}
                                                 categories={categories}
                                                 editTodo={editTodo}
-                                                deleteTodo={deleteTodo}
+                                                deleteTodo={this.deleteTodo}
                                                 toggleTodo={toggleTodo} />
                     </TabPanel>
-                </Tabs> 
+                </Tabs>
+                <NotificationSystem ref={instance => this.$notificationSystem = instance} />
             </div>
         );
     }

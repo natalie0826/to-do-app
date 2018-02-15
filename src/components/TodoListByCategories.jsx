@@ -4,8 +4,6 @@ import NotificationSystem from 'react-notification-system';
 
 import Todo from '../components/Todo';
 import Section from './Section';
-import { FilterLink } from '../containers/FilterLink';
-import { Search } from './common/Search';
 import '../styles/todo.css';
 
 export default class TodoListByCategories extends React.Component {
@@ -33,43 +31,14 @@ export default class TodoListByCategories extends React.Component {
         };
     }
 
-    updateSearch = (event) => {
-        this.setState({ search: event.target.value });
-    }
-
-    notificationSystem = null;
-
-    addNotification(id) {
-        this.notificationSystem.addNotification({
-            title: `Your item has been successfully deleted!`,
-            level: 'info',
-            autoDismiss: 10,
-            dismissible: false,
-            action: {
-                label: 'Undo',
-                callback: () => {
-                    //this.props.deleteTodo(id);
-                }
-            }
-        });
-    }
-
-    componentDidMount() {
-        this.notificationSystem = this.refs.notificationSystem;
-        if (this.props.flag === 'list'){ this.props.fetch(); }
-    }
-
     render() {
         const {
             todos,
             editTodo,
-            toggleTodo,
             deleteTodo,
+            toggleTodo,
             categories
         } = this.props;
-
-        // It isn't a state because filteredTodos can be computed by combining user input in search box and todos array from props.
-        let filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
 
         return (
             <div className="accordeon">
@@ -77,20 +46,19 @@ export default class TodoListByCategories extends React.Component {
                     return (
                         <Section key={category.category} title={category.category} color={category.color}>
                             {todos.map((todo) => {
-                                    if (todo.category === category.category) {
-                                        return (
-                                            <Todo
-                                                key={todo.id}
-                                                {...todo}
-                                                toggleTodo={() => toggleTodo(todo.id, !todo.completed)}
-                                                deleteTodo={() => this.addNotification(todo.id)}
-                                                editTodo={editTodo}
-                                                categories={categories}
-                                            />
-                                        );
-                                    } else {
-                                        return null;
-                                    }
+                                if (todo.category === category.category) {
+                                    return (
+                                        <Todo
+                                            key={todo.id}
+                                            {...todo}
+                                            toggleTodo={() => toggleTodo(todo.id)}
+                                            deleteTodo={() => deleteTodo(todo.id)}
+                                            editTodo={editTodo}
+                                            categories={categories}/>)
+                                        }
+                                else {
+                                    return null;
+                                }
                             })}
                         </Section>
                     );
