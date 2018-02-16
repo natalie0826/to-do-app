@@ -7,14 +7,17 @@ import TodoList from '../components/TodoList';
 import { AddCategory } from './common/AddCategory';
 import '../styles/todo.css';
 
+import { TodoTryMy } from './TodoTryMy';
+
+
 export const App = (props) => {
-    const TodoListWithNull = withFetching(TodoList);
+    const TodoListWithNull = withFetching('https://api.myjson.com/bins/aufxd')(TodoTryMy);
 
     return (
         <div className="container">
             <AddCategory store={configureStore} categories={configureStore.categories} />
             <h3>Todos</h3>
-            <TodoListWithNull todos={props.todos}/>
+            <TodoListWithNull />
         </div>
     );
 };
