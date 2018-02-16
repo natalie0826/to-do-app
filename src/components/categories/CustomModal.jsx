@@ -5,10 +5,9 @@ import { Modal, Effect} from 'react-dynamic-modal';
 import { AddCategory } from '../../containers/AddCategory';
 import '../../styles/modal.css';
 
-export const CategoryModal = (props) => {
-    CategoryModal.propTypes = {
+export const CustomModal = (props) => {
+    CustomModal.propTypes = {
         store: PropTypes.object,
-        categories: PropTypes.array,
         onRequestClose: PropTypes.func.isRequired
     };
 
