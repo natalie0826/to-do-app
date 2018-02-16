@@ -4,14 +4,16 @@ import uuidv4 from 'uuid/v4';
 
 import { constants } from './constants';
 
-export const addTodo = (text, category, description, completed, deleted) => ({
+export const addTodo = (todo) => ({
     type: constants.ADD_TODO,
-    id: uuidv4(),
-    text,
-    category,
-    description,
-    completed,
-    deleted
+    payload: {
+        id: uuidv4(),
+        text: todo.text,
+        category: todo.category,
+        description: todo.description,
+        completed: todo.completed,
+        deleted: todo.deleted
+    }
 });
 
 export const editTodo = (id, text, category, description) => ({

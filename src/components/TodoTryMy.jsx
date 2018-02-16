@@ -11,7 +11,7 @@ class TodoTry extends React.Component {
         };
     }
     componentDidUpdate() {
-        this.props.addTodo(this.props.data);
+        this.props.addTodo(this.props.todos);
     }
 
     render() {
@@ -19,7 +19,7 @@ class TodoTry extends React.Component {
             <div>
                 <div className="todos">
                     <ul>
-                        {this.props.todos.map(todo => <li key={todo.text}>{todo.text}</li>)}
+                        {this.props.todos.map(todo => <li key={todo.text}>{todo.text} and {todo.category}</li>)}
                     </ul>
                 </div>
             </div>
@@ -35,7 +35,7 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = (dispatch, props) => ({
     addTodo: (data) => {
-        props.data.map(one => dispatch(addTodo(one.text, one.text, one.text, false, false)));
+        props.data.map(one => dispatch(addTodo(one)));
     }
 });
 

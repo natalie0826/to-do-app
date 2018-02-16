@@ -5,14 +5,14 @@ import { constants } from '../actions/constants';
 const todo = (state, action) => {
     switch (action.type) {
         case constants.ADD_TODO:
-            console.log(action);
+            console.log('AAAAA', action);
             return {
-                id: action.id,
-                text: action.text,
-                category: action.category,
-                description: action.description,
-                completed: action.completed,
-                deleted: action.deleted
+                id: action.payload.id,
+                text: action.payload.text,
+                category: action.payload.category,
+                description: action.payload.description,
+                completed: action.payload.completed,
+                deleted: action.payload.deleted
             };
         case constants.EDIT_TODO:
             if (state.id !== action.id) {
