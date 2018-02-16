@@ -3,23 +3,21 @@ import '../../node_modules/react-tabs/style/react-tabs.css';
 
 import { configureStore } from '../configureStore';
 import { withFetching } from '../containers/withFetching';
-// import TodoList from '../components/TodoList';
-// import { AddCategory } from './common/AddCategory';
+import { ButtonToOpenModal } from './common/ButtonToOpenModal';
+import { urls } from '../constants/constantsUrls';
 import '../styles/todo.css';
 
-import { TodoTryMy } from './TodoTryMy';
-import { CategoriesTryMy } from './CategoriesTryMy';
+import { ShowTodoApp } from '../containers/ShowTodoApp';
 
 export const App = (props) => {
-    const TodoListWithNull = withFetching('https://api.myjson.com/bins/aufxd')(TodoTryMy);
-    const CategoriesWithNull = withFetching('https://api.myjson.com/bins/wqrmt')(CategoriesTryMy);
+    const TodoAppWithFetch = withFetching(urls.todos)(ShowTodoApp);
+    const CategoriesWithNull = withFetching(urls.categories)(ButtonToOpenModal);
 
     return (
         <div className="container">
-            {/* <AddCategory store={configureStore} categories={configureStore.categories} /> */}
+            <ButtonToOpenModal store={configureStore} categories={configureStore.categories} />
             <h3>Todos</h3>
-            <TodoListWithNull />
-            <CategoriesWithNull />
+            <TodoAppWithFetch />
         </div>
     );
 };
