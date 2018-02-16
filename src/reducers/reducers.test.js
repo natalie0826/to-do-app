@@ -14,7 +14,7 @@ describe('Reducers', () => {
                 'present': []
             });
     });
-    
+
     it('should handle ADD_TODO', () => {
         expect(
             todosReducer([], {

@@ -41,6 +41,7 @@
         "comma-spacing": "error",
         "comma-style": "error",
         "consistent-this": ["error", "me"],
+        "constructor-super": 1,
         "curly": "error",
         "eol-last": "error",
         "func-call-spacing": "error",
