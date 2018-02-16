@@ -42,7 +42,7 @@ export const fetchTodos = (url) => {
     return (dispatch) => {
         return fetch(url)
             .then(response => response.json())
-            .then(todos => todos.map(todo => dispatch(addTodo(todo.text, todo.category, todo.text, todo.completed, todo.deleted)))); // addTodo = initializeStore
+            .then(todos => todos.map(todo => dispatch(addTodo(todo)))); // addTodo = initializeStore
     };
 };
 

@@ -1,9 +1,11 @@
 import { constants } from './constants';
 
-export const addCategory = (category, color) => ({
+export const addCategory = (category) => ({
     type: constants.ADD_CATEGORY,
-    category,
-    color
+    payload: {
+        category: category.category,
+        color: category.color
+    }
 });
 
 export const fetchCategories = (url) => {

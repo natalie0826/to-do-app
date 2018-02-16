@@ -24,17 +24,17 @@ export const withFetching = (url) => ComposedComponent =>
                     loading: false,
                     data
                 }))
-                .catch(error => this.setState({error, isLoading: false}));
+                .catch(error => this.setState({error, loading: false}));
         }
 
         render() {
-            const { data, isLoading, error } = this.state;
+            const { data, loading, error } = this.state;
 
             if (error) {
                 return <p>{error.message}</p>
             }
 
-            if (isLoading) {
+            if (loading) {
                 return <Loading loading={this.state.loading} />;
             }
 
