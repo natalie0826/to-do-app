@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { WithFetching } from './WithFetching';
 import { addTodo, editTodo, toggleTodo, deleteTodo } from '../actions/todos';
 import TodoApp from '../components/TodoApp';
 
@@ -33,7 +32,7 @@ const mapDispatchToProps = ({
     undo: UndoActionCreators.undo,
 });
 
-export const ShowTodoList = connect(
+export const ShowTodoApp = connect(
     mapStateToProps,
     mapDispatchToProps
 )(TodoApp);

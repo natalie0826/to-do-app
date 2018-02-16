@@ -6,7 +6,7 @@ import NotificationSystem from 'react-notification-system';
 import Editor from './common/Editor';
 import { Search } from './common/Search';
 import TodoList from './TodoList';
-import TodoListByCategories from './TodoListByCategories';
+import Categories from './Categories';
 import '../styles/todo.css';
 
 export default class TodoApp extends React.Component {
@@ -17,10 +17,10 @@ export default class TodoApp extends React.Component {
           completed: PropTypes.bool.isRequired,
           text: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        categories: PropTypes.arrayOf(PropTypes.shape({
-            category: PropTypes.string.isRequired,
-            color: PropTypes.string.isRequired
-        }).isRequired).isRequired,
+        // categories: PropTypes.arrayOf(PropTypes.shape({
+        //     category: PropTypes.string.isRequired,
+        //     color: PropTypes.string.isRequired
+        // }).isRequired).isRequired,
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
         addTodo: PropTypes.func.isRequired,
@@ -33,6 +33,10 @@ export default class TodoApp extends React.Component {
             search: '',
             showNotification: false
         };
+    }
+
+    componentDidMount() {
+        this.props.data.map(one => this.props.addTodo(one));
     }
 
     updateSearch = (event) => {
@@ -87,11 +91,11 @@ export default class TodoApp extends React.Component {
                             toggleTodo={toggleTodo} />
                     </TabPanel>
                     <TabPanel>
-                        <TodoListByCategories   todos={todos}
-                                                categories={categories}
-                                                editTodo={editTodo}
-                                                deleteTodo={this.deleteTodo}
-                                                toggleTodo={toggleTodo} />
+                        <Categories todos={todos}
+                                    categories={categories}
+                                    editTodo={editTodo}
+                                    deleteTodo={this.deleteTodo}
+                                    toggleTodo={toggleTodo} />
                     </TabPanel>
                 </Tabs>
                 <NotificationSystem ref={instance => this.$notificationSystem = instance} />
