@@ -42,4 +42,4 @@ export const withFetching = (url) => ComposedComponent =>
                 <ComposedComponent data={data} />
             );
         }
-    
+    }
