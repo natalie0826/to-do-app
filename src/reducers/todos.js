@@ -5,7 +5,6 @@ import { constants } from '../actions/constants';
 const todo = (state, action) => {
     switch (action.type) {
         case constants.ADD_TODO:
-            console.log('AAAAA', action);
             return {
                 id: action.payload.id,
                 text: action.payload.text,

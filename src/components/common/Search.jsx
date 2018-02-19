@@ -5,7 +5,7 @@ export const Search = (props) => {
     Search.propTypes = {
         updateSearch: PropTypes.func.isRequired,
         value: PropTypes.string.isRequired,
-        isVisible: PropTypes.number
+        isVisible: PropTypes.bool
     };
 
     Search.defaultProps = {
@@ -16,14 +16,12 @@ export const Search = (props) => {
         <div>
             {props.isVisible && (
                     <div>
-                        <hr />
                         <input
                             className="search-todo"
                             type="text"
                             placeholder="Search. . ."
                             value={props.value}
                             onChange={props.updateSearch} />
-                        <hr />
                     </div>
                 )
             }
