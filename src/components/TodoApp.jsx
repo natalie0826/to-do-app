@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotificationSystem from 'react-notification-system';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { ShowCategories } from '../containers/ShowCategories';
-import Editor from './common/Editor';
+import { configureStore } from '../configureStore';
 import { Search } from './common/Search';
+import Editor from './common/Editor';
 import TodoList from './tabs/TodoList';
 import '../styles/todo.css';
 
@@ -74,7 +75,8 @@ export default class TodoApp extends React.Component {
             todos,
             categories,
             addTodo,
-            addCategory
+            addCategory,
+            store
         } = this.props;
 
         // It isn't a state because filteredTodos can be computed by combining user
@@ -84,7 +86,7 @@ export default class TodoApp extends React.Component {
         return (
             <div>
                 <h3>Todos</h3>
-                <Editor isAddTodo={true} categories={categories} addTodo={addTodo} addCategory={addCategory} store={this.props.store} />
+                <Editor isAddTodo={true} categories={categories} addTodo={addTodo} addCategory={addCategory} store={configureStore} />
                 <Tabs className="tabs">
                     <TabList>
                         <Tab>All tasks</Tab>

@@ -7,7 +7,6 @@ import '../../styles/modal.css';
 
 export const CustomModal = (props) => {
     CustomModal.propTypes = {
-        store: PropTypes.object,
         onRequestClose: PropTypes.func.isRequired
     };
 
@@ -23,7 +22,7 @@ export const CustomModal = (props) => {
             style={style}
             onRequestClose={props.onRequestClose}
             effect={Effect.Fall}>
-            <ShowCategories store={props.store}/>
+            <ShowCategories store={props.store} />
         </Modal>
     );
 };

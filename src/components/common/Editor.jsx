@@ -76,10 +76,7 @@ export default class Editor extends React.Component {
     }
 
     handleCategoryModal = () => {
-        ModalManager.open(<CustomModal  onRequestClose={() => true}
-                                        store={this.props.store}
-                                        categories={this.props.categories}
-                                        addCategory={this.props.addCategory} />);
+        ModalManager.open(<CustomModal onRequestClose={() => true} store={this.props.store} categories={this.props.categories}/>);
     };
 
     render() {

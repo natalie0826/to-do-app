@@ -12,7 +12,8 @@ export default class CategoriesModal extends React.Component {
             category: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        addCategory: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired,
+        store: PropTypes.object.isRequired
     };
 
     constructor(props) {

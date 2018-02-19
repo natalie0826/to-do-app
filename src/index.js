@@ -6,7 +6,7 @@ import { configureStore } from './configureStore';
 
 render(
     <Provider store={configureStore}>
-        <App store={configureStore} />
+        <App />
     </Provider>,
     document.getElementById('root')
 );
