@@ -9,11 +9,15 @@ export const CategoriesList = (props) => {
             category: PropTypes.string.isRequired,
             color: PropTypes.string.isRequired
         }).isRequired).isRequired,
+        title: PropTypes.string.isRequired
     };
 
     return (
-        props.categories.map((category) => {
-            return <CategoryBadge {...category} />
-        })
+        <div className="categories">
+            <p>{props.title}</p>
+            {props.categories.map((category) => {
+                return <CategoryBadge key={category.category} {...category} />
+            })}
+        </div>
     );
 };

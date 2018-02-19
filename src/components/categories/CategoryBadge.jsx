@@ -8,7 +8,7 @@ export const CategoryBadge = (props) => {
     };
     return (
         <span   key={props.category}
-                className="category-badge"
+                className="category-todo category-badge"
                 style={{'backgroundColor': props.color}}
         >
             {props.category}

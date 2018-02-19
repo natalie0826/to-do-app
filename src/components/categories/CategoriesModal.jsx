@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ModalManager} from 'react-dynamic-modal';
-import {CirclePicker} from 'react-color';
+import { ModalManager } from 'react-dynamic-modal';
+import { CirclePicker } from 'react-color';
 
 import { CategoriesList } from './CategoriesList';
 import '../../styles/modal.css';
 
-export default class CategoriesBlock extends React.Component {
+export default class CategoriesModal extends React.Component {
     static propTypes = {
         categories: PropTypes.arrayOf(PropTypes.shape({
             category: PropTypes.string.isRequired,
@@ -33,7 +33,9 @@ export default class CategoriesBlock extends React.Component {
 
     handleAddCategory = () => {
         if (this.state.category.trim()) {
-            this.props.addCategory(this.state.category, this.state.color);
+            this.props.addCategory({
+                'category': this.state.category,
+                'color': this.state.color});
         }
         this.setState({category: ''});
     }
@@ -50,13 +52,8 @@ export default class CategoriesBlock extends React.Component {
                     placeholder="Category"
                     onChange={this.handleChange}
                     value={this.state.category}/>
-                <div className="categories">
-                    <p>All the categories</p>
-                    <CategoriesList categories={this.props.categories} />
-                </div>
-                {!this.state.color
-                    ? <p><i>Color for a category:</i></p>
-                    : <p style={{'color': this.state.color}}><i>{this.state.color}</i></p>}
+                <CategoriesList title="All the categories" categories={this.props.categories} />
+                <p style={{'color': this.state.color}}><i>Color for a category: {this.state.color}</i></p>
                 <CirclePicker onChange={this.handleChangeComplete}/>
                 <div className="buttons-wrapper modal-footer">
                     <button className="btn btn-add" onClick={this.handleAddCategory}>Add category</button>
