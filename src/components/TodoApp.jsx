@@ -3,13 +3,10 @@ import PropTypes from 'prop-types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotificationSystem from 'react-notification-system';
 
-import { withFetching } from '../containers/withFetching';
-import { urls } from '../constants/constantsUrls';
 import { ShowCategories } from '../containers/ShowCategories';
 import Editor from './common/Editor';
 import { Search } from './common/Search';
 import TodoList from './TodoList';
-import Categories from './Categories';
 import '../styles/todo.css';
 
 export default class TodoApp extends React.Component {
@@ -20,26 +17,32 @@ export default class TodoApp extends React.Component {
           completed: PropTypes.bool.isRequired,
           text: PropTypes.string.isRequired
         }).isRequired).isRequired,
-        // categories: PropTypes.arrayOf(PropTypes.shape({
-        //     category: PropTypes.string.isRequired,
-        //     color: PropTypes.string.isRequired
-        // }).isRequired).isRequired,
+        categories: PropTypes.arrayOf(PropTypes.shape({
+            category: PropTypes.string.isRequired,
+            color: PropTypes.string.isRequired
+        }).isRequired).isRequired,
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
         addTodo: PropTypes.func.isRequired,
-        editTodo: PropTypes.func.isRequired
+        editTodo: PropTypes.func.isRequired,
+        addCategory: PropTypes.func.isRequired
     }
 
     constructor(props) {
         super(props);
         this.state = {
             search: '',
-            showNotification: false
+            showNotification: false,
+            todos: this.props.data[0],
+            categories: this.props.data[1]
         };
     }
 
     componentDidMount() {
-        this.props.data.map(one => this.props.addTodo(one));
+        if (this.props.data.length) {
+            this.props.data[0].map(todo => this.props.addTodo(todo));
+            this.props.data[1].map(category => this.props.addCategory(category));
+        }
     }
 
     updateSearch = (event) => {
@@ -70,37 +73,33 @@ export default class TodoApp extends React.Component {
         const {
             todos,
             categories,
-            toggleTodo,
             addTodo,
-            editTodo
+            addCategory
         } = this.props;
 
-        const Categories = withFetching(urls.categories, this.props)(ShowCategories);
+        // It isn't a state because filteredTodos can be computed by combining user
+        // input in search box and todos array from props.
+        const filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
 
         return (
             <div>
-                <Editor isAddTodo={true} categories={categories} addTodo={addTodo} />
-                <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={todos.length} />
-                <Tabs>
+                <h3>Todos</h3>
+                <Editor isAddTodo={true} categories={categories} addTodo={addTodo} addCategory={addCategory} store={this.props.store} />
+                <Tabs className="tabs">
                     <TabList>
                         <Tab>All tasks</Tab>
                         <Tab>Categories</Tab>
                     </TabList>
                 
-                    <TabPanel>
-                        <TodoList   
-                            todos={todos}
-                            categories={categories}
-                            editTodo={editTodo}
-                            deleteTodo={this.deleteTodo}
-                            toggleTodo={toggleTodo} />
+                    <TabPanel className="tabs-panel">
+                        <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={todos.length > 0} />
+                        <TodoList   {...this.props}
+                                    todos={filteredTodos}
+                                    deleteTodo={this.deleteTodo}/>
                     </TabPanel>
-                    <TabPanel>
-                        <Categories todos={todos}
-                                    categories={categories}
-                                    editTodo={editTodo}
-                                    deleteTodo={this.deleteTodo}
-                                    toggleTodo={toggleTodo} />
+                    <TabPanel className="tabs-panel">
+                        <ShowCategories {...this.props}
+                                        deleteTodo={this.deleteTodo} />
                     </TabPanel>
                 </Tabs>
                 <NotificationSystem ref={instance => this.$notificationSystem = instance} />
