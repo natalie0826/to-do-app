@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Loading } from '../components/Loading';
 
-export const withFetching = (urlsArray) => ComposedComponent => 
-    
+export const withFetching = (urls) => (ComposedComponent) =>
     class withFetching extends React.Component {
         constructor(props) {
             super(props);
@@ -15,19 +14,30 @@ export const withFetching = (urlsArray) => ComposedComponent =>
         }
 
         componentDidMount() {
-            
             this.setState({loading: true});
-            Promise.all([
-                fetch(urlsArray)
-            ]).then(response => {
-                    if (response[0].ok) { return response[0].json(); }
-                    else { throw new Error('Something went wrong...'); }
+            Promise.all(urls.map((url) => {
+                return fetch(url)
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    } else {
+                        throw new Error('Something went wrong...');
+                    }
                 })
-                .then(data => this.setState({
+                .then((data) => {
+                    return data;
+                })
+            }))
+            .then((finalDataArray) => {
+                this.setState({
                     loading: false,
-                    data
-                }))
-                .catch(error => this.setState({error, loading: false}));
+                    data: finalDataArray
+                });
+            })
+            .catch((error) => this.setState({
+                error,
+                loading: false
+            }));
         }
 
         render() {
@@ -44,4 +54,3 @@ export const withFetching = (urlsArray) => ComposedComponent =>
             return (<ComposedComponent data={data} />);
         }
     }
-
