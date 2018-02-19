@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import '../styles/section.css';
 
-export default class Section extends React.Component {
+export default class TodosByCategory extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired
     }
@@ -27,9 +27,7 @@ export default class Section extends React.Component {
         return (
             <div className={sectionClass}>
                 <button className="toggle-button">toggle</button>
-                <div
-                    className="section-head"
-                    onClick={this.handleClick}>
+                <div className="section-head" onClick={this.handleClick}>
                     {this.props.title}
                 </div>
                 <div className="article-wrap">

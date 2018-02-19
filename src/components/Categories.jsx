@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Todo from '../components/Todo';
-import Section from './Section';
+import TodosByCategory from './TodosByCategory';
 import '../styles/todo.css';
 
 export default class Categories extends React.Component {
@@ -30,11 +30,6 @@ export default class Categories extends React.Component {
         };
     }
 
-    componentDidMount() {
-        console.log(this.props);
-        this.props.data.map(one => this.props.addCategory(one));
-    }
-
     render() {
         const {
             todos,
@@ -48,7 +43,7 @@ export default class Categories extends React.Component {
             <div className="accordeon">
                 {categories.map((category) => {
                     return (
-                        <Section key={category.category} title={category.category} color={category.color}>
+                        <TodosByCategory key={category.category} title={category.category} color={category.color}>
                             {todos.map((todo) => {
                                 if (todo.category === category.category) {
                                     return (
@@ -64,7 +59,7 @@ export default class Categories extends React.Component {
                                     return null;
                                 }
                             })}
-                        </Section>
+                        </TodosByCategory>
                     );
                 })}
             </div>
