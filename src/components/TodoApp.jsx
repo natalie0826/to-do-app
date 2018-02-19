@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import NotificationSystem from 'react-notification-system';
 
+import { withFetching } from '../containers/withFetching';
+import { urls } from '../constants/constantsUrls';
+import { ShowCategories } from '../containers/ShowCategories';
 import Editor from './common/Editor';
 import { Search } from './common/Search';
 import TodoList from './TodoList';
@@ -71,6 +74,8 @@ export default class TodoApp extends React.Component {
             addTodo,
             editTodo
         } = this.props;
+
+        const Categories = withFetching(urls.categories, this.props)(ShowCategories);
 
         return (
             <div>
