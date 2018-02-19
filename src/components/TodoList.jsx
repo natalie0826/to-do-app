@@ -33,14 +33,10 @@ export default class TodoList extends React.Component {
     render() {
         const {todos, editTodo, toggleTodo, deleteTodo, categories} = this.props;
 
-        // It isn't a state because filteredTodos can be computed by combining user
-        // input in search box and todos array from props.
-        const filteredTodos = todos.filter(todo => todo.text.includes(this.state.search.toLowerCase()));
-
         return (
             <div>
                 <div className="todos">
-                    <FilterLink/> {filteredTodos.map((todo) =>
+                    <FilterLink/> {todos.map((todo) =>
                     <Todo
                         key={todo.id}
                         {...todo}

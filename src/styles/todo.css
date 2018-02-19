@@ -11,7 +11,7 @@ body {
 h3 {
     color: #1BBC9B;
     font-size: 4em;
-    margin: 0;
+    margin: 0 0 15px 0;
     font-family: "Sacramento", cursive;
 }
 
@@ -25,21 +25,20 @@ hr {
     min-height: 400px;
     height: 100%;
     margin: 0 auto;
-    padding: 20px;
+    padding: 20px 40px 40px 40px;
     background-color: #ffffff;
 }
 
 /* todo inputs */
 
 .add-todo {
-    width: 150px;
-    margin: 0 0 0 10px;
+    width: 170px;
     border-radius: 3px;
 }
 
 .search-todo {
     width: 50%;
-    margin-left: 25%;
+    margin: 20px 0 20px 25%;
 }
 
 .edit-todo {
@@ -65,7 +64,7 @@ hr {
 }
 
 .todo-edit {
-    height: 170px;
+    height: 200px;
 }
 
 /* buttons */
@@ -80,7 +79,7 @@ hr {
 
 .btn {
     padding: 8px 5px;
-    margin: 5px;
+    margin: 0 5px 5px 0;
     border: none;
     border-radius: 3px;
     box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
@@ -92,6 +91,14 @@ hr {
     margin: 0 5px;
     float: right;
     width: 100px;
+}
+
+.btn-cancel {
+    margin: 0 5px 0 0;
+    float: left;
+    width: 100px;
+    background-color: #DB4E3D;
+    transition: .3s ease-in;
 }
 
 .btn-edit {
@@ -122,7 +129,8 @@ hr {
     width: 100px;
 }
 
-.btn-delete:hover {
+.btn-delete:hover,
+.btn-cancel:hover {
     background-color: rgb(185, 56, 42);
     transition: .3s ease-in;
 }
@@ -131,7 +139,7 @@ hr {
 
 .todos {
     padding: 0;
-    margin-left: 15px;
+    margin-left: 10px;
     list-style-type: none;
 }
 
@@ -140,7 +148,7 @@ hr {
     width: 460px;
     margin: 5px 0 5px 0;
     padding: 10px;
-    background-color: #eeeeee;
+    background-color: rgb(247, 247, 247);
 }
 
 .todo-info,
@@ -230,14 +238,14 @@ hr {
     left: 0;
     width: 18px;
     height: 18px;
-    background: #eeeeee;
+    background: rgb(247, 247, 247);
     cursor: pointer;
 }
 
 /* categories and description */
 
 .select-category {
-    width: 160px;
+    width: 180px;
     height: 31px;
     margin-left: 2%;
     padding: 2px 5px;
@@ -249,8 +257,8 @@ hr {
 }
 
 .description-todo {
-    width: 95%;
-    margin: 20px 0 0 10px;
+    width: 96%;
+    margin: 20px 0 10px 0;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
     border-radius: 3px;
@@ -293,10 +301,28 @@ hr {
 
 .filter-hint {
     display: flex;
-    margin-right: 20px;
+    margin: 10px 10px 10px 0;
     padding-top: 2px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-style: italic;
+    color: #033813;
 }
 
 .loading {
     margin: 10% 0 0 43%;
+}
+
+.tabs {
+    margin-top: 30px;
+}
+
+.tabs-panel {
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
+div.section-head {
+    margin-left: 2px;
 }

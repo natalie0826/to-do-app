@@ -15,5 +15,3 @@ export const ShowCategories = connect(
     mapStateToProps,
     mapDispatchToProps
 )(Categories);
-
-// сделать для компоненты едитор контейнер едит инфо и брать категории и все остальное 

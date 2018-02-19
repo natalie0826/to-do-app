@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ModalManager } from 'react-dynamic-modal';
 
+import { CustomModal } from '../categories/CustomModal';
 import { Select } from './Select';
 import '../../styles/modal.css';
 
@@ -9,11 +11,12 @@ export default class Editor extends React.Component {
         isAddTodo: PropTypes.bool.isRequired,
         addTodo: PropTypes.func,
         editTodo: PropTypes.func,
+        addCategory: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
         text: PropTypes.string,
         category: PropTypes.string,
         description: PropTypes.string,
-        setEditStatus: PropTypes.func,
+        setEditStatus: PropTypes.func
     }
 
     constructor(props) {
@@ -39,7 +42,12 @@ export default class Editor extends React.Component {
 
     handleAddTodo() {
         if(this.isDataValid()) {
-            this.props.addTodo(this.state.text, this.state.category, this.state.description, false, false);
+            this.props.addTodo({
+                'text': this.state.text,
+                'category': this.state.category || this.props.categories[0].category,
+                'description': this.state.description,
+                'completed': false,
+                'deleted': false});
             this.setState({text: '', description: ''});
         }
     }
@@ -59,6 +67,21 @@ export default class Editor extends React.Component {
         return true;
     }
 
+    clearFields() {
+        this.setState({
+            text: '',
+            category: '',
+            description: ''
+        })
+    }
+
+    handleCategoryModal = () => {
+        ModalManager.open(<CustomModal  onRequestClose={() => true}
+                                        store={this.props.store}
+                                        categories={this.props.categories}
+                                        addCategory={this.props.addCategory} />);
+    };
+
     render() {
         return (
             <div className="todo-edit">
@@ -71,17 +94,18 @@ export default class Editor extends React.Component {
                         selectedValue={this.state.category}
                         changeSelection={this.handleCategoryChange}
                         options={this.props.categories} />
+                <button className="btn btn-add" onClick={this.handleCategoryModal}>New category</button>
+                <textarea   className="description-todo"
+                            value={this.state.description}
+                            onChange={this.handleDescriptionChange}
+                            placeholder="Description"
+                            rows="5" cols="20"
+                />
+                <button className="btn btn-cancel" onClick={() => this.clearFields()}>Clear fields</button>
                 {this.props.isAddTodo
                     ? <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>
                     : <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>
                 }
-                <textarea
-                    className="description-todo"
-                    value={this.state.description}
-                    onChange={this.handleDescriptionChange}
-                    placeholder="Description"
-                    rows="5" cols="20"
-                />            
             </div>
         );
     }
