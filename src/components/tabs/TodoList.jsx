@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Todo from '../components/Todo';
-import { FilterLink } from '../containers/FilterLink';
-import '../styles/todo.css';
+import Todo from './Todo';
+import { FilterLink } from '../../containers/FilterLink';
+import '../../styles/todo.css';
 
 export default class TodoList extends React.Component {
     static propTypes = {

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Todo from '../components/Todo';
+import Todo from './Todo';
 import TodosByCategory from './TodosByCategory';
-import '../styles/todo.css';
+import '../../styles/todo.css';
 
 export default class Categories extends React.Component {
     static propTypes = {

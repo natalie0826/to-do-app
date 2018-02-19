@@ -6,7 +6,7 @@ import NotificationSystem from 'react-notification-system';
 import { ShowCategories } from '../containers/ShowCategories';
 import Editor from './common/Editor';
 import { Search } from './common/Search';
-import TodoList from './TodoList';
+import TodoList from './tabs/TodoList';
 import '../styles/todo.css';
 
 export default class TodoApp extends React.Component {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import '../styles/section.css';
+import '../../styles/section.css';
 
 export default class TodosByCategory extends React.Component {
     static propTypes = {

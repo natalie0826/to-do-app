@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { DeletingTodo } from './common/DeletingTodo';
-import Editor from '../components/common/Editor';
-import '../styles/todo.css';
-import '../../node_modules/font-awesome/css/font-awesome.min.css';
+import { DeletingTodo } from '../common/DeletingTodo';
+import Editor from '../common/Editor';
+import '../../styles/todo.css';
 
 export default class Todo extends React.Component {
     static propTypes = {
