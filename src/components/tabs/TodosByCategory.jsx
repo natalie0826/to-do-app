@@ -12,8 +12,7 @@ export default class TodosByCategory extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            open: false,
-            class: 'section'
+            open: false
         };
     }
 
@@ -22,7 +21,7 @@ export default class TodosByCategory extends React.Component {
     }
 
     render() {
-        const sectionClass = classNames("section", {open: this.state.open});
+        const sectionClass = classNames("section", { open: this.state.open });
 
         return (
             <div className={sectionClass}>

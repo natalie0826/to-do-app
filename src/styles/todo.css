@@ -32,17 +32,13 @@ hr {
 /* todo inputs */
 
 .add-todo {
-    width: 170px;
+    width: 160px;
     border-radius: 3px;
 }
 
 .search-todo {
     width: 50%;
     margin: 20px 0 20px 25%;
-}
-
-.edit-todo {
-    width: 78%;
 }
 
 .add-todo,
@@ -64,7 +60,10 @@ hr {
 }
 
 .todo-edit {
-    height: 200px;
+    height: 180px;
+    width: 460px;
+    margin: 0 auto;
+    padding: 10px;
 }
 
 /* buttons */
@@ -87,13 +86,19 @@ hr {
     cursor: pointer;
 }
 
+.btn-delete-completed {
+    margin: 10px;
+    background-color: #DB4E3D;
+    transition: .3s ease-in;
+}
+
 .btn-add {
     margin: 0 5px;
     float: right;
     width: 100px;
 }
 
-.btn-cancel {
+.btn-clear {
     margin: 0 5px 0 0;
     float: left;
     width: 100px;
@@ -105,14 +110,25 @@ hr {
     width: 50px;
 }
 
-.btn-add,
+.btn-category {
+    background-color: #1BBC9B;
+    transition: .3s ease-in;
+    margin-left: 10px;
+}
+
+.btn-add {
+    background-color: #1BBC9B;
+    transition: .3s ease-in;
+}
+ 
 .btn-edit {
     background-color: #1BBC9B;
     transition: .3s ease-in;
 }
 
 .btn-add:hover,
-.btn-edit:hover {
+.btn-edit:hover,
+.btn-category:hover {
     background-color: rgb(22, 156, 129);
     transition: .3s ease-in;
 }
@@ -130,7 +146,7 @@ hr {
 }
 
 .btn-delete:hover,
-.btn-cancel:hover {
+.btn-clear:hover {
     background-color: rgb(185, 56, 42);
     transition: .3s ease-in;
 }
@@ -163,10 +179,6 @@ hr {
 .delete-info {
     display: inline-block;
     margin: 10px 0 0 20px;
-}
-
-.todo-display {
-    display: none;
 }
 
 .todo-completed {
@@ -245,7 +257,7 @@ hr {
 /* categories and description */
 
 .select-category {
-    width: 180px;
+    width: 170px;
     height: 31px;
     margin-left: 2%;
     padding: 2px 5px;
@@ -257,7 +269,7 @@ hr {
 }
 
 .description-todo {
-    width: 96%;
+    width: 445px;
     margin: 20px 0 10px 0;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
@@ -325,4 +337,12 @@ hr {
 
 div.section-head {
     margin-left: 2px;
+}
+
+.show-element {
+    display: block;
+}
+
+.hide-element {
+    display: none;
 }
