@@ -4,34 +4,40 @@ import uuidv4 from 'uuid/v4';
 
 import { constants } from './constants';
 
-export const addTodo = (todo) => ({
+export const addTodo = (text, category, description, completed, deleted) => ({
     type: constants.ADD_TODO,
     payload: {
         id: uuidv4(),
-        text: todo.text,
-        category: todo.category,
-        description: todo.description,
-        completed: todo.completed,
-        deleted: todo.deleted
+        text,
+        category,
+        description,
+        completed,
+        deleted
     }
 });
 
 export const editTodo = (id, text, category, description) => ({
     type: constants.EDIT_TODO,
-    id,
-    text,
-    category,
-    description
+    payload: {
+        id,
+        text,
+        category,
+        description
+    }
 });
 
 export const deleteTodo = (id) => ({
     type: constants.DELETE_TODO,
-    id
+    payload: {
+        id
+    }
 });
 
 export const toggleTodo = (id) => ({
     type: constants.TOGGLE_TODO,
-    id
+    payload: {
+        id
+    }
 });
 
 export const requestTodos = () => ({
@@ -48,5 +54,7 @@ export const fetchTodos = (url) => {
 
 export const setFilter = (filter) => ({
     type: constants.SET_FILTER,
-    filter
+    payload: {
+        filter
+    }
 });
