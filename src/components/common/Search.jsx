@@ -11,20 +11,13 @@ export const Search = (props) => {
     Search.defaultProps = {
         isVisible: true
     };
-
     return (
-        <div>
-            {props.isVisible && (
-                    <div>
-                        <input
-                            className="search-todo"
-                            type="text"
-                            placeholder="Search. . ."
-                            value={props.value}
-                            onChange={props.updateSearch} />
-                    </div>
-                )
-            }
-        </div>
+        props.isVisible && 
+            <input  className="search-todo"
+                    type="text"
+                    placeholder="Search. . ."
+                    value={props.value}
+                    onChange={props.updateSearch} />
+                
     );
 };
