@@ -34,9 +34,7 @@ export default class CategoriesModal extends React.Component {
 
     handleAddCategory = () => {
         if (this.state.category.trim()) {
-            this.props.addCategory({
-                'category': this.state.category,
-                'color': this.state.color});
+            this.props.addCategory(this.state.category, this.state.color);
         }
         this.setState({category: ''});
     }
