@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Todo from './Todo';
+import TodoWrap from './TodoWrap';
 import { FilterLink } from '../../containers/FilterLink';
 import '../../styles/todo.css';
 
@@ -19,7 +19,8 @@ export default class TodoList extends React.Component {
         }).isRequired).isRequired,
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
-        editTodo: PropTypes.func.isRequired
+        editTodo: PropTypes.func.isRequired,
+        addCategory: PropTypes.func.isRequired
     }
 
     constructor() {
@@ -31,19 +32,22 @@ export default class TodoList extends React.Component {
     }
 
     render() {
-        const {todos, editTodo, toggleTodo, deleteTodo, categories} = this.props;
+        const {todos, editTodo, toggleTodo, deleteTodo, categories, addCategory} = this.props;
 
         return (
             <div>
                 <div className="todos">
-                    <FilterLink/> {todos.map((todo) =>
-                    <Todo
-                        key={todo.id}
-                        {...todo}
-                        toggleTodo={() => toggleTodo(todo.id)}
-                        deleteTodo={() => deleteTodo(todo.id)}
-                        editTodo={editTodo}
-                        categories={categories}/>)}
+                    <FilterLink/>
+                    {todos.map((todo) =>
+                        <TodoWrap
+                            key={todo.id}
+                            {...todo}
+                            toggleTodo={() => toggleTodo(todo.id)}
+                            deleteTodo={() => deleteTodo(todo.id)}
+                            editTodo={editTodo}
+                            categories={categories}
+                            addCategory={addCategory}/>
+                    )}
                 </div>
             </div>
         );
