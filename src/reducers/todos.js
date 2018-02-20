@@ -1,32 +1,32 @@
 import undoable from 'redux-undo';
-// import { includeAction } from 'redux-undo';
+import { includeAction } from 'redux-undo';
 import { constants } from '../actions/constants';
 
-const todo = (state, action) => {
-    switch (action.type) {
+const todo = (state, actionType, payload) => {
+    switch (actionType) {
         case constants.ADD_TODO:
             return {
-                id: action.payload.id,
-                text: action.payload.text,
-                category: action.payload.category,
-                description: action.payload.description,
-                completed: action.payload.completed,
-                deleted: action.payload.deleted
+                id: payload.id,
+                text: payload.text,
+                category: payload.category,
+                description: payload.description,
+                completed: payload.completed,
+                deleted: payload.deleted
             };
         case constants.EDIT_TODO:
-            if (state.id !== action.id) {
+            if (state.id !== payload.id) {
                 return state;
             }
 
             return {
                 ...state,
-                id: action.id,
-                text: action.text,
-                category: action.category,
-                description: action.description
+                id: payload.id,
+                text: payload.text,
+                category: payload.category,
+                description: payload.description
             };
         case constants.TOGGLE_TODO:
-            if (state.id !== action.id && !state.deleted) {
+            if (state.id !== payload.id && !state.deleted) {
                 return state;
             }
 
@@ -44,30 +44,30 @@ const todos = (state = [], action) => {
         case constants.ADD_TODO:
             return [
                 ...state,
-                todo(undefined, action)
+                todo(undefined, action.type, action.payload)
             ];
         case constants.EDIT_TODO:
         case constants.TOGGLE_TODO:
             return state.map(t =>
-                todo(t, action)
+                todo(t, action.type, action.payload)
             );
         case constants.DELETE_TODO:
             return state.filter((todo) => {
-                return todo.id !== action.id
+                return todo.id !== action.payload.id
             });;
         case constants.RECEIVE_TODOS:
         case constants.REQUEST_TODOS:
             return {
                 ...state,
-                'todos': getTodos(state.todos, action)
+                'todos': getTodos(state.todos, action.type, action.payload)
             };
         default:
             return state;
     }
 };
 
-function getTodos(state = [], action) {
-    switch (action.type) {
+function getTodos(state = [], actionType, payload) {
+    switch (actionType) {
         case constants.REQUEST_TODOS:
             return {
                 ...state
@@ -75,13 +75,13 @@ function getTodos(state = [], action) {
         case constants.RECEIVE_TODOS:
             return {
                 ...state,
-                todos: action.todos
+                todos: payload.todos
             };
         default:
             return state;
     }
 }
 
-const undoableTodos = undoable(todos);
+const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO']) });
 
 export default undoableTodos;
