@@ -2,7 +2,7 @@ import React from 'react';
 import '../../node_modules/react-tabs/style/react-tabs.css';
 
 import { withFetching } from '../containers/withFetching';
-import { urls } from '../constants/constantsUrls';
+import { urls } from '../constants/urls';
 import { ShowTodoApp } from '../containers/ShowTodoApp';
 import '../styles/todo.css';
 
