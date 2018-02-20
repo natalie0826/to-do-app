@@ -16,7 +16,12 @@ export default class Editor extends React.Component {
         text: PropTypes.string,
         category: PropTypes.string,
         description: PropTypes.string,
-        setEditStatus: PropTypes.func
+        setEditStatus: PropTypes.func,
+        isVisible: PropTypes.bool
+    }
+
+    static defaultProps = {
+        isVisible: true
     }
 
     constructor(props) {
@@ -42,12 +47,8 @@ export default class Editor extends React.Component {
 
     handleAddTodo() {
         if(this.isDataValid()) {
-            this.props.addTodo({
-                'text': this.state.text,
-                'category': this.state.category || this.props.categories[0].category,
-                'description': this.state.description,
-                'completed': false,
-                'deleted': false});
+            const category = this.state.category || this.props.categories[0].category;
+            this.props.addTodo(this.state.text, category, this.state.description, false, false);
             this.setState({text: '', description: ''});
         }
     }
@@ -68,11 +69,7 @@ export default class Editor extends React.Component {
     }
 
     clearFields() {
-        this.setState({
-            text: '',
-            category: '',
-            description: ''
-        })
+        this.setState({ text: '', category: '', description: '' })
     }
 
     handleCategoryModal = () => {
@@ -81,7 +78,7 @@ export default class Editor extends React.Component {
 
     render() {
         return (
-            <div className="todo-edit">
+            this.props.isVisible && <div className="todo-edit">
                 <input  className="add-todo"
                         type="text"
                         placeholder="Task"
@@ -91,14 +88,14 @@ export default class Editor extends React.Component {
                         selectedValue={this.state.category}
                         changeSelection={this.handleCategoryChange}
                         options={this.props.categories} />
-                <button className="btn btn-add" onClick={this.handleCategoryModal}>New category</button>
+                <button className="btn btn-category" onClick={this.handleCategoryModal}>New category</button>
                 <textarea   className="description-todo"
                             value={this.state.description}
                             onChange={this.handleDescriptionChange}
                             placeholder="Description"
                             rows="5" cols="20"
                 />
-                <button className="btn btn-cancel" onClick={() => this.clearFields()}>Clear fields</button>
+                <button className="btn btn-clear" onClick={() => this.clearFields()}>Clear fields</button>
                 {this.props.isAddTodo
                     ? <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>
                     : <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>
