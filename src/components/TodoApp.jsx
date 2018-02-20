@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import NotificationSystem from 'react-notification-system';
+import classNames from 'classnames';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
-import { ShowCategories } from '../containers/ShowCategories';
-import { configureStore } from '../configureStore';
 import { Search } from './common/Search';
+import { configureStore } from '../configureStore';
+import Categories from './tabs/Categories';
 import Editor from './common/Editor';
 import TodoList from './tabs/TodoList';
 import '../styles/todo.css';
@@ -26,7 +27,8 @@ export default class TodoApp extends React.Component {
         deleteTodo: PropTypes.func.isRequired,
         addTodo: PropTypes.func.isRequired,
         editTodo: PropTypes.func.isRequired,
-        addCategory: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired,
+        undo: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -41,8 +43,8 @@ export default class TodoApp extends React.Component {
 
     componentDidMount() {
         if (this.props.data.length) {
-            this.props.data[0].map(todo => this.props.addTodo(todo));
-            this.props.data[1].map(category => this.props.addCategory(category));
+            this.props.data[0].map(todo => this.props.addTodo(todo.text, todo.category, todo.description, todo.completed, todo.deleted));
+            this.props.data[1].map(category => this.props.addCategory(category.category, category.color));
         }
     }
 
@@ -50,16 +52,16 @@ export default class TodoApp extends React.Component {
         this.setState({ search: event.target.value });
     }
 
-    addNotification(id/*, callback*/) {
+    addNotification(title, level, label, timeDismiss, dismissible, callback) {
         this.$notificationSystem.addNotification({
-            title: `Your item has been successfully deleted!`,
-            level: 'info',
-            autoDismiss: 10,
-            dismissible: false,
+            title: title,
+            level: level,
+            autoDismiss: timeDismiss,
+            dismissible: dismissible,
             action: {
-                label: 'Undo',
+                label: label,
                 callback: () => {
-                    /*callback()*/
+                    callback()
                 }
             }
         });
@@ -67,7 +69,11 @@ export default class TodoApp extends React.Component {
 
     deleteTodo = (id) => {
         this.props.deleteTodo(id);
-        this.addNotification();
+        this.addNotification(`Your item has been successfully deleted!`, 'info', 'Undo', 10, false, this.props.undo);
+    }
+
+    deleteCompleted = () => {
+        this.props.todos.map(todo => todo.completed ? this.props.deleteTodo(todo.id) : null);
     }
 
     render() {
@@ -75,9 +81,15 @@ export default class TodoApp extends React.Component {
             todos,
             categories,
             addTodo,
-            addCategory,
-            store
+            addCategory
         } = this.props;
+
+        const existCompleted = todos.some(todo => todo.completed);
+
+        const displayElement = classNames({
+            'hide-element': !existCompleted,
+            'btn btn-delete-completed': true
+        });
 
         // It isn't a state because filteredTodos can be computed by combining user
         // input in search box and todos array from props.
@@ -98,9 +110,10 @@ export default class TodoApp extends React.Component {
                         <TodoList   {...this.props}
                                     todos={filteredTodos}
                                     deleteTodo={this.deleteTodo}/>
+                        <button className={displayElement} onClick={this.deleteCompleted}>Delete completed</button>
                     </TabPanel>
                     <TabPanel className="tabs-panel">
-                        <ShowCategories {...this.props}
+                        <Categories {...this.props}
                                         deleteTodo={this.deleteTodo} />
                     </TabPanel>
                 </Tabs>
