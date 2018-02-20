@@ -29,10 +29,8 @@ export default class Filter extends React.Component {
         return (
             <div className="filter">
                 <span className="filter-hint">Show all tasks</span>
-                <ToggleButton
-                    value={ this.state.value }
-                    onToggle={(value) => this.handleChange(value)}
-                />
+                <ToggleButton   value={ this.state.value }
+                                onToggle={(value) => this.handleChange(value)} />
             </div>
         );
     }

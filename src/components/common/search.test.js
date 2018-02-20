@@ -10,7 +10,7 @@ describe('Filter', () => {
         isVisible: false
     };
 
-    const component = shallow(<Search {...searchProps} store={configureStore} />);
+    const component = shallow(<Search store={configureStore} />);
 
     it('renders Search component', () => {
         expect(component.length).toBe(1);

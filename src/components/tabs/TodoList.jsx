@@ -11,9 +11,11 @@ export default class TodoList extends React.Component {
             id: PropTypes.string.isRequired,
             deleted: PropTypes.bool.isRequired,
             completed: PropTypes.bool.isRequired,
-            text: PropTypes.string.isRequired
+            text: PropTypes.string.isRequired,
+            category: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired
         }).isRequired).isRequired,
-          categories: PropTypes.arrayOf(PropTypes.shape({
+        categories: PropTypes.arrayOf(PropTypes.shape({
               category: PropTypes.string.isRequired,
               color: PropTypes.string.isRequired
         }).isRequired).isRequired,
@@ -37,7 +39,7 @@ export default class TodoList extends React.Component {
         return (
             <div>
                 <div className="todos">
-                    <FilterLink/>
+                    <FilterLink />
                     {todos.map((todo) =>
                         <TodoWrap
                             key={todo.id}
