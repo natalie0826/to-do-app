@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Todo from './Todo';
+import TodoWrap from './TodoWrap';
 import TodosByCategory from './TodosByCategory';
 import '../../styles/todo.css';
 
@@ -19,7 +19,8 @@ export default class Categories extends React.Component {
         })),
         toggleTodo: PropTypes.func,
         deleteTodo: PropTypes.func,
-        editTodo: PropTypes.func
+        editTodo: PropTypes.func,
+        addCategory: PropTypes.func.isRequired
     }
 
     constructor(props) {
@@ -36,7 +37,8 @@ export default class Categories extends React.Component {
             editTodo,
             deleteTodo,
             toggleTodo,
-            categories
+            categories,
+            addCategory
         } = this.props;
 
         return (
@@ -47,13 +49,14 @@ export default class Categories extends React.Component {
                             {todos.map((todo) => {
                                 if (todo.category === category.category) {
                                     return (
-                                        <Todo
+                                        <TodoWrap
                                             key={todo.id}
                                             {...todo}
                                             toggleTodo={() => toggleTodo(todo.id)}
                                             deleteTodo={() => deleteTodo(todo.id)}
                                             editTodo={editTodo}
-                                            categories={categories}/>)
+                                            categories={categories}
+                                            addCategory={addCategory}/>)
                                         }
                                 else {
                                     return null;
