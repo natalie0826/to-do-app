@@ -45,12 +45,11 @@ export default class CategoriesModal extends React.Component {
                 <h1>Please, enter a category and select a color for it.</h1>
                 <h3>Categories should be unique.</h3>
                 <hr/>
-                <input
-                    className="add-category"
-                    type="text"
-                    placeholder="Category"
-                    onChange={this.handleChange}
-                    value={this.state.category}/>
+                <input  className="add-category"
+                        type="text"
+                        placeholder="Category"
+                        onChange={this.handleChange}
+                        value={this.state.category} />
                 <CategoriesList title="All the categories" categories={this.props.categories} />
                 <p style={{'color': this.state.color}}><i>Color for a category: {this.state.color}</i></p>
                 <CirclePicker onChange={this.handleChangeComplete}/>
