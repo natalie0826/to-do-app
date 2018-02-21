@@ -2,13 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Modal, Effect} from 'react-dynamic-modal';
 
-import { AddCategory } from '../../containers/AddCategory';
+import { ShowCategories } from '../../containers/ShowCategories';
 import '../../styles/modal.css';
 
-export const CategoryModal = (props) => {
-    CategoryModal.propTypes = {
-        store: PropTypes.object,
-        categories: PropTypes.array,
+export const CustomModal = (props) => {
+    CustomModal.propTypes = {
         onRequestClose: PropTypes.func.isRequired
     };
 
@@ -24,7 +22,7 @@ export const CategoryModal = (props) => {
             style={style}
             onRequestClose={props.onRequestClose}
             effect={Effect.Fall}>
-            <AddCategory store={props.store}/>
+            <ShowCategories store={props.store} />
         </Modal>
     );
 };

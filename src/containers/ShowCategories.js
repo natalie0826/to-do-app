@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
+
 import { addCategory } from '../actions/categories';
-import Categories from '../components/categories/Categories';
+import CategoriesModal from '../components/categories/CategoriesModal';
 
 const mapStateToProps = (store) => ({
-    categories: store.categories
+    categories: store.categories,
+    store: store
 });
 
 const mapDispatchToProps = ({
     addCategory: addCategory
 });
 
-export const AddCategory = connect(
+export const ShowCategories = connect(
     mapStateToProps,
     mapDispatchToProps
-)(Categories);
+)(CategoriesModal);

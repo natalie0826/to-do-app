@@ -14,7 +14,7 @@ export const Select = (props) => {
     });
 
     return (
-        <select className={props.class} value={props.selectedValue} onChange={(event) => props.changeSelection(event.target.value)}>
+        <select className={props.class} value={props.selectedValue} onChange={event => props.changeSelection(event.target.value)}>
             {options}
         </select>
     );

@@ -1,10 +1,10 @@
 import { constants } from './constants';
 
-export const addCategory = (category) => ({
+export const addCategory = (category, color) => ({
     type: constants.ADD_CATEGORY,
     payload: {
-        category: category.category,
-        color: category.color
+        category,
+        color
     }
 });
 

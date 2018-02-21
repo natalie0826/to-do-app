@@ -24,6 +24,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "redux-undo": "^0.6.1",
+    "shallow": "^1.0.0",
+    "sinon": "^4.3.0",
     "uuid": "^3.2.1"
   },
   "scripts": {
@@ -46,6 +48,8 @@
     "jest": "^20.0.4",
     "jest-enzyme": "^4.1.1",
     "react-dom": "^16.2.0",
-    "react-edit-inline": "^1.0.8"
+    "react-edit-inline": "^1.0.8",
+    "redux-devtools-extension": "^2.13.2",
+    "redux-mock-store": "^1.5.1"
   }
 }

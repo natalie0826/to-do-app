@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { ModalManager } from 'react-dynamic-modal';
 
+import { CustomModal } from '../categories/CustomModal';
 import { Select } from './Select';
 import '../../styles/modal.css';
 
@@ -9,11 +11,17 @@ export default class Editor extends React.Component {
         isAddTodo: PropTypes.bool.isRequired,
         addTodo: PropTypes.func,
         editTodo: PropTypes.func,
+        addCategory: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
         text: PropTypes.string,
         category: PropTypes.string,
         description: PropTypes.string,
         setEditStatus: PropTypes.func,
+        isVisible: PropTypes.bool
+    }
+
+    static defaultProps = {
+        isVisible: true
     }
 
     constructor(props) {
@@ -39,7 +47,8 @@ export default class Editor extends React.Component {
 
     handleAddTodo() {
         if(this.isDataValid()) {
-            this.props.addTodo(this.state.text, this.state.category, this.state.description, false, false);
+            const category = this.state.category || this.props.categories[0].category;
+            this.props.addTodo(this.state.text, category, this.state.description, false, false);
             this.setState({text: '', description: ''});
         }
     }
@@ -48,7 +57,6 @@ export default class Editor extends React.Component {
         if(this.isDataValid()) {
             this.props.editTodo(this.props.id, this.state.text, this.state.category, this.state.description);
             this.props.setEditStatus();
-            this.setState({text: '', description: ''});
         }
     }
 
@@ -59,30 +67,40 @@ export default class Editor extends React.Component {
         return true;
     }
 
+    clearFields() {
+        this.setState({ text: '', category: '', description: '' })
+    }
+
+    handleCategoryModal = () => {
+        ModalManager.open(<CustomModal onRequestClose={() => true} store={this.props.store} categories={this.props.categories}/>);
+    };
+
     render() {
-        return (
-            <div className="todo-edit">
-                <input  className="add-todo"
-                        type="text"
-                        placeholder="Task"
-                        onChange={this.handleTextChange}
-                        value={this.state.text} />
-                <Select class="select-category"
-                        selectedValue={this.state.category}
-                        changeSelection={this.handleCategoryChange}
-                        options={this.props.categories} />
-                {this.props.isAddTodo
-                    ? <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>
-                    : <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>
-                }
-                <textarea
-                    className="description-todo"
-                    value={this.state.description}
-                    onChange={this.handleDescriptionChange}
-                    placeholder="Description"
-                    rows="5" cols="20"
-                />            
-            </div>
-        );
+        const addButton = <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>;
+        const saveButton = <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>;
+
+        if (this.props.isVisible) {
+            return (
+                <div className="todo-edit">
+                    <input  className="add-todo"
+                            type="text"
+                            placeholder="Task"
+                            onChange={this.handleTextChange}
+                            value={this.state.text} />
+                    <Select class="select-category"
+                            selectedValue={this.state.category}
+                            changeSelection={this.handleCategoryChange}
+                            options={this.props.categories} />
+                    <button className="btn btn-category" onClick={this.handleCategoryModal}>New category</button>
+                    <textarea   className="description-todo"
+                                value={this.state.description}
+                                onChange={this.handleDescriptionChange}
+                                placeholder="Description"
+                                rows="5" />
+                    <button className="btn btn-clear" onClick={() => this.clearFields()}>Clear fields</button>
+                    {this.props.isAddTodo ? addButton : saveButton}
+                </div>
+            );
+        } else { return null; }
     }
 }

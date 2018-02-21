@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { WithFetching } from './WithFetching';
 import { addTodo, editTodo, toggleTodo, deleteTodo } from '../actions/todos';
+import { addCategory } from '../actions/categories';
 import TodoApp from '../components/TodoApp';
 
 const getVisibleTodos = (todos, filter) => {
@@ -19,13 +19,14 @@ const getVisibleTodos = (todos, filter) => {
 };
 
 const mapStateToProps = (state) => {
-    return {
-        todos: getVisibleTodos(state.todos.present, state.filter),
-        categories: state.categories
-    };
+        return {
+            todos: getVisibleTodos(state.todos.present, state.filter),
+            categories: state.categories
+        }
 };
 
 const mapDispatchToProps = ({
+    addCategory: addCategory,
     editTodo: editTodo,
     addTodo: addTodo,
     deleteTodo: deleteTodo,
@@ -33,7 +34,7 @@ const mapDispatchToProps = ({
     undo: UndoActionCreators.undo,
 });
 
-export const ShowTodoList = connect(
+export const ShowTodoApp = connect(
     mapStateToProps,
     mapDispatchToProps
 )(TodoApp);

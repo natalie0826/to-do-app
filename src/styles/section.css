@@ -61,12 +61,22 @@
 }
 
 .section.open .article-wrap {
-    height: 150px;
-    overflow-y: scroll;
+    height: auto;
+    max-height: 450px;
+    -webkit-transition: max-height 1s;
+    -moz-transition: max-height 1s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 1s;
 }
 
 .article-wrap {
-    height: 0;
+    max-height: 0;
+    -webkit-transition: max-height 1s;
+    -moz-transition: max-height 1s;
+    -ms-transition: max-height 1s;
+    -o-transition: max-height 1s;
+    transition: max-height 1s;
     overflow: hidden;
     transition: all .2s ease-in;
 }
