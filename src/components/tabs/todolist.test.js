@@ -78,5 +78,5 @@ describe('TodoList', () => {
 
     it('renders children count equal to todos.length', () => {
         expect(component.find(TodoWrap).length).toBe(todos.length);
-    })
+    });
 });

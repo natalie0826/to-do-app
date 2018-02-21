@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import { configureStore } from '../../configureStore';
 import { Search } from './Search';
 
-describe('Filter', () => {
+describe('Search functional component', () => {
     const searchProps = {
         updateSearch: jest.fn(),
         value: 'Search...',

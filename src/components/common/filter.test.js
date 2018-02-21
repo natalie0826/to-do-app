@@ -5,7 +5,7 @@ import { configureStore } from '../../configureStore';
 import { FilterLink } from '../../containers/FilterLink';
 import ToggleButton from 'react-toggle-button';
 
-describe('Filter', () => {
+describe('Filter stateful component', () => {
     const component = mount(<FilterLink store={configureStore} />);
 
     it('renders Filter component', () => {
@@ -21,5 +21,7 @@ describe('Filter', () => {
         const componentFilter = shallow(<FilterLink store={configureStore} />).dive();
         componentFilter.setState({value: true});
         expect(componentFilter.state().value).toBe(true);
-    })
+    });
+
+    
 });

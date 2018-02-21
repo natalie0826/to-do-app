@@ -18,6 +18,5 @@ export const Search = (props) => {
                     placeholder="Search. . ."
                     value={props.value}
                     onChange={props.updateSearch} />
-                
     );
 };
