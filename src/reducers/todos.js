@@ -1,60 +1,87 @@
-import undoable, { includeAction } from 'redux-undo'
+import undoable from 'redux-undo';
+import { includeAction } from 'redux-undo';
+import { constants } from '../actions/constants';
 
-const todo = (state, action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        id: action.id,
-        text: action.text,
-        completed: false,
-        deleted: false
-      }
-    case 'DELETE_TODO':
-      console.log('in delete');
-      if (state.id !== action.id) {
-        return state
-      }
+const todo = (state, actionType, payload) => {
+    switch (actionType) {
+        case constants.ADD_TODO:
+            return {
+                id: payload.id,
+                text: payload.text,
+                category: payload.category,
+                description: payload.description,
+                completed: payload.completed,
+                deleted: payload.deleted
+            };
+        case constants.EDIT_TODO:
+            if (state.id !== payload.id) {
+                return state;
+            }
 
-      return {
-        ...state,
-        deleted: !state.deleted
-      }
-    case 'TOGGLE_TODO':
-      console.log('in edit');
-      if (state.id !== action.id) {
-        return state
-      }
+            return {
+                ...state,
+                id: payload.id,
+                text: payload.text,
+                category: payload.category,
+                description: payload.description
+            };
+        case constants.TOGGLE_TODO:
+            if (state.id !== payload.id && !state.deleted) {
+                return state;
+            }
 
-      return {
-        ...state,
-        completed: !state.completed
-      }
-    default:
-      return state
-  }
-}
+            return {
+                ...state,
+                completed: !state.completed
+            };
+        default:
+            return state;
+    }
+};
 
 const todos = (state = [], action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return [
-        ...state,
-        todo(undefined, action)
-      ]
-    case 'DELETE_TODO':
-      console.log('in delete todos');
-      return state.map(t =>
-        todo(t, action)
-      )
-    case 'TOGGLE_TODO':
-      return state.map(t =>
-        todo(t, action)
-      )
-    default:
-      return state
-  }
+    switch (action.type) {
+        case constants.ADD_TODO:
+            return [
+                ...state,
+                todo(undefined, action.type, action.payload)
+            ];
+        case constants.EDIT_TODO:
+        case constants.TOGGLE_TODO:
+            return state.map(t =>
+                todo(t, action.type, action.payload)
+            );
+        case constants.DELETE_TODO:
+            return state.filter((todo) => {
+                return todo.id !== action.payload.id
+            });;
+        case constants.RECEIVE_TODOS:
+        case constants.REQUEST_TODOS:
+            return {
+                ...state,
+                'todos': getTodos(state.todos, action.type, action.payload)
+            };
+        default:
+            return state;
+    }
+};
+
+function getTodos(state = [], actionType, payload) {
+    switch (actionType) {
+        case constants.REQUEST_TODOS:
+            return {
+                ...state
+            };
+        case constants.RECEIVE_TODOS:
+            return {
+                ...state,
+                todos: payload.todos
+            };
+        default:
+            return state;
+    }
 }
 
-const undoableTodos = undoable(todos, { filter: includeAction(['ADD_TODO', 'TOGGLE_TODO', 'DELETE_TODO']) })
+const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO']) });
 
-export default undoableTodos
+export default undoableTodos;

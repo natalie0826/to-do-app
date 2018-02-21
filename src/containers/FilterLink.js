@@ -1,20 +1,16 @@
-import { connect } from 'react-redux'
-import { setFilter } from '../actions'
-import Link from '../components/Link'
 
-const mapStateToProps = (state, ownProps) => ({
-  active: ownProps.filter === state.filter
-})
+import { connect } from 'react-redux';
+
+import { setFilter } from '../actions/todos';
+import Filter from '../components/common/Filter';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onClick: () => {
-    dispatch(setFilter(ownProps.filter))
-  }
-})
+    onClick: (filter) => {
+        dispatch(setFilter(filter));
+    }
+});
 
-const FilterLink = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Link)
-
-export default FilterLink
+export const FilterLink = connect(
+    null,
+    mapDispatchToProps
+)(Filter);

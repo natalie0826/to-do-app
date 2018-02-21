@@ -1,6 +1,348 @@
-.delete-todo {
-    padding: 3px 7px;
-    background-color: #cccccc;
-    margin-left: 5px;
+@import url("https://fonts.googleapis.com/css?family=Sacramento");
+
+body {
+    font-size: 14px;
+    background-color: #1BBC9B;
+    padding: 10px;
+    font-family: "Arial";
+    color: #000000;
+}
+
+h3 {
+    color: #1BBC9B;
+    font-size: 4em;
+    margin: 0 0 15px 0;
+    font-family: "Sacramento", cursive;
+}
+
+hr {
+    margin: 20px 0;
+    border: 1px solid #cccccc;
+}
+
+.container {
+    width: 500px;
+    min-height: 400px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 40px 40px 40px;
+    background-color: #ffffff;
+}
+
+/* todo inputs */
+
+.add-todo {
+    width: 160px;
+    border-radius: 3px;
+}
+
+.search-todo {
+    width: 50%;
+    margin: 20px 0 20px 25%;
+}
+
+.add-todo,
+.search-todo,
+.edit-todo {
+    height: 24px;
+    padding: 2px 5px;
+    border: 2px solid #1BBC9B;
+}
+
+.add-todo:focus,
+.search-todo:focus {
+    outline: 0;
+}
+
+.edit {
+    display: inline;
+    clear: both;
+}
+
+.todo-edit {
+    height: 180px;
+    width: 460px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* buttons */
+
+.buttons-wrapper {
+    float: right;
+}
+
+.buttons-wrapper-category {
+    float: right;
+}
+
+.btn {
+    padding: 8px 5px;
+    margin: 0 5px 5px 0;
+    border: none;
+    border-radius: 3px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.4);
+    color: #ffffff;
     cursor: pointer;
+}
+
+.btn-delete-completed {
+    margin: 10px;
+    background-color: #DB4E3D;
+    transition: .3s ease-in;
+}
+
+.btn-add {
+    margin: 0 5px;
+    float: right;
+    width: 100px;
+}
+
+.btn-clear {
+    margin: 0 5px 0 0;
+    float: left;
+    width: 100px;
+    background-color: #DB4E3D;
+    transition: .3s ease-in;
+}
+
+.btn-edit {
+    width: 50px;
+}
+
+.btn-category {
+    background-color: #1BBC9B;
+    transition: .3s ease-in;
+    margin-left: 10px;
+}
+
+.btn-add {
+    background-color: #1BBC9B;
+    transition: .3s ease-in;
+}
+ 
+.btn-edit {
+    background-color: #1BBC9B;
+    transition: .3s ease-in;
+}
+
+.btn-add:hover,
+.btn-edit:hover,
+.btn-category:hover {
+    background-color: rgb(22, 156, 129);
+    transition: .3s ease-in;
+}
+
+.btn-delete,
+.btn-del {
+    width: 50px;
+    clear: both;
+    background-color: #DB4E3D;
+    transition: .3s ease-in;
+}
+
+.btn-del {
+    width: 100px;
+}
+
+.btn-delete:hover,
+.btn-clear:hover {
+    background-color: rgb(185, 56, 42);
+    transition: .3s ease-in;
+}
+
+/* todos */
+
+.todos {
+    padding: 0;
+    margin-left: 10px;
+    list-style-type: none;
+}
+
+.todo {
+    clear: both;
+    width: 460px;
+    margin: 5px 0 5px 0;
+    padding: 10px;
+    background-color: rgb(247, 247, 247);
+}
+
+.todo-info,
+.delete-info {
+    display: inline;
+    font-weight: bold;
+    font-size: 1.1em;
+    cursor: pointer;
+    color: #DB4E3D;
+}
+
+.delete-info {
+    display: inline-block;
+    margin: 10px 0 0 20px;
+}
+
+.todo-completed {
+    text-decoration: line-through;
+}
+
+.todo-odd {
+    color: rgb(22, 156, 129);
+}
+
+.todo-hint {
+    font-style: italic;
+    color: #92000F;
+    font-size: .9em;
+    margin-left: 10px;
+}
+
+.todo-info-card {
+    display: inline-block;
+    height: 40px;
+}
+
+.delete {
+    height: 40px;
+}
+
+/* checkbox styles */
+
+.label-checkbox {
+    position: relative;
+    margin: 1px;
+    line-height: 135%;
+    cursor: pointer;
+}
+
+.checkbox {
+    position: relative;
+    top: -1px;
+    margin: 0 10px 0 0;
+    cursor: pointer;
+}
+.checkbox:before {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    content: "";
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #1BBC9B;
+}
+.checkbox:checked:before {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    height: 7px;
+    border-color: #009688;
+    border-top-style: none;
+    border-right-style: none;
+}
+.checkbox:after {
+    content: "";
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 18px;
+    height: 18px;
+    background: rgb(247, 247, 247);
+    cursor: pointer;
+}
+
+/* categories and description */
+
+.select-category {
+    width: 170px;
+    height: 31px;
+    margin-left: 2%;
+    padding: 2px 5px;
+    border: 2px solid #1BBC9B;
+    border-radius: 3px;
+}
+.select-category:focus {
+    outline: 0;
+}
+
+.description-todo {
+    width: 445px;
+    margin: 20px 0 10px 0;
+    padding: 2px 5px;
+    border: 2px solid #1BBC9B;
+    border-radius: 3px;
+    clear: both;
+}
+
+.description {
+    margin: 2px 0 0 22px;
+    font-size: 0.9em;
+    font-weight: normal;
+    font-style: italic;
+    color: rgb(139, 139, 139);
+    
+}
+
+.category-todo {
+    padding: 5px 10px;
+    margin-left: 30px;
+    background-color: rgba(6, 41, 49, 0.2);
+    border-radius: 10px;
+    font-size: .9em;
+    font-weight: normal;
+    color: #000000;
+}
+
+/* accordeon */
+.accordeon {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    width: 500px;
+    overflow: hidden;
+}
+
+/* filter */
+
+.filter {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.filter-hint {
+    display: flex;
+    margin: 10px 10px 10px 0;
+    padding-top: 2px;
+    height: 25px;
+    line-height: 25px;
+    vertical-align: middle;
+    font-style: italic;
+    color: #033813;
+}
+
+.loading {
+    margin: 10% 0 0 43%;
+}
+
+.tabs {
+    margin-top: 30px;
+}
+
+.tabs-panel {
+    border-left: 1px solid #cccccc;
+    border-right: 1px solid #cccccc;
+}
+
+div.section-head {
+    margin-left: 2px;
+}
+
+.show-element {
+    display: block;
+}
+
+.hide-element {
+    display: none;
 }
