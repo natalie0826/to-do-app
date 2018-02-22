@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { addTodo, editTodo, toggleTodo, deleteTodo } from '../actions/todos';
-import { addCategory } from '../actions/categories';
+import { addTodo, editTodo, toggleTodo, deleteTodo, fetchTodos, fetchTodosSuccess, fetchTodosFailure } from '../actions/todos';
+import { addCategory, fetchCategories } from '../actions/categories';
 import TodoApp from '../components/TodoApp';
 
 const getVisibleTodos = (todos, filter) => {
@@ -25,8 +25,16 @@ const mapStateToProps = (state) => {
         }
 };
 
-const mapDispatchToProps = ({
+const mapDispatchToProps = (dispatch) => ({
     addCategory: addCategory,
+    // fetchTodos: fetchTodos,
+    fetchTodos: (url) => {
+        dispatch(fetchTodos(url))
+            .then((response) => {
+                !response.error ? dispatch(fetchTodosSuccess(response.payload.data)) : dispatch(fetchTodosFailure(response.payload.data));
+            });
+      },
+    fetchCategories: fetchCategories,
     editTodo: editTodo,
     addTodo: addTodo,
     deleteTodo: deleteTodo,

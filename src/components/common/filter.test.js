@@ -16,12 +16,9 @@ describe('Filter stateful component', () => {
         expect(component.find(ToggleButton).props().value).toBe(true);
     });
 
-    // ASK!!!!!!!!!!!!!! http://airbnb.io/enzyme/docs/api/ShallowWrapper/state.html
     it('checks state value', () => {
         const componentFilter = shallow(<FilterLink store={configureStore} />).dive();
         componentFilter.setState({value: true});
         expect(componentFilter.state().value).toBe(true);
     });
-
-    
 });

@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import { Search } from './common/Search';
 import { configureStore } from '../configureStore';
+import { urls } from '../constants/urls';
 import Categories from './tabs/Categories';
 import Editor from './common/Editor';
 import TodoList from './tabs/TodoList';
@@ -35,17 +36,13 @@ export default class TodoApp extends React.Component {
         super(props);
         this.state = {
             search: '',
-            showNotification: false,
-            todos: this.props.data[0],
-            categories: this.props.data[1]
+            showNotification: false
         };
     }
 
     componentDidMount() {
-        if (this.props.data.length) {
-            this.props.data[0].map(todo => this.props.addTodo(todo.text, todo.category, todo.description, todo.completed, todo.deleted));
-            this.props.data[1].map(category => this.props.addCategory(category.category, category.color));
-        }
+        this.props.fetchTodos(urls.todos);
+        this.props.fetchCategories(urls.categories);
     }
 
     updateSearch = (event) => {
@@ -114,7 +111,7 @@ export default class TodoApp extends React.Component {
                     </TabPanel>
                     <TabPanel className="tabs-panel">
                         <Categories {...this.props}
-                                        deleteTodo={this.deleteTodo} />
+                                    deleteTodo={this.deleteTodo} />
                     </TabPanel>
                 </Tabs>
                 <NotificationSystem ref={instance => this.$notificationSystem = instance} />

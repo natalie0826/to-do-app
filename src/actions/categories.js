@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { constants } from './constants';
 
 export const addCategory = (category, color) => ({
@@ -10,8 +12,14 @@ export const addCategory = (category, color) => ({
 
 export const fetchCategories = (url) => {
     return (dispatch) => {
-        return fetch(url)
-            .then(response => response.json())
-            .then(categories => categories.map(category => dispatch(addCategory(category.category, category.color))));
+        return axios.get(url)
+            .then((categories) => {
+                if (categories.data.length) {
+                    categories.data.map(category => dispatch(addCategory(category.category, category.color)));
+                } else {
+                    throw new Error('Something went wrong...');
+                }
+            })
+            .catch(error => console.log(error));
     };
 };

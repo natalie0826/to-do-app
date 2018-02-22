@@ -1,6 +1,6 @@
 // actions call reducers
-import fetch from 'isomorphic-fetch';
 import uuidv4 from 'uuid/v4';
+import axios from 'axios';
 
 import { constants } from './constants';
 
@@ -45,12 +45,41 @@ export const requestTodos = () => ({
 });
 
 export const fetchTodos = (url) => {
-    return (dispatch) => {
-        return fetch(url)
-            .then(response => response.json())
-            .then(todos => todos.map(todo => dispatch(addTodo(todo)))); // addTodo = initializeStore
+    const request = axios({
+        method: 'get',
+        url: url,
+        headers: []
+    });
+    return {
+        type: constants.FETCH_TODOS,
+        payload: request
     };
+    // return (dispatch) => {
+    //     return axios.get(url)
+    //         .then((todos) => {
+    //             if (todos.data.length) {
+    //                 return todos.data.map(todo => dispatch(addTodo(todo.text, todo.category, todo.description, todo.completed, todo.deleted)))
+    //             } else {
+    //                 throw new Error('Something went wrong...');
+    //             }
+    //         })
+    //         .catch(error => console.log(error));
+    // };
 };
+
+export function fetchTodosSuccess(posts) {
+    return {
+        type: constants.FETCH_TODOS_SUCCESS,
+        payload: posts
+    };
+}
+
+export function fetchTodosFailure(error) {
+    return {
+        type: constants.FETCH_TODOS_FAILURE,
+        payload: error
+    };
+}
 
 export const setFilter = (filter) => ({
     type: constants.SET_FILTER,

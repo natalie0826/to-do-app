@@ -1,0 +1,49 @@
+{
+    "todos": [{
+        "text": "read about fetch",
+        "category": "work",
+        "description": "read about fetch",
+        "completed": false,
+        "deleted": false
+    }, {
+        "text": "clean the room",
+        "category": "home",
+        "description": "clean the room",
+        "completed": false,
+        "deleted": false
+    }, {
+        "text": "buy new book",
+        "category": "hobby",
+        "description": "clean the room",
+        "completed": false,
+        "deleted": false
+    }, {
+        "text": "call my mentor",
+        "category": "work",
+        "description": "clean the room",
+        "completed": true,
+        "deleted": false
+    }, {
+        "text": "edit todos application",
+        "category": "work",
+        "description": "edit todos application",
+        "completed": false,
+        "deleted": false
+    }, {
+        "text": "write a book's review",
+        "category": "hobby",
+        "description": "write a book's review",
+        "completed": true,
+        "deleted": false
+    }],
+    "categories": [{
+        "category": "work",
+        "color": "#FBD6AA"
+    }, {
+        "category": "home",
+        "color": "#FB77FF"
+    }, {
+        "category": "hobby",
+        "color": "#F33AAA"
+    }]
+}

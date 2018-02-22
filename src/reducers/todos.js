@@ -61,6 +61,22 @@ const todos = (state = [], action) => {
                 ...state,
                 'todos': getTodos(state.todos, action.type, action.payload)
             };
+        case constants.FETCH_TODOS:
+            return {
+                ...state,
+                todos: []
+            };
+        case constants.FETCH_TODOS_SUCCESS:
+            return {
+                ...state,
+                todos: action.payload.todos
+            };
+        case constants.FETCH_TODOS_FAILURE:
+            //error = action.payload || {message: action.payload.message};//2nd one is network or server down errors
+            return {
+                ...state,
+                todos: []
+            };
         default:
             return state;
     }
