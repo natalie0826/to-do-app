@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-import { constants } from './constants';
+import { categoriesActions } from './categoriesActions';
 
 export const addCategory = (category, color) => ({
-    type: constants.ADD_CATEGORY,
+    type: categoriesActions.ADD_CATEGORY,
     payload: {
         category,
         color

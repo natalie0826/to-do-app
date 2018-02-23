@@ -1,35 +1,41 @@
 {
     "todos": [{
+        "id": "f64f2940-fae4-11e7-8c5f-ef356f279131",
         "text": "read about fetch",
         "category": "work",
         "description": "read about fetch",
         "completed": false,
         "deleted": false
     }, {
+        "id": "1b671a64-40d5-491e-99b0-da01ff1f3341",
         "text": "clean the room",
         "category": "home",
         "description": "clean the room",
         "completed": false,
         "deleted": false
     }, {
+        "id": "e8b5a51d-11c8-3310-a6ab-367563f20686",
         "text": "buy new book",
         "category": "hobby",
         "description": "clean the room",
         "completed": false,
         "deleted": false
     }, {
+        "id": "416ac246-e7ac-49ff-93b4-f7e94d997e6b",
         "text": "call my mentor",
         "category": "work",
         "description": "clean the room",
         "completed": true,
         "deleted": false
     }, {
+        "id": "fdda765f-fc57-5604-a269-52a7df8164ec",
         "text": "edit todos application",
         "category": "work",
         "description": "edit todos application",
         "completed": false,
         "deleted": false
     }, {
+        "id": "3bbcee75-cecc-5b56-8031-b6641c1ed1f1",
         "text": "write a book's review",
         "category": "hobby",
         "description": "write a book's review",

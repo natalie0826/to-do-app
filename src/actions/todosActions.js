@@ -1,4 +1,4 @@
-export const constants = {
+export const todosActions = {
     ADD_TODO: 'ADD_TODO',
     EDIT_TODO: 'EDIT_TODO',
     DELETE_TODO: 'DELETE_TODO',
@@ -6,8 +6,6 @@ export const constants = {
     REQUEST_TODOS: 'REQUEST_TODOS',
     RECEIVE_TODOS: 'RECEIVE_TODOS',
     SET_FILTER: 'SET_FILTER',
-    ADD_CATEGORY: 'ADD_CATEGORY',
-
     FETCH_TODOS: 'FETCH_TODOS',
     FETCH_TODOS_SUCCESS: 'FETCH_TODOS_SUCCESS',
     FETCH_TODOS_FAILURE: 'FETCH_TODOS_FAILURE',

@@ -81,7 +81,7 @@ export default class TodoApp extends React.Component {
             addCategory
         } = this.props;
 
-        const existCompleted = todos.some(todo => todo.completed);
+        const existCompleted = todos//.some(todo => todo.completed);
 
         const displayElement = classNames({
             'hide-element': !existCompleted,

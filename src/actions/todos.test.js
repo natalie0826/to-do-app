@@ -1,5 +1,5 @@
 // actions
-import * as actions from './todos';
+import * as todosActions from './todosActions';
 import uuidv4 from 'uuid/v4';
 
 describe('Actions', () => {
@@ -32,7 +32,7 @@ describe('Actions', () => {
                 id
             }
         };
-        expect(actions.deleteTodo(id)).toEqual(expectedAction);
+        expect(todosActions.deleteTodo(id)).toEqual(expectedAction);
     });
 
     it('should create an action to EDIT the todo', () => {
@@ -43,6 +43,6 @@ describe('Actions', () => {
                 id
             }
         };
-        expect(actions.editTodo(id, text)).toEqual(expectedAction);
+        expect(todosActions.editTodo(id, text)).toEqual(expectedAction);
     });
 });

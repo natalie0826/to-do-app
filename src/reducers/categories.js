@@ -1,6 +1,8 @@
+import { categoriesActions } from '../actions/categoriesActions';
+
 export const categories = (state = [], action) => {
     switch(action.type) {
-        case 'ADD_CATEGORY':
+        case categoriesActions.ADD_CATEGORY:
             const isUnique = () => !!state.find((el) => {
                 return el.category === action.payload.category;
             });
@@ -15,6 +17,8 @@ export const categories = (state = [], action) => {
             } else {
                 return state;
             }
+        case categoriesActions.FETCH_CATEGORIES_SUCCESS:
+            
         default:
             return state;
     }

@@ -2,10 +2,10 @@
 import uuidv4 from 'uuid/v4';
 import axios from 'axios';
 
-import { constants } from './constants';
+import { todosActions } from './todosActions';
 
 export const addTodo = (text, category, description, completed, deleted) => ({
-    type: constants.ADD_TODO,
+    type: todosActions.ADD_TODO,
     payload: {
         id: uuidv4(),
         text,
@@ -17,7 +17,7 @@ export const addTodo = (text, category, description, completed, deleted) => ({
 });
 
 export const editTodo = (id, text, category, description) => ({
-    type: constants.EDIT_TODO,
+    type: todosActions.EDIT_TODO,
     payload: {
         id,
         text,
@@ -27,62 +27,49 @@ export const editTodo = (id, text, category, description) => ({
 });
 
 export const deleteTodo = (id) => ({
-    type: constants.DELETE_TODO,
+    type: todosActions.DELETE_TODO,
     payload: {
         id
     }
 });
 
 export const toggleTodo = (id) => ({
-    type: constants.TOGGLE_TODO,
+    type: todosActions.TOGGLE_TODO,
     payload: {
         id
     }
 });
 
-export const requestTodos = () => ({
-    type: constants.REQUEST_TODOS
-});
-
 export const fetchTodos = (url) => {
-    const request = axios({
-        method: 'get',
-        url: url,
-        headers: []
-    });
-    return {
-        type: constants.FETCH_TODOS,
-        payload: request
+    return (dispatch) => {
+        return axios.get(url)
+            .then((response) => {
+                if (response.data.length) {
+                    return dispatch(fetchTodosSuccess(response.data));
+                } else {
+                    throw new Error('Something went wrong...');
+                }
+            })
+            .catch(error => dispatch(fetchTodosFailure));
     };
-    // return (dispatch) => {
-    //     return axios.get(url)
-    //         .then((todos) => {
-    //             if (todos.data.length) {
-    //                 return todos.data.map(todo => dispatch(addTodo(todo.text, todo.category, todo.description, todo.completed, todo.deleted)))
-    //             } else {
-    //                 throw new Error('Something went wrong...');
-    //             }
-    //         })
-    //         .catch(error => console.log(error));
-    // };
 };
 
-export function fetchTodosSuccess(posts) {
-    return {
-        type: constants.FETCH_TODOS_SUCCESS,
-        payload: posts
-    };
-}
+export const fetchTodosSuccess = (data) => ({
+    type: todosActions.FETCH_TODOS_SUCCESS,
+    payload: {
+        todos: data
+    }
+});
 
-export function fetchTodosFailure(error) {
-    return {
-        type: constants.FETCH_TODOS_FAILURE,
-        payload: error
-    };
-}
+export const fetchTodosFailure = (error) => ({
+    type: todosActions.FETCH_TODOS_FAILURE,
+    payload: {
+        error
+    }
+});
 
 export const setFilter = (filter) => ({
-    type: constants.SET_FILTER,
+    type: todosActions.SET_FILTER,
     payload: {
         filter
     }
