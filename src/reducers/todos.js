@@ -4,7 +4,7 @@ import { todosActions } from '../actions/todosActions';
 
 const todo = (state, actionType, payload) => {
     switch (actionType) {
-        case todosActions.ADD_TODO:
+        case todosActions.ADD_TODO_SUCCESS:
             return {
                 id: payload.id,
                 text: payload.text,
@@ -41,7 +41,7 @@ const todo = (state, actionType, payload) => {
 
 const todos = (state = [], action) => {
     switch (action.type) {
-        case todosActions.ADD_TODO:
+        case todosActions.ADD_TODO_SUCCESS:
             return [
                 ...state,
                 todo(undefined, action.type, action.payload)
@@ -51,7 +51,7 @@ const todos = (state = [], action) => {
             return state.map(t =>
                 todo(t, action.type, action.payload)
             );
-        case todosActions.DELETE_TODO:
+        case todosActions.DELETE_TODO_SUCCESS:
             return state.filter((todo) => {
                 return todo.id !== action.payload.id
             });;
@@ -62,6 +62,6 @@ const todos = (state = [], action) => {
     }
 };
 
-const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO', 'FETCH_TODOS_SUCCESS']) });
+const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO_SUCCESS', 'FETCH_TODOS_SUCCESS']) });
 
 export default undoableTodos;

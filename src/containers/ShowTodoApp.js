@@ -29,9 +29,9 @@ const mapDispatchToProps = (dispatch) => ({
     addCategory: addCategory,
     fetchTodos: (url) => dispatch(fetchTodos(url)),
     fetchCategories: (url) => dispatch(fetchCategories(url)),
-    editTodo: editTodo,
-    addTodo: addTodo,
-    deleteTodo: deleteTodo,
+    editTodo: (text, category, description, completed, deleted) => dispatch(editTodo(text, category, description, completed, deleted)),
+    addTodo: (text, category, description) => dispatch(addTodo(text, category, description)),
+    deleteTodo: (id) => dispatch(deleteTodo(id)),
     toggleTodo: toggleTodo,
     undo: UndoActionCreators.undo,
 });

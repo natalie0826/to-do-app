@@ -13,9 +13,9 @@ export const addCategory = (category, color) => ({
 export const fetchCategories = (url) => {
     return (dispatch) => {
         return axios.get(url)
-            .then((categories) => {
-                if (categories.data.length) {
-                    categories.data.map(category => dispatch(addCategory(category.category, category.color)));
+            .then((response) => {
+                if (response.data.length) {
+                    return dispatch(fetchCategoriesSuccess(response.data));
                 } else {
                     throw new Error('Something went wrong...');
                 }
@@ -23,3 +23,17 @@ export const fetchCategories = (url) => {
             .catch(error => console.log(error));
     };
 };
+
+export const fetchCategoriesSuccess = (data) => ({
+    type: categoriesActions.FETCH_CATEGORIES_SUCCESS,
+    payload: {
+        categories: data
+    }
+});
+
+export const fetchCategoriesFailure = (error) => ({
+    type: categoriesActions.FETCH_CATEGORIES_FAILURE,
+    payload: {
+        error
+    }
+});

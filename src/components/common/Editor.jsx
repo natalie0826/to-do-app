@@ -48,7 +48,7 @@ export default class Editor extends React.Component {
     handleAddTodo() {
         if(this.isDataValid()) {
             const category = this.state.category || this.props.categories[0].category;
-            this.props.addTodo(this.state.text, category, this.state.description, false, false);
+            this.props.addTodo(this.state.text, category, this.state.description);
             this.setState({text: '', description: ''});
         }
     }

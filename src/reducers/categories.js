@@ -18,7 +18,7 @@ export const categories = (state = [], action) => {
                 return state;
             }
         case categoriesActions.FETCH_CATEGORIES_SUCCESS:
-            
+            return Object.assign([], state, action.payload.categories);
         default:
             return state;
     }
