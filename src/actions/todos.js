@@ -5,6 +5,8 @@ import { todosActions } from './todosActions';
 import { urls } from '../constants/urls';
 import axios from 'axios';
 
+import 'whatwg-fetch';
+
 // axios.interceptors.response.use((response) => {
 //     return response
 //   }, (error) => {
@@ -25,24 +27,17 @@ export const addTodo = (text, category, description) => {
         deleted: false
     };
     return (dispatch) => {
-        // return axios.post(urls.todos, newTodo)
-        //     .then(response => {
-        //         return dispatch(addTodoSuccess(response.data));
-        //     })
-        //     .catch(error => console.log(error))
-        return fetch(urls.todos, { method: 'POST', data: {
-            id: uuidv4(),
-            text,
-            category,
-            description,
-            completed: false,
-            deleted: false
-        }})
-            .then(res => res.json() )
+        return axios.post(urls.todos, newTodo)
             .then(response => {
-                    return dispatch(addTodoSuccess(response));
-                })
-                .catch(error => console.log(error))
+                return dispatch(addTodoSuccess(response.data));
+            })
+            .catch(error => console.log(error))
+        // return fetch(urls.todos, { method: 'POST',  headers: {
+        //     'Content-Type': 'application/json'
+        //   }, body: JSON.stringify(newTodo)})
+        //     .then(res => { if(res.status === 201) { return dispatch(addTodoSuccess(newTodo))}} )
+
+        //         .catch(error => console.log(error))
     }
 };
 
