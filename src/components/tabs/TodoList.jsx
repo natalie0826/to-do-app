@@ -44,7 +44,7 @@ export default class TodoList extends React.Component {
                         <TodoWrap
                             key={todo.id}
                             {...todo}
-                            toggleTodo={() => toggleTodo(todo.id)}
+                            toggleTodo={toggleTodo}
                             deleteTodo={() => deleteTodo(todo.id)}
                             editTodo={editTodo}
                             categories={categories}

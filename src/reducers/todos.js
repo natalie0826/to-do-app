@@ -1,10 +1,9 @@
 import undoable from 'redux-undo';
 import { includeAction } from 'redux-undo';
-import { todosActions } from '../actions/todosActions';
 
 const todo = (state, actionType, payload) => {
     switch (actionType) {
-        case todosActions.ADD_TODO_SUCCESS:
+        case 'ADD_TODO_SUCCESS':
             return {
                 id: payload.id,
                 text: payload.text,
@@ -13,7 +12,7 @@ const todo = (state, actionType, payload) => {
                 completed: payload.completed,
                 deleted: payload.deleted
             };
-        case todosActions.EDIT_TODO:
+        case 'EDIT_TODO_SUCCESS':
             if (state.id !== payload.id) {
                 return state;
             }
@@ -25,7 +24,7 @@ const todo = (state, actionType, payload) => {
                 category: payload.category,
                 description: payload.description
             };
-        case todosActions.TOGGLE_TODO:
+        case 'TOGGLE_TODO_SUCCESS':
             if (state.id !== payload.id && !state.deleted) {
                 return state;
             }
@@ -41,27 +40,27 @@ const todo = (state, actionType, payload) => {
 
 const todos = (state = [], action) => {
     switch (action.type) {
-        case todosActions.ADD_TODO_SUCCESS:
+        case 'ADD_TODO_SUCCESS':
             return [
                 ...state,
                 todo(undefined, action.type, action.payload)
             ];
-        case todosActions.EDIT_TODO:
-        case todosActions.TOGGLE_TODO:
+        case 'EDIT_TODO_SUCCESS':
+        case 'TOGGLE_TODO_SUCCESS':
             return state.map(t =>
                 todo(t, action.type, action.payload)
             );
-        case todosActions.DELETE_TODO_SUCCESS:
+        case 'DELETE_TODO_SUCCESS':
             return state.filter((todo) => {
                 return todo.id !== action.payload.id
             });;
-        case todosActions.FETCH_TODOS_SUCCESS:
+        case 'FETCH_TODOS_SUCCESS':
             return Object.assign([], state, action.payload.todos);
         default:
             return state;
     }
 };
 
-const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO_SUCCESS', 'FETCH_TODOS_SUCCESS']) });
+const undoableTodos = undoable(todos, { filter: includeAction(['DELETE_TODO_SUCCESS']) });
 
 export default undoableTodos;

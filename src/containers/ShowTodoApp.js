@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => ({
     editTodo: (text, category, description, completed, deleted) => dispatch(editTodo(text, category, description, completed, deleted)),
     addTodo: (text, category, description) => dispatch(addTodo(text, category, description)),
     deleteTodo: (id) => dispatch(deleteTodo(id)),
-    toggleTodo: toggleTodo,
+    toggleTodo: (id, completed) => dispatch(toggleTodo(id, completed)),
     undo: UndoActionCreators.undo,
 });
 

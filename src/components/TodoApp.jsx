@@ -41,6 +41,7 @@ export default class TodoApp extends React.Component {
     }
 
     componentDidMount() {
+        this.setState({counter:this.state.caounter++});
         this.props.fetchTodos(urls.todos);
         this.props.fetchCategories(urls.categories);
     }
