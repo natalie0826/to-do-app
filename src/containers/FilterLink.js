@@ -5,9 +5,7 @@ import { setFilter } from '../actions/todos';
 import Filter from '../components/common/Filter';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    onClick: (filter) => {
-        dispatch(setFilter(filter));
-    }
+    onClick: setFilter
 });
 
 export const FilterLink = connect(

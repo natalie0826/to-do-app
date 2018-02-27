@@ -45,8 +45,8 @@ export default class TodoWrap extends React.Component {
     }
 
     handleChange = () => {
-        this.setState({compl: !this.state.compl});
-        this.props.toggleTodo(this.props.id);
+        console.log('handleChange', this.props.id, !this.props.completed);
+        this.props.toggleTodo(this.props.id, !this.props.completed);
     }
 
     render() {

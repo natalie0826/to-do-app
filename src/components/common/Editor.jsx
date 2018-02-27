@@ -45,7 +45,9 @@ export default class Editor extends React.Component {
         this.setState({description: event.target.value});
     }
 
-    handleAddTodo() {
+    handleAddTodo(e) {
+        e.preventDefault();
+        e.stopPropagation();
         if(this.isDataValid()) {
             const category = this.state.category || this.props.categories[0].category;
             this.props.addTodo(this.state.text, category, this.state.description);
@@ -76,7 +78,7 @@ export default class Editor extends React.Component {
     };
 
     render() {
-        const addButton = <button className="btn btn-add" onClick={() => this.handleAddTodo()}>Add</button>;
+        const addButton = <button className="btn btn-add" onClick={(e) => this.handleAddTodo(e)}>Add</button>;
         const saveButton = <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>;
 
         if (this.props.isVisible) {
