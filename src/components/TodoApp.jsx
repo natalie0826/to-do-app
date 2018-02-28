@@ -7,6 +7,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { Search } from './common/Search';
 import { configureStore } from '../configureStore';
 import { urls } from '../constants/urls';
+import { notificationConstants } from '../constants/notificationConstants';
 import Categories from './tabs/Categories';
 import Editor from './common/Editor';
 import TodoList from './tabs/TodoList';
@@ -66,7 +67,7 @@ export default class TodoApp extends React.Component {
 
     deleteTodo = (id) => {
         this.props.deleteTodo(id);
-        this.addNotification(`Your item has been successfully deleted!`, 'info', 'Undo', 10, false, this.props.undo);
+        this.addNotification(notificationConstants.message, notificationConstants.type, notificationConstants.buttonUndo, 10, false, this.props.undo);
     }
 
     deleteCompleted = () => {
@@ -81,7 +82,7 @@ export default class TodoApp extends React.Component {
             addCategory
         } = this.props;
 
-        const existCompleted = todos//.some(todo => todo.completed);
+        const existCompleted = todos.some(todo => todo.completed);
 
         const displayElement = classNames({
             'hide-element': !existCompleted,

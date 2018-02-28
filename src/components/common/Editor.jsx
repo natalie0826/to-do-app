@@ -81,6 +81,8 @@ export default class Editor extends React.Component {
     render() {
         const addButton = <button className="btn btn-add" onClick={(e) => this.handleAddTodo(e)}>Add</button>;
         const saveButton = <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>;
+        const resetButton = <button className="btn btn-clear" onClick={() => this.clearFields()}>Reset</button>;
+        const cancelButton = <button className="btn btn-clear" onClick={this.props.setEditStatus}>Cancel</button>;
 
         if (this.props.isVisible) {
             return (
@@ -100,8 +102,7 @@ export default class Editor extends React.Component {
                                 onChange={this.handleDescriptionChange}
                                 placeholder="Description"
                                 rows="5" />
-                    <button className="btn btn-clear" onClick={() => this.clearFields()}>Clear fields</button>
-                    {this.props.isAddTodo ? addButton : saveButton}
+                    {this.props.isAddTodo ? <div>{addButton} {resetButton}</div> : <div>{saveButton} {cancelButton}</div>}
                 </div>
             );
         } else { return null; }

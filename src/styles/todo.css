@@ -330,9 +330,14 @@ hr {
     margin-top: 30px;
 }
 
+.react-tabs__tab-list {
+    margin: 0;
+}
+
 .tabs-panel {
-    border-left: 1px solid #cccccc;
-    border-right: 1px solid #cccccc;
+    border-bottom: 1px solid #aaaaaa;
+    border-left: 1px solid #aaaaaa;
+    border-right: 1px solid #aaaaaa;
 }
 
 div.section-head {

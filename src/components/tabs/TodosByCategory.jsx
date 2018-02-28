@@ -26,9 +26,7 @@ export default class TodosByCategory extends React.Component {
         return (
             <div className={sectionClass}>
                 <button className="toggle-button">toggle</button>
-                <div className="section-head" onClick={this.handleClick}>
-                    {this.props.title}
-                </div>
+                <div className="section-head" onClick={this.handleClick}>{this.props.title}</div>
                 <div className="article-wrap">
                     <div className="article">
                         {this.props.children}

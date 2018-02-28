@@ -38,16 +38,14 @@ export default class TodoList extends React.Component {
         const { todos, deleteTodo } = this.props;
 
         return (
-            <div>
-                <div className="todos">
-                    <FilterLink />
-                    {todos.map((todo) =>
-                        <TodoWrap   key={todo.id}
-                                    {...todo}
-                                    {...this.props}
-                                    deleteTodo={() => deleteTodo(todo.id)} />
-                    )}
-                </div>
+            <div className="todos">
+                <FilterLink />
+                {todos.map((todo) =>
+                    <TodoWrap   key={todo.id}
+                                {...todo}
+                                {...this.props}
+                                deleteTodo={() => deleteTodo(todo.id)} />
+                )}
             </div>
         );
     }

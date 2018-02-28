@@ -34,36 +34,33 @@ export default class Categories extends React.Component {
     render() {
         const {
             todos,
-            editTodo,
             deleteTodo,
-            toggleTodo,
-            categories,
-            addCategory
+            categories
         } = this.props;
+
+        const sortedTodosByCategory = (category) => {
+            let todosByCategory = [];
+            todos.map(todo => {
+                return todo.category === category ? todosByCategory.push(todo) : '';
+            });
+            return todosByCategory;
+         };
 
         return (
             <div className="accordeon">
                 {categories.map((category) => {
                     return (
-                        <TodosByCategory key={category.category} title={category.category} color={category.color}>
-                            {todos.map((todo) => {
-                                if (todo.category === category.category) {
-                                    return (
-                                        <TodoWrap
-                                            key={todo.id}
-                                            {...todo}
-                                            toggleTodo={toggleTodo}
-                                            deleteTodo={() => deleteTodo(todo.id)}
-                                            editTodo={editTodo}
-                                            categories={categories}
-                                            addCategory={addCategory}/>)
-                                        }
-                                else {
-                                    return null;
-                                }
-                            })}
-                        </TodosByCategory>
-                    );
+                        sortedTodosByCategory(category.category).map((todo) => {
+                            return (
+                                <TodosByCategory key={category.category} title={category.category} color={category.color}>
+                                    <TodoWrap   key={todo.id}
+                                                {...todo}
+                                                {...this.props}
+                                                deleteTodo={() => deleteTodo(todo.id)} />
+                                </TodosByCategory>
+                            )}
+                        )
+                    )
                 })}
             </div>
         );
