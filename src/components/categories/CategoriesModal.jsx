@@ -43,8 +43,6 @@ export default class CategoriesModal extends React.Component {
         return (
             <div className="category-modal">
                 <h1>Please, enter a category and select a color for it.</h1>
-                <h3>Categories should be unique.</h3>
-                <hr/>
                 <input  className="add-category"
                         type="text"
                         placeholder="Category"

@@ -21,7 +21,8 @@ const getVisibleTodos = (todos, filter) => {
 const mapStateToProps = (state) => {
     return {
         todos: getVisibleTodos(state.todos.present, state.filter),
-        categories: state.categories
+        categories: state.categories,
+        store: state
     }
 };
 

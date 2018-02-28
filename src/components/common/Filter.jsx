@@ -18,11 +18,7 @@ export default class Filter extends React.Component {
 
     handleChange = (value) => {
         this.setState({value: !value});
-        if (value) {
-            this.props.onClick('SHOW_ALL');
-        } else {
-            this.props.onClick('SHOW_ACTIVE');
-        }
+        value ? this.props.onClick('SHOW_ALL') : this.props.onClick('SHOW_ACTIVE');
     }
 
     render() {

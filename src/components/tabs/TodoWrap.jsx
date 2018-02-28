@@ -19,7 +19,8 @@ export default class TodoWrap extends React.Component {
         toggleTodo: PropTypes.func.isRequired,
         editTodo: PropTypes.func.isRequired,
         categories: PropTypes.array.isRequired,
-        addCategory: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired,
+        store: PropTypes.object
     }
 
     constructor(props) {
@@ -45,7 +46,6 @@ export default class TodoWrap extends React.Component {
     }
 
     handleChange = () => {
-        console.log('handleChange', this.props.id, !this.props.completed);
         this.props.toggleTodo(this.props.id, !this.props.completed);
     }
 

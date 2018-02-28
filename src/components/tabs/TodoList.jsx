@@ -22,7 +22,8 @@ export default class TodoList extends React.Component {
         toggleTodo: PropTypes.func.isRequired,
         deleteTodo: PropTypes.func.isRequired,
         editTodo: PropTypes.func.isRequired,
-        addCategory: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired,
+        store: PropTypes.object
     }
 
     constructor() {
@@ -34,21 +35,17 @@ export default class TodoList extends React.Component {
     }
 
     render() {
-        const {todos, editTodo, toggleTodo, deleteTodo, categories, addCategory} = this.props;
+        const { todos, deleteTodo } = this.props;
 
         return (
             <div>
                 <div className="todos">
                     <FilterLink />
                     {todos.map((todo) =>
-                        <TodoWrap
-                            key={todo.id}
-                            {...todo}
-                            toggleTodo={toggleTodo}
-                            deleteTodo={() => deleteTodo(todo.id)}
-                            editTodo={editTodo}
-                            categories={categories}
-                            addCategory={addCategory}/>
+                        <TodoWrap   key={todo.id}
+                                    {...todo}
+                                    {...this.props}
+                                    deleteTodo={() => deleteTodo(todo.id)} />
                     )}
                 </div>
             </div>

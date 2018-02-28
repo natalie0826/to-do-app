@@ -17,7 +17,8 @@ export default class Editor extends React.Component {
         category: PropTypes.string,
         description: PropTypes.string,
         setEditStatus: PropTypes.func,
-        isVisible: PropTypes.bool
+        isVisible: PropTypes.bool,
+        store: PropTypes.object
     }
 
     static defaultProps = {

@@ -41,7 +41,6 @@ export default class TodoApp extends React.Component {
     }
 
     componentDidMount() {
-        this.setState({counter:this.state.caounter++});
         this.props.fetchTodos(urls.todos);
         this.props.fetchCategories(urls.categories);
     }
@@ -107,7 +106,8 @@ export default class TodoApp extends React.Component {
                         <Search updateSearch={this.updateSearch} value={this.state.search} isVisible={todos.length > 0} />
                         <TodoList   {...this.props}
                                     todos={filteredTodos}
-                                    deleteTodo={this.deleteTodo}/>
+                                    deleteTodo={this.deleteTodo}
+                                    store={configureStore} />
                         <button className={displayElement} onClick={this.deleteCompleted}>Delete completed</button>
                     </TabPanel>
                     <TabPanel className="tabs-panel">
