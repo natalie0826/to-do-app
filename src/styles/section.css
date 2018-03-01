@@ -83,9 +83,8 @@
 
 .section-head {
     overflow: hidden;
-    width: 470px;
     padding: 10px 0 10px 20px;
-    margin: 5px 10px 0 5px;
+    margin-top: 10px;
     border: 2px solid #1BBC9B;
     color: #313131;
     cursor: pointer;

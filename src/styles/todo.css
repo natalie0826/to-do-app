@@ -38,7 +38,7 @@ hr {
 
 .search-todo {
     width: 50%;
-    margin: 20px 0 20px 25%;
+    margin: 10px 0 20px 25%;
 }
 
 .add-todo,
@@ -270,10 +270,12 @@ hr {
 
 .description-todo {
     width: 445px;
+    height: 50px;
     margin: 20px 0 10px 0;
     padding: 2px 5px;
     border: 2px solid #1BBC9B;
     border-radius: 3px;
+    vertical-align: top;
     clear: both;
 }
 
@@ -334,20 +336,26 @@ hr {
     margin: 0;
 }
 
-.tabs-panel {
-    border-bottom: 1px solid #aaaaaa;
-    border-left: 1px solid #aaaaaa;
-    border-right: 1px solid #aaaaaa;
-}
-
-div.section-head {
-    margin-left: 2px;
-}
-
 .show-element {
     display: block;
 }
 
 .hide-element {
     display: none;
+}
+
+.error {
+    border: 2px solid #DB4E3D;
+}
+
+.warning {
+    border: 2px solid rgb(206, 184, 114);
+}
+
+.fields {
+    display: inline-block;
+}
+
+input:focus {
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
