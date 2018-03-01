@@ -39,7 +39,7 @@ export default class TodoList extends React.Component {
 
         return (
             <div className="todos">
-                <FilterLink />
+                <FilterLink isVisible={todos.length > 0} />
                 {todos.map((todo) =>
                     <TodoWrap   key={todo.id}
                                 {...todo}
