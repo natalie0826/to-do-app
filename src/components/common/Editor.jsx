@@ -1,13 +1,52 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { ModalManager } from 'react-dynamic-modal';
+import classNames from 'classnames';
+import { connect } from 'react-redux';
 
 import { CustomModal } from '../categories/CustomModal';
 import { Select } from './Select';
 import '../../styles/modal.css';
 
-export default class Editor extends React.Component {
-    static propTypes = {
+const validate = (values) => {
+    const errors = {};
+    if (!values.text) {
+        errors.text = 'Required';
+    } else if (values.text.length < 5) {
+        errors.text = 'Must be 5 characters or more';
+    } else if (values.text.length > 50) {
+        errors.text = 'Must be 50 characters or less';
+    }
+    if (!values.category) {
+        errors.category = 'Required';
+    }
+    return errors;
+}
+
+const warn = (values) => {
+    const warnings = {};
+    if (!values.description) {
+        warnings.description = 'Hmm, you seem not to add a description...';
+    }
+    return warnings;
+}
+
+const renderField = ({ input, placeholder, className, type, meta: { touched, error, warning } }) => {
+    const fieldClass = classNames(className, {
+        'error': error
+    });
+
+    return (
+        <div className="fields">
+            <input className={fieldClass} {...input} placeholder={placeholder} type={type} />
+            {touched && ((error && <p>{error}</p>) || (warning && <p>{warning}</p>))}
+        </div>
+    );
+}
+
+let Editor = (props) => {
+    Editor.propTypes = {
         isAddTodo: PropTypes.bool.isRequired,
         addTodo: PropTypes.func,
         editTodo: PropTypes.func,
@@ -21,90 +60,95 @@ export default class Editor extends React.Component {
         store: PropTypes.object
     }
 
-    static defaultProps = {
+    Editor.defaultProps = {
         isVisible: true
     }
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            text: this.props.text || '',
-            category: this.props.category || '',
-            description: this.props.description || ''
-        };
-    }
-
-    handleTextChange = (event) => {
-        this.setState({text: event.target.value});
-    }
-
-    handleCategoryChange = (value) => {
-        this.setState({category: value});
-    }
-
-    handleDescriptionChange = (event) => {
-        this.setState({description: event.target.value});
-    }
-
-    handleAddTodo(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        if(this.isDataValid()) {
-            const category = this.state.category || this.props.categories[0].category;
-            this.props.addTodo(this.state.text, category, this.state.description);
-            this.setState({text: '', description: ''});
-        }
-    }
-
-    handleEditTodo() {
-        if(this.isDataValid()) {
-            this.props.editTodo(this.props.id, this.state.text, this.state.category, this.state.description);
-            this.props.setEditStatus();
-        }
-    }
-
-    isDataValid() {
-        if(!this.state.text.trim() || !this.state.description.trim()) {
-            return false;
-        }
-        return true;
-    }
-
-    clearFields() {
-        this.setState({ text: '', category: '', description: '' })
-    }
-
-    handleCategoryModal = () => {
-        ModalManager.open(<CustomModal onRequestClose={() => true} store={this.props.store} categories={this.props.categories}/>);
+    const handleCategoryModal = () => {
+        ModalManager.open(<CustomModal onRequestClose={() => true} store={props.store} categories={props.categories}/>);
     };
 
-    render() {
-        const addButton = <button className="btn btn-add" onClick={(e) => this.handleAddTodo(e)}>Add</button>;
-        const saveButton = <button className="btn btn-add" onClick={() => this.handleEditTodo()}>Save</button>;
-        const resetButton = <button className="btn btn-clear" onClick={() => this.clearFields()}>Reset</button>;
-        const cancelButton = <button className="btn btn-clear" onClick={this.props.setEditStatus}>Cancel</button>;
-
-        if (this.props.isVisible) {
-            return (
-                <div className="todo-edit">
-                    <input  className="add-todo"
-                            type="text"
-                            placeholder="Task"
-                            onChange={this.handleTextChange}
-                            value={this.state.text} />
-                    <Select class="select-category"
-                            selectedValue={this.state.category}
-                            changeSelection={this.handleCategoryChange}
-                            options={this.props.categories} />
-                    <button className="btn btn-category" onClick={this.handleCategoryModal}>New category</button>
-                    <textarea   className="description-todo"
-                                value={this.state.description}
-                                onChange={this.handleDescriptionChange}
-                                placeholder="Description"
-                                rows="5" />
-                    {this.props.isAddTodo ? <div>{addButton} {resetButton}</div> : <div>{saveButton} {cancelButton}</div>}
-                </div>
-            );
-        } else { return null; }
+    const handleSubmit = (e, values) => {
+        e.preventDefault();
+        props.isAddTodo ? props.addTodo(props.text, props.category, props.description) : props.editTodo(props.id, props.text, props.category, props.description);
+        props.reset();
     }
+
+    const saveButton = <button type="submit" value="submit" className="btn btn-add">{props.isAddTodo ? 'Add' : 'Save'}</button>;
+    const resetButton = <button className="btn btn-clear" onClick={props.reset}>Reset</button>;
+    const cancelButton = <button className="btn btn-clear" onClick={props.setEditStatus}>Cancel</button>;
+
+        return (
+            props.isVisible ?
+            <form className="todo-edit" onSubmit={handleSubmit}>
+                <Field component={renderField} name="text" className="add-todo" type="text" placeholder="Task" />
+                <Field  component="select" name="category" className="select-category">
+                    {props.categories.map((category) => {
+                        return (
+                            <option value={category.category} key={category.category}>
+                                {category.category}
+                            </option>)
+                    })}
+                </Field>
+                <button className="btn btn-category">New category</button>
+                <Field component={renderField} name="description" className="description-todo" type="textarea" placeholder="Description" />
+                {saveButton}
+                {resetButton}
+            </form>
+            : ''
+            // <form className="todo-edit" onSubmit={this.handleSubmit}>
+            //     <Field  component="input"
+            //             name="text"
+            //             className="add-todo"
+            //             type="text"
+            //             placeholder="Task"
+            //             onChange={this.handleTextChange}
+            //             value={this.state.text} />
+            //     <Field  component="select"
+            //             name="category"
+            //             className="select-category">
+            //             {props.categories.map((category) => {
+            //                 return (
+            //                     <option value={category.category} key={category.category}>
+            //                         {category.category}
+            //                     </option>)
+            //             })}
+            //     </Field>
+            //     <button className="btn btn-category" onClick={this.handleCategoryModal}>New category</button>
+            //     <Field  component="textarea"
+            //             name="description"
+            //             className="description-todo"
+            //             value={this.state.description}
+            //             onChange={this.handleDescriptionChange}
+            //             placeholder="Description"
+            //             rows="5" />
+            //     {saveButton}
+            //     {props.isAddTodo ? resetButton : cancelButton}
+            // </form>
+        );
 }
+
+Editor = reduxForm({
+    form: 'editor',
+    destroyOnUnmount: false,
+    validate,
+    warn
+})(Editor);
+
+
+const selector = formValueSelector('editor')
+
+Editor = connect(
+    state => {
+        const text = selector(state, 'text');
+        const description = selector(state, 'description');
+        const category = selector(state, 'category');
+        return {
+            text,
+            description,
+            category
+        }
+    }
+)(Editor)
+
+export default Editor;

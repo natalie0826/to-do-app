@@ -1,4 +1,6 @@
 import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+
 import todos from './todos';
 import { filter } from './filter';
 import { categories } from './categories';
@@ -8,5 +10,6 @@ export const todoReducers = combineReducers({
     loading,
     todos,
     filter,
-    categories
+    categories,
+    form: formReducer
 });

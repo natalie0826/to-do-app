@@ -40,27 +40,27 @@ export default class Categories extends React.Component {
 
         const sortedTodosByCategory = (category) => {
             let todosByCategory = [];
-            todos.map(todo => {
-                return todo.category === category ? todosByCategory.push(todo) : '';
-            });
-            return todosByCategory;
+            todos.map(todo => todo.category === category.category ? todosByCategory.push(todo) : '');
+            if (todosByCategory.length) {
+                return  <TodosByCategory key={category.category} title={category.category} color={category.color}>
+                            {todosByCategory.map((todo) => {
+                                return (
+                                    <TodoWrap   key={todo.id}
+                                                {...todo}
+                                                {...this.props}
+                                                deleteTodo={() => deleteTodo(todo.id)} />
+                                )})}
+                        </TodosByCategory>
+            }
+            else {
+                return null;
+            }
          };
 
         return (
             <div className="accordeon">
                 {categories.map((category) => {
-                    return (
-                        sortedTodosByCategory(category.category).map((todo) => {
-                            return (
-                                <TodosByCategory key={category.category} title={category.category} color={category.color}>
-                                    <TodoWrap   key={todo.id}
-                                                {...todo}
-                                                {...this.props}
-                                                deleteTodo={() => deleteTodo(todo.id)} />
-                                </TodosByCategory>
-                            )}
-                        )
-                    )
+                    return sortedTodosByCategory(category);
                 })}
             </div>
         );
