@@ -6,8 +6,13 @@ import '../../styles/todo.css';
 
 export default class Filter extends React.Component {
     static propTypes = {
-        onClick: PropTypes.func.isRequired
+        onClick: PropTypes.func.isRequired,
+        isVisible: PropTypes.bool
     };
+
+    static defaultProps = {
+        isVisible: true
+    }
 
     constructor(props) {
         super(props);
@@ -23,6 +28,7 @@ export default class Filter extends React.Component {
 
     render() {
         return (
+            this.props.isVisible &&
             <div className="filter">
                 <span className="filter-hint">Show all tasks</span>
                 <ToggleButton   value={ this.state.value }
