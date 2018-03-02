@@ -72,7 +72,7 @@ export default class TodoWrap extends React.Component {
             <div className="todo">
                 <div className={todoClass}>       
                     <TodoInfo {...this.props} isVisible={!this.state.isEditing} setAsCompleted={this.handleChange} />
-                    <Editor isAddTodo={false} isVisible={this.state.isEditing} setEditStatus={this.setEditStatus} {...this.props} />
+                    <Editor form={'todo-' + id} isAddTodo={false} isVisible={this.state.isEditing} setEditStatus={this.setEditStatus} {...this.props} />
                     <div className={buttonsClass}>
                         {!completed && <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>}
                         <button className="btn btn-delete" onClick={this.confirmDeleting}>Delete</button>

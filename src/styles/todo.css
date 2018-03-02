@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Sacramento");
-
 body {
     font-size: 14px;
     background-color: #1BBC9B;
@@ -52,6 +51,7 @@ hr {
 .add-todo:focus,
 .search-todo:focus {
     outline: 0;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 .edit {
@@ -120,7 +120,7 @@ hr {
     background-color: #1BBC9B;
     transition: .3s ease-in;
 }
- 
+
 .btn-edit {
     background-color: #1BBC9B;
     transition: .3s ease-in;
@@ -131,6 +131,16 @@ hr {
 .btn-category:hover {
     background-color: rgb(22, 156, 129);
     transition: .3s ease-in;
+}
+
+.btn-add:disabled {
+    background-color: rgb(146, 196, 186);
+    cursor: not-allowed;
+}
+
+.btn-add:disabled:hover {
+    background-color: rgb(146, 196, 186);
+    cursor: not-allowed;
 }
 
 .btn-delete,
@@ -220,6 +230,7 @@ hr {
     margin: 0 10px 0 0;
     cursor: pointer;
 }
+
 .checkbox:before {
     -webkit-transition: all 0.3s ease-in-out;
     -moz-transition: all 0.3s ease-in-out;
@@ -232,6 +243,7 @@ hr {
     height: 15px;
     border: 1px solid #1BBC9B;
 }
+
 .checkbox:checked:before {
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -243,6 +255,7 @@ hr {
     border-top-style: none;
     border-right-style: none;
 }
+
 .checkbox:after {
     content: "";
     position: absolute;
@@ -265,6 +278,7 @@ hr {
     border-radius: 3px;
     vertical-align: top;
 }
+
 .select-category:focus {
     outline: 0;
 }
@@ -286,7 +300,6 @@ hr {
     font-weight: normal;
     font-style: italic;
     color: rgb(139, 139, 139);
-    
 }
 
 .category-todo {
@@ -300,6 +313,7 @@ hr {
 }
 
 /* accordeon */
+
 .accordeon {
     padding-bottom: 30px;
     margin-bottom: 30px;
@@ -355,8 +369,4 @@ hr {
 
 .fields {
     display: inline-block;
-}
-
-input:focus {
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
