@@ -3,7 +3,7 @@ import uuidv4 from 'uuid/v4';
 
 import { todosActions } from './todosActions';
 import { urls } from '../constants/urls';
-import axios from 'axios';
+import { api } from './api';
 
 export const addTodo = (text, category, description) => {
     const newTodo = {
@@ -15,7 +15,7 @@ export const addTodo = (text, category, description) => {
         deleted: false
     };
     return (dispatch) => {
-        return axios.post(urls.todos, newTodo)
+        return api.post(urls.todos, newTodo)
             .then(response => {
                 return dispatch(addTodoSuccess(response.data));
             })
@@ -43,7 +43,7 @@ export const editTodo = (id, text, category, description) => {
         description
     };
     return (dispatch) => {
-        return axios.patch(`${urls.todos}/${id}`, changedTodo)
+        return api.patch(`${urls.todos}/${id}`, changedTodo)
                 .then(response => {
                     return dispatch(editTodoSuccess(changedTodo));
                 })
@@ -63,7 +63,7 @@ export const editTodoSuccess = ({id, text, category, description}) => ({
 
 export const deleteTodo = (id) => {
     return (dispatch) => {
-        return axios.delete(`${urls.todos}/${id}`)
+        return api.delete(`${urls.todos}/${id}`)
             .then(response => {
                 return dispatch(deleteTodoSuccess(id))
             })
@@ -80,7 +80,7 @@ export const deleteTodoSuccess = (id) => ({
 
 export const toggleTodo = (id, completed) => {
     return (dispatch) => {
-        return axios.patch(`${urls.todos}/${id}`, {'completed': completed})
+        return api.patch(`${urls.todos}/${id}`, {'completed': completed})
             .then(response => {
                 return dispatch(toggleTodoSuccess(id))
             })
@@ -99,7 +99,7 @@ export const toggleTodoSuccess = (id, completed) => ({
 export const fetchTodos = (url) => {
     return (dispatch) => {
         dispatch(startOrFinishLoading(true));
-        return axios.get(url)
+        return api.get(urls.todos)
             .then((response) => {
                 if (response.data.length) {
                     dispatch(startOrFinishLoading(false));
