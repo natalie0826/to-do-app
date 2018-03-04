@@ -33,6 +33,15 @@ const todo = (state, actionType, payload) => {
                 ...state,
                 completed: !state.completed
             };
+        case 'DELETE_TODO_SUCCESS': 
+            if (state.id !== payload.id) {
+                return state
+            }
+        
+            return {
+                ...state,
+              deleted: !state.deleted
+            }
         default:
             return state;
     }
@@ -51,9 +60,9 @@ const todos = (state = [], action) => {
                 todo(t, action.type, action.payload)
             );
         case 'DELETE_TODO_SUCCESS':
-            return state.filter((todo) => {
-                return todo.id !== action.payload.id
-            });;
+            return state.map(t =>
+                todo(t, action.type, action.payload)
+            )
         case 'FETCH_TODOS_SUCCESS':
             return Object.assign([], state, action.payload.todos);
         default:
