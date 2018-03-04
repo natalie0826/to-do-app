@@ -30,7 +30,7 @@ export default class Filter extends React.Component {
         return (
             this.props.isVisible &&
             <div className="filter">
-                <span className="filter-hint">Show all tasks</span>
+                <span className="filter-hint">Show tasks in progress</span>
                 <ToggleButton   value={ this.state.value }
                                 onToggle={(value) => this.handleChange(value)} />
             </div>
