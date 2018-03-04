@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { ActionCreators as UndoActionCreators } from 'redux-undo';
 
-import { addTodo, editTodo, toggleTodo, deleteTodo, fetchTodos } from '../actions/todos';
+import { addTodo, editTodo, toggleTodo, deleteTodo, fetchTodos, deleteTodoSuccess } from '../actions/todos';
 import { addCategory, fetchCategories } from '../actions/categories';
 import TodoApp from '../components/TodoApp';
 
@@ -34,6 +34,7 @@ const mapDispatchToProps = (dispatch) => ({
     addTodo: (text, category, description) => dispatch(addTodo(text, category, description)),
     deleteTodo: (id) => dispatch(deleteTodo(id)),
     toggleTodo: (id, completed) => dispatch(toggleTodo(id, completed)),
+    deleteTodoSuccess: (id) => dispatch(deleteTodoSuccess(id)),
     undo: UndoActionCreators.undo,
 });
 

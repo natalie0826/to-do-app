@@ -56,6 +56,12 @@ export default class TodoWrap extends React.Component {
             deleted,
         } = this.props;
 
+        const currentTodo = {
+            text: this.props.text,
+            category: this.props.category,
+            description: this.props.description
+        };
+
         const todoClass = classNames({
             'hide-element': deleted || this.state.showDeleteConfirmation
         });
@@ -72,7 +78,12 @@ export default class TodoWrap extends React.Component {
             <div className="todo">
                 <div className={todoClass}>       
                     <TodoInfo {...this.props} isVisible={!this.state.isEditing} setAsCompleted={this.handleChange} />
-                    <Editor form={'todo-' + id} isAddTodo={false} isVisible={this.state.isEditing} setEditStatus={this.setEditStatus} {...this.props} />
+                    <Editor form={'todo-' + id}
+                            isAddTodo={false}
+                            isVisible={this.state.isEditing}
+                            setEditStatus={this.setEditStatus}
+                            {...this.props}
+                            initialValues={currentTodo} />
                     <div className={buttonsClass}>
                         {!completed && <button className="btn btn-edit" onClick={this.setEditStatus}>Edit</button>}
                         <button className="btn btn-delete" onClick={this.confirmDeleting}>Delete</button>
