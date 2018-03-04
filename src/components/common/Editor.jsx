@@ -6,7 +6,6 @@ import classNames from 'classnames';
 import { connect } from 'react-redux';
 
 import { CustomModal } from '../categories/CustomModal';
-import { Select } from './Select';
 import '../../styles/modal.css';
 
 const validate = (values) => {
@@ -69,7 +68,7 @@ let Editor = (props) => {
 
     Editor.defaultProps = {
         isVisible: true
-    }
+    };
 
     const handleCategoryModal = () => {
         ModalManager.open(<CustomModal
@@ -84,9 +83,14 @@ let Editor = (props) => {
             const category = props.category || props.categories[0].category;
             props.isAddTodo
                 ? props.addTodo(props.text, category, props.description)
-                : props.editTodo(props.id, props.text, category, props.description);
+                : editTodoHandle(category);
             props.reset();
         }
+    }
+
+    const editTodoHandle = (category) => {
+        props.setEditStatus();
+        props.editTodo(props.id, props.text, category, props.description);
     }
 
     const isDataValid = () => {
@@ -97,25 +101,11 @@ let Editor = (props) => {
         }
     }
 
-    const saveButton = <button
-        type="submit"
-        value="submit"
-        className="btn btn-add"
-        disabled={props.pristine}>
-        {props.isAddTodo
-            ? 'Add'
-            : 'Save'}
+    const saveButton = <button type="submit" value="submit" className="btn btn-add" disabled={props.pristine}>
+        {props.isAddTodo ? 'Add' : 'Save'}
     </button>;
-    const resetButton = <button
-        type="button"
-        value="button"
-        className="btn btn-clear"
-        onClick={props.reset}>Reset</button>;
-    const cancelButton = <button
-        type="button"
-        value="button"
-        className="btn btn-clear"
-        onClick={props.setEditStatus}>Cancel</button>;
+    const resetButton = <button type="button" value="button" className="btn btn-clear" onClick={props.reset}>Reset</button>;
+    const cancelButton = <button type="button" value="button" className="btn btn-clear" onClick={props.setEditStatus}>Cancel</button>;
 
     return (props.isVisible
         ? <form className="todo-edit" onSubmit={handleSubmit}>
@@ -136,58 +126,38 @@ let Editor = (props) => {
                             )
                         })}
                 </Field>
-                <button className="btn btn-category">New category</button>
+                <button className="btn btn-category" onClick={handleCategoryModal}>New category</button>
                 <Field
                     component={renderField}
                     name="description"
                     className="description-todo"
                     type="textarea"
                     placeholder="Description"/> {saveButton}
-                {resetButton}
+                {props.isAddTodo ? resetButton : cancelButton}
             </form>
         : ''
-        // <form className="todo-edit" onSubmit={this.handleSubmit}>     <Field
-        // component="input"             name="text"             className="add-todo"
-        //          type="text"             placeholder="Task"
-        // onChange={this.handleTextChange}             value={this.state.text} />
-        // <Field  component="select"             name="category"
-        // className="select-category">             {props.categories.map((category) =>
-        // {                 return (                     <option
-        // value={category.category} key={category.category}>
-        // {category.category}                     </option>)             })}
-        // </Field>     <button className="btn btn-category"
-        // onClick={this.handleCategoryModal}>New category</button>     <Field
-        // component="textarea"             name="description"
-        // className="description-todo"             value={this.state.description}
-        //       onChange={this.handleDescriptionChange}
-        // placeholder="Description"             rows="5" />     {saveButton}
-        // {props.isAddTodo ? resetButton : cancelButton} </form>
     );
 }
 
-const selector = formValueSelector('editor')
 
 Editor = connect((state, ownProps) => {
+    const selector = formValueSelector(ownProps.form)
     const text = selector(state, 'text');
     const description = selector(state, 'description');
     const category = selector(state, 'category');
-    return {text, description, category}
+    return {
+        text,
+        description,
+        category
+    }
 })(Editor);
 
-const mapStateToProps = (state, ownProps) => ({
-    initialValues: {
-        text: 'ownProps.text',
-        description: 'ownProps.description',
-        category: 'ownProps.category'
-    }
-});
-
 Editor = reduxForm({
-    form: 'editor',
     destroyOnUnmount: false,
     validate,
     warn,
-    enableReinitialize: true
-}, mapStateToProps)(Editor);
+    enableReinitialize: true,
+    overwriteOnInitialValuesChange: true
+})(Editor);
 
 export default Editor;
