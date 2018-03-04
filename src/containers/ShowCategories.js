@@ -8,8 +8,8 @@ const mapStateToProps = (store) => ({
     store: store
 });
 
-const mapDispatchToProps = ({
-    addCategory: addCategory
+const mapDispatchToProps = (dispatch) => ({
+    addCategory: (category, color) => dispatch(addCategory(category, color))
 });
 
 export const ShowCategories = connect(

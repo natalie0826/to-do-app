@@ -1,10 +1,10 @@
 export const categories = (state = [], action) => {
     switch(action.type) {
-        case 'ADD_CATEGORY':
+        case 'ADD_CATEGORY_SUCCESS':
             const isUnique = () => !!state.find((el) => {
                 return el.category === action.payload.category;
             });
-            if(!isUnique()) {
+            if (!isUnique()) {
                 return [
                     ...state,
                     {

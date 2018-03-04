@@ -1,18 +1,12 @@
-import axios from 'axios';
+import uuidv4 from 'uuid/v4';
+import { api } from './api';
 
 import { categoriesActions } from './categoriesActions';
-
-export const addCategory = (category, color) => ({
-    type: categoriesActions.ADD_CATEGORY,
-    payload: {
-        category,
-        color
-    }
-});
+import { urls } from '../constants/urls';
 
 export const fetchCategories = (url) => {
     return (dispatch) => {
-        return axios.get(url)
+        return api.get(url)
             .then((response) => {
                 if (response.data.length) {
                     return dispatch(fetchCategoriesSuccess(response.data));
@@ -31,9 +25,26 @@ export const fetchCategoriesSuccess = (data) => ({
     }
 });
 
-export const fetchCategoriesFailure = (error) => ({
-    type: categoriesActions.FETCH_CATEGORIES_FAILURE,
+export const addCategory = (category, color) => {
+    const newCategory = {
+        id: uuidv4(),
+        category,
+        color
+    };
+    return (dispatch) => {
+        return api.post(urls.categories, newCategory)
+            .then(response => {
+                return dispatch(addCategorySuccess(response.data));
+            })
+            .catch(error => console.log(error))
+    }
+};
+
+export const addCategorySuccess = (category) => ({
+    type: categoriesActions.ADD_CATEGORY_SUCCESS,
     payload: {
-        error
+        id: category.id,
+        category: category.category,
+        color: category.color
     }
 });
