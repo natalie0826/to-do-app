@@ -20,7 +20,8 @@ export default class Categories extends React.Component {
         toggleTodo: PropTypes.func,
         deleteTodo: PropTypes.func,
         editTodo: PropTypes.func,
-        addCategory: PropTypes.func.isRequired
+        addCategory: PropTypes.func.isRequired,
+        store: PropTypes.object.isRequired
     }
 
     constructor(props) {
