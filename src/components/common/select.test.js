@@ -19,7 +19,7 @@ describe('Select functional component', () => {
 
     it('has select tag', () => {
         expect(component.find('select').length).toBe(1);
-    })
+    });
 
     it('expects selectedValue to be equal to the props value', () => {
         expect(component.find('select').props().value).toBe(selectProps.selectedValue);

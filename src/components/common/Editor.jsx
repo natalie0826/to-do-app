@@ -66,6 +66,8 @@ let Editor = (props) => {
         store: PropTypes.object
     }
 
+    //ТЕСТЫ И АНИМАЦИИ
+
     Editor.defaultProps = {
         isVisible: true
     };
