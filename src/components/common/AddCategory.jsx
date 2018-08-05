@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ModalManager } from 'react-dynamic-modal';
 
-import { CategoryModal } from '../categories/CategoryModal';
+import { withModal } from '../categories/withModal';
+import { AddCategories } from '../../containers/AddCategories';
 
 export const AddCategory = (props) => {
     AddCategory.propTypes = {
@@ -14,7 +15,8 @@ export const AddCategory = (props) => {
     };
 
     const handleCategoryModal = () => {
-        ModalManager.open(<CategoryModal onRequestClose={() => true} store={props.store} categories={props.categories}/>);
+        const categoryModal = withModal(props.store, true)(AddCategories);
+        ModalManager.open(categoryModal);
     };
 
     return (

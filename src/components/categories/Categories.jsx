@@ -60,7 +60,7 @@ export default class CategoriesBlock extends React.Component {
                     type="text"
                     placeholder="Category"
                     onChange={this.handleChange}
-                    value={this.state.category}/>
+                    value={this.state.category} />
                 <div className="categories">
                     <p>All the categories</p>
                     {categories}
